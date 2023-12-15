@@ -14,6 +14,11 @@
 # rsync -av --delete public root@tencent.cloud:/usr/share/nginx/
 # gsed -i 's#](https://ymlog.cn/images/#](img/#' source/_posts/*.md
 
+
+# https://ymlog.cn/images -> /img/
+
+cp -r source/_posts/img source/
+
 git add .
 current_date=$(date +'%Y-%m-%d %H:%M')
 if [ "$#" -gt 0 ]; then
