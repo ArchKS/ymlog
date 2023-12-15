@@ -1,0 +1,20 @@
+- class_name: 友情链接
+  class_desc: 那些人，那些事
+  link_list:
+    - name: 刘希望
+      link: https://www.ujslxw.com
+      avatar: https://cdn.jsdelivr.net/gh/ujslxw/imgs/imgs/20200427180433.png
+      descr: 永远热爱，永远前行。
+    - name: 毛小龙
+      link: http://mxlamm.cn/
+      avatar: http://mxlamm.cn/usr/themes/optica-master/images/avatar.jpg
+      descr: 苟日新，日日新，又日新
+
+
+- class_name: 网站
+  class_desc: 值得推荐的网站
+  link_list:
+    - name: Bilibili
+      link: https://www.bilibili.com/
+      avatar: https://gitee.com/archks/img/raw/master/2020-img/bilibili-icon.png
+      descr: 视频网站
