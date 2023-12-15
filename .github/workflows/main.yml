@@ -40,6 +40,7 @@ jobs:
 
       # 3、刷新cdn
       - name: Refresh CDN
+      # https://purge.upyun.com/purge/
         run: |
           curl --location --request POST 'https://api.upyun.com/buckets/purge/batch' \
           --header 'Authorization: Bearer 1a984d6d-5174-4b49-b77c-0518a8d3d7dd' \
@@ -51,7 +52,7 @@ jobs:
           --data-raw '{
             "noif": 42,
             "delay": 42,
-            "source_url": "https://i.ymlog.cn/*"
+            "source_url": "http://i.ymlog.cn/*"
           }'
 
       # # 3、同步到 gitee 的仓库
