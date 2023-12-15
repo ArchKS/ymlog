@@ -1,7 +1,7 @@
 ---
-title: 牧原
+title: Test
 date: 2023-12-15 09:55:22
-typora-root-url: ..
+typora-root-url: ../_posts
 ---
 
 
