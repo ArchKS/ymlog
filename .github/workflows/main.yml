@@ -26,7 +26,7 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
-          ACCESS_TOKEN: ${{ secrets.BK_TOKEN }}
+          BK_TOKEN: ${{ secrets.BK_TOKEN }}
           REPOSITORY_NAME: archks/archks.github.io
           BRANCH: main
           FOLDER: public
