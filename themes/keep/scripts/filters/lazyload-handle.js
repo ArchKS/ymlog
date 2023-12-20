@@ -1,7 +1,6 @@
 'use strict'
 hexo.extend.filter.register(
-  'after_post_render',
-  function (data) {
+  'after_post_render', function (data) {
     const theme = hexo.theme.config;
     if (!theme.lazyload || !theme.lazyload.enable) return;
     data.content = data.content.replace(

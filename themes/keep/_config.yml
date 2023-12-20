@@ -4,7 +4,7 @@
 base_info:
   title: Zendu
   author: Zendu
-  url: http://ymlog.cn/
+  url: https://i.ymlog.cn/
   # Logo image (You can use local image, image external link or don’t fill)
   logo_img: /images/avatar.jpg
 
@@ -189,7 +189,7 @@ comment:
 # See: https://github.com/hexojs/hexo-generator-feed
 # ---------------------------------------------------------------------------------------
 rss:
-  enable: true
+  enable: false
 
 # ---------------------------------------------------------------------------------------
 # Lazyload image
@@ -201,7 +201,7 @@ lazyload:
 # CDN
 # ---------------------------------------------------------------------------------------
 cdn:
-  enable: false
+  enable: true
 
 # ---------------------------------------------------------------------------------------
 # PJAX
@@ -213,7 +213,7 @@ pjax:
 # Footer settings
 # ---------------------------------------------------------------------------------------
 footer:
-  since: 2018 # the starting year of your website, Can be null
+  since: 2017 # the starting year of your website, Can be null
   icp: # ICP record number of your website, Can be null
   upyun: # url
 
