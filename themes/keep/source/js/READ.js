@@ -61,7 +61,7 @@ function generatorCss() {
 
 function addReadStyle() {
     let url = window.location.href;
-    if (url.indexOf("2017/09/27/Read/") > 0) {
+    if (url.indexOf("ymlog.cn/Read/") > 0) {
         setColorsInCategory();
         if (document.body.clientWidth < 700) {
             generatorCss();
