@@ -39,23 +39,20 @@ jobs:
           #注意这里的 public 是仓库根目录下的 public，也就是 npm run build 生成静态资源的路径，比如有的人是 `docs/.vuepress/dist`
 
       # 3、刷新cdn
-      # - name: Refresh CDN
-      # https://purge.upyun.com/purge/
-      # c2e60692-7d16-416a-99e4-3677d9e037f5
-      # 1a984d6d-5174-4b49-b77c-0518a8d3d7dd
-        # run: |
-        #   curl --location --request POST 'https://api.upyun.com/buckets/purge/batch' \
-        #   --header 'Authorization: Bearer 1a984d6d-5174-4b49-b77c-0518a8d3d7dd' \
-        #   --header 'User-Agent: Apifox/1.0.0 (https://apifox.com)' \
-        #   --header 'Content-Type: application/json' \
-        #   --header 'Accept: */*' \
-        #   --header 'Host: api.upyun.com' \
-        #   --header 'Connection: keep-alive' \
-        #   --data-raw '{
-        #     "noif": 42,
-        #     "delay": 42,
-        #     "source_url": "https://i.ymlog.cn/*"
-        #   }'
+      - name: Refresh CDN
+        run: |
+          curl --location --request POST 'https://api.upyun.com/buckets/purge/batch' \
+          --header 'Authorization: Bearer bcb60ea8-d653-4f4f-8baf-394d2c4c83b9' \
+          --header 'User-Agent: Apifox/1.0.0 (https://apifox.com)' \
+          --header 'Content-Type: application/json' \
+          --header 'Accept: */*' \
+          --header 'Host: api.upyun.com' \
+          --header 'Connection: keep-alive' \
+          --data-raw '{
+            "noif": 42,
+            "delay": 42,
+            "source_url": "https://i.ymlog.cn/*"
+          }'
 
       # # 3、同步到 gitee 的仓库
       # - name: Sync to Gitee
