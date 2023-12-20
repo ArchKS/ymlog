@@ -14,6 +14,7 @@
 # rsync -av --delete public root@tencent.cloud:/usr/share/nginx/
 # gsed -i 's#](https://ymlog.cn/images/#](img/#' source/_posts/*.md
 
+# git config --global core.autocrlf true
 
 # https://ymlog.cn/images -> /img/
 cp -r source/_posts/img source/

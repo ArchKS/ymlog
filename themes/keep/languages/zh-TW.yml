@@ -36,11 +36,11 @@ copyright:
   create_time: 撰寫時間
   license_title: 版權宣告
   license_content: "這個網站所有文章均使用 %s 授權。"
-ago:
-  second: "%s 秒前"
-  minute: "%s 分鐘前"
-  hour: "%s 小時前"
-  day: "%s 天前"
-  week: "%s 周前"
-  month: "%s 個月前"
-  year: "%s 年前"
+# ago:
+#   second: "%s 秒前"
+#   minute: "%s 分鐘前"
+#   hour: "%s 小時前"
+#   day: "%s 天前"
+#   week: "%s 周前"
+#   month: "%s 個月前"
+#   year: "%s 年前"
