@@ -1,6 +1,6 @@
 ---
-title: 2023 交易总结
-permalink: 2021-trade-summary/
+title: 2023 投资总结
+permalink: 2023-invest-summary/
 typora-root-url: ..
 date: 2023-12-23 11:39:04
 ---
