@@ -29,4 +29,4 @@ fi
 git commit -m "$commit_message"
 git push 
 
-echo "\n [ Deploy Finish ] \n"
+echo -e "\n [ Deploy Finish ] \n"
