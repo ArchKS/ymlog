@@ -1,5 +1,6 @@
 ---
 title: {{ title }}
 date: {{ date }}
-category: novel
+typora-root-url: ..
+permalink: {{ title }}/
 ---
