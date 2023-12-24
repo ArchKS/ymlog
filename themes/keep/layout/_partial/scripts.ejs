@@ -1,9 +1,10 @@
 <%- __js([
-    'js/utils.js',
+    // 'js/utils.js',
+    // 'js/header-shrink.js',
+    // 'js/back2top.js',
+    // 'js/dark-light-toggle.js',
+    // 'js/READ.js'
     'js/main.js',
-    'js/header-shrink.js',
-    'js/back2top.js',
-    'js/dark-light-toggle.js'
 ]) %>
 
 <% if (theme.local_search.enable) { %>
@@ -21,11 +22,11 @@
 <div class="post-scripts<%= theme.pjax.enable === true ? ' pjax' : '' %>">
     <% if (theme.toc.enable && is_post()) { %>
         <%- __js([
-            'js/left-side-toggle.js',
             'js/libs/anime.min.js',
-            'js/toc.js',
-            'js/img.js',
-            'js/READ.js'
+            // 'js/toc.js',
+            // 'js/left-side-toggle.js',
+            // 'js/img.js',
+            
         ]) %>
     <% } %>
 </div>

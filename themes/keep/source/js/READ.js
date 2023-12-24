@@ -9,7 +9,6 @@ function addNewStyle(newStyle) {
     styleElement.appendChild(document.createTextNode(newStyle));
 }
 
-
 function generatorCss() {
     const cls = `
         .article-content table th:nth-child(1), .article-content table td:nth-child(1), 
@@ -61,16 +60,13 @@ function generatorCss() {
 
 function addReadStyle() {
     let url = window.location.href;
-    if (url.indexOf("ymlog.cn/Read/") > 0) {
+    if (url.indexOf("/Read/") > 0) {
         setColorsInCategory();
         if (document.body.clientWidth < 700) {
             generatorCss();
         }
     }
 }
-
-addReadStyle();
-
 
 // 给不同的分类设置颜色
 function setColorsInCategory() {
@@ -145,4 +141,4 @@ function setColorsInCategory() {
     })
 }
 
-
+addReadStyle();
