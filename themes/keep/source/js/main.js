@@ -1,3 +1,79 @@
+
+
+
+// 给不同的分类设置颜色
+function setColorsInCategory() {
+  const markCount = 2; // 前2个
+  // 每个table标注种类最多的两个
+  // bestInvest: "linear-gradient(109.6deg, rgb(95, 207, 128) 71.8%, rgb(78, 158, 112) 71.8%)",
+  const coloredCateObj = {
+    投资: "rgb(95, 207, 128,.5)",
+    文学: "rgba(22, 138, 173,.3)",
+    传记: "rgba(255,150,0,.6)",
+    政治: "rgba(229, 107, 111,.3)",
+    社会: "rgba(124, 22, 46,.1)",
+    历史: "rgba(255, 214, 165,.3)",
+    哲学: "rgba(46, 196, 182,.4)",
+    心理学: "rgba(155, 246, 255,.5)",
+    best: "linear-gradient(109.6deg, rgb(214,180,148) 71.8%,rgb(10,5,0)  71.8%)"
+  }
+
+  let _categoryEs = document.querySelectorAll('table');
+  _categoryEs.forEach(table => {
+    let categoryEs = Array.from(table.querySelectorAll("tbody tr td:nth-child(2)")).map(v => v.innerText);
+    // 统计当前Table分类最多的
+    let uniqCategoryEs = [...new Set(categoryEs)];
+    let cateObj = {};
+    uniqCategoryEs.forEach(c => {
+      cateObj[c] = 0;
+    });
+    categoryEs.forEach(c => {
+      cateObj[c] += 1;
+    })
+    // {投资: 3}
+    cateObj['投资'] += !isNaN(cateObj['投资/行业研究']) ? cateObj['投资/行业研究'] : 0;
+    delete cateObj['投资/行业研究'];
+
+    let objArr = Object.keys(cateObj).map(key => {
+      return {
+        category: key,
+        number: cateObj[key]
+      }
+    })
+    objArr.sort((a, b) => b.number - a.number);
+
+    let Tops = objArr.slice(0, markCount);
+
+    let specTableCateObj = {};
+    Tops.forEach(item => {
+      let key = item.category;
+      specTableCateObj[key] = coloredCateObj[key];
+    })
+
+    table.querySelectorAll("tbody tr td:nth-child(2)").forEach(tr => {
+      let text = tr.innerText;
+      if (text === '投资/行业研究') text = '投资';
+
+      let color = specTableCateObj[text];
+
+      let td = tr.parentElement;
+      let rate = td.querySelector("td:last-child");
+      if (rate.innerText.trim().length === 5) {
+        rate.style.color = 'gold'
+        color = coloredCateObj['best']
+        td.style.background = color;
+      } else {
+        if (document.body.clientWidth > 700) {
+          // td.style.background = color;
+        }
+      }
+
+    })
+  })
+}
+
+
+
 /* global KEEP */
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -16,185 +92,6 @@ window.addEventListener('DOMContentLoaded', () => {
     fontSizeLevel: 0,
     isOpenPageAside: true
   }
-
-  // print theme base info
-  KEEP.printThemeInfo = () => {
-    console.log(`\n %c ${KEEP.themeInfo.theme} %c ${KEEP.themeInfo.repository} \n`, `color: #fadfa3; background: #333; padding: 5px 0;`, `background: #fadfa3; padding: 5px 0;`);
-  }
-
-  // set styleStatus to localStorage
-  KEEP.setStyleStatus = () => {
-    localStorage.setItem(KEEP.localStorageKey, JSON.stringify(KEEP.styleStatus));
-  }
-
-  // get styleStatus from localStorage
-  KEEP.getStyleStatus = () => {
-    let temp = localStorage.getItem(KEEP.localStorageKey);
-    if (temp) {
-      temp = JSON.parse(temp);
-      for (let key in KEEP.styleStatus) {
-        KEEP.styleStatus[key] = temp[key];
-      }
-      return temp;
-    } else {
-      return null;
-    }
-  }
-
-  /* global KEEP */
-  function initTOC() {
-    KEEP.utils.navItems = document.querySelectorAll('.post-toc-wrap .post-toc li');
-
-    if (KEEP.utils.navItems.length > 0) {
-
-      KEEP.utils = {
-
-        ...KEEP.utils,
-
-        findActiveIndexByTOC() {
-          if (!Array.isArray(KEEP.utils.sections)) return;
-          let index = KEEP.utils.sections.findIndex(element => {
-            return element && element.getBoundingClientRect().top - 20 > 0;
-          });
-          if (index === -1) {
-            index = KEEP.utils.sections.length - 1;
-          } else if (index > 0) {
-            index--;
-          }
-          this.activateNavByIndex(index);
-        },
-
-        registerSidebarTOC() {
-          KEEP.utils.sections = [...document.querySelectorAll('.post-toc li a.nav-link')].map(element => {
-            const target = document.getElementById(decodeURI(element.getAttribute('href')).replace('#', ''));
-            element.addEventListener('click', event => {
-              event.preventDefault();
-              const offset = target.getBoundingClientRect().top + window.scrollY;
-              window.anime({
-                targets: document.scrollingElement,
-                duration: 500,
-                easing: 'linear',
-                scrollTop: offset - 10,
-                complete: function () {
-                  setTimeout(() => {
-                    KEEP.utils.pageTop_dom.classList.add('hide');
-                  }, 100)
-                }
-              });
-            });
-            return target;
-          });
-        },
-
-        activateNavByIndex(index) {
-          const target = document.querySelectorAll('.post-toc li a.nav-link')[index];
-          if (!target || target.classList.contains('active-current')) return;
-
-          document.querySelectorAll('.post-toc .active').forEach(element => {
-            element.classList.remove('active', 'active-current');
-          });
-          target.classList.add('active', 'active-current');
-          let parent = target.parentNode;
-          while (!parent.matches('.post-toc')) {
-            if (parent.matches('li')) parent.classList.add('active');
-            parent = parent.parentNode;
-          }
-          // Scrolling to center active TOC element if TOC content is taller then viewport.
-          const tocElement = document.querySelector('.post-toc-wrap');
-          window.anime({
-            targets: tocElement,
-            duration: 200,
-            easing: 'linear',
-            scrollTop: tocElement.scrollTop - (tocElement.offsetHeight / 2) + target.getBoundingClientRect().top - tocElement.getBoundingClientRect().top
-          });
-        },
-
-        showPageAsideWhenHasTOC() {
-
-          const openHandle = () => {
-            const styleStatus = KEEP.getStyleStatus();
-            const key = 'isOpenPageAside';
-            if (styleStatus && styleStatus.hasOwnProperty(key)) {
-              KEEP.utils.leftSideToggle.pageAsideHandleOfTOC(styleStatus[key]);
-            } else {
-              KEEP.utils.leftSideToggle.pageAsideHandleOfTOC(true);
-            }
-          }
-
-          const initOpenKey = 'init_open';
-
-          if (KEEP.theme_config.toc.hasOwnProperty(initOpenKey)) {
-            KEEP.theme_config.toc[initOpenKey] ? openHandle() : KEEP.utils.leftSideToggle.pageAsideHandleOfTOC(false);
-
-          } else {
-            openHandle();
-          }
-
-        }
-      }
-
-      KEEP.utils.showPageAsideWhenHasTOC();
-      KEEP.utils.registerSidebarTOC();
-
-    } else {
-      KEEP.utils.pageContainer_dom.removeChild(document.querySelector('.page-aside'));
-    }
-  }
-
-  if (KEEP.theme_config.pjax.enable === true && KEEP.utils) {
-    initTOC();
-  } else {
-    window.addEventListener('DOMContentLoaded', initTOC);
-  }
-
-
-  // =====left side toggle 
-  /* global KEEP */
-
-  function initLeftSideToggle() {
-    KEEP.utils.leftSideToggle = {
-
-      toggleBar: document.querySelector('.page-aside-toggle'),
-      pageTopDom: document.querySelector('.page-main-content-top'),
-      containerDom: document.querySelector('.page-container'),
-      leftAsideDom: document.querySelector('.page-aside'),
-      toggleBarIcon: document.querySelector('.page-aside-toggle i'),
-
-      isOpenPageAside: false,
-
-      initToggleBarButton() {
-        this.toggleBar && this.toggleBar.addEventListener('click', () => {
-          this.isOpenPageAside = !this.isOpenPageAside;
-          KEEP.styleStatus.isOpenPageAside = this.isOpenPageAside;
-          KEEP.setStyleStatus();
-          this.changePageLayoutWhenOpenToggle(this.isOpenPageAside);
-        });
-      },
-
-      changePageLayoutWhenOpenToggle(isOpen) {
-        this.toggleBarIcon && (this.toggleBarIcon.className = isOpen ? 'fas fa-outdent' : 'fas fa-indent');
-        const pageAsideWidth = KEEP.theme_config.style.left_side_width || '260px';
-        this.containerDom.style.paddingLeft = isOpen ? pageAsideWidth : '0';
-        this.pageTopDom.style.paddingLeft = isOpen ? pageAsideWidth : '0';
-        this.leftAsideDom.style.left = isOpen ? '0' : `-${pageAsideWidth}`;
-      },
-
-      pageAsideHandleOfTOC(isOpen) {
-        this.toggleBar.style.display = 'flex';
-        this.isOpenPageAside = isOpen;
-        this.changePageLayoutWhenOpenToggle(isOpen);
-      }
-    }
-    KEEP.utils.leftSideToggle.initToggleBarButton();
-  }
-
-  if (KEEP.theme_config.pjax.enable === true && KEEP.utils) {
-    initLeftSideToggle();
-  } else {
-    window.addEventListener('DOMContentLoaded', initLeftSideToggle);
-  }
-
-
   /* global KEEP */
 
   /* global KEEP */
@@ -364,16 +261,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
       },
 
-      // go comment anchor
-      goComment() {
-        this.goComment_dom = document.querySelector('.go-comment');
-        if (this.goComment_dom) {
-          this.goComment_dom.addEventListener('click', () => {
-            document.querySelector('#comment-anchor').scrollIntoView();
-          });
-        }
-
-      },
 
       // get dom element height
       getElementHeight(selectors) {
@@ -544,8 +431,6 @@ window.addEventListener('DOMContentLoaded', () => {
     // adjust content area width
     KEEP.utils.contentAreaWidthAdjust();
 
-    // go comment
-    KEEP.utils.goComment();
 
     // init page height handle
     KEEP.utils.initPageHeightHandle();
@@ -559,6 +444,25 @@ window.addEventListener('DOMContentLoaded', () => {
     // set how long age in home article block
     KEEP.utils.setHowLongAgoInHome();
 
+  }
+
+  // get styleStatus from localStorage
+  KEEP.getStyleStatus = () => {
+    let temp = localStorage.getItem(KEEP.localStorageKey);
+    if (temp) {
+      temp = JSON.parse(temp);
+      for (let key in KEEP.styleStatus) {
+        KEEP.styleStatus[key] = temp[key];
+      }
+      return temp;
+    } else {
+      return null;
+    }
+  }
+
+  // set styleStatus to localStorage
+  KEEP.setStyleStatus = () => {
+    localStorage.setItem(KEEP.localStorageKey, JSON.stringify(KEEP.styleStatus));
   }
 
 
@@ -618,7 +522,6 @@ window.addEventListener('DOMContentLoaded', () => {
     KEEP.utils.modeToggle.initModeToggleButton();
     KEEP.utils.modeToggle.initModeAutoTrigger();
   };
-
   KEEP.initBack2Top = () => {
 
     KEEP.utils = {
@@ -712,7 +615,6 @@ window.addEventListener('DOMContentLoaded', () => {
     KEEP.utils.headerShrink.headerShrink();
     KEEP.utils.headerShrink.toggleHeaderDrawerShow();
   }
-
   KEEP.refresh = () => {
     KEEP.initUtils();
     KEEP.initHeaderShrink();
@@ -731,8 +633,58 @@ window.addEventListener('DOMContentLoaded', () => {
       KEEP.initLazyLoad();
     }
   }
+  KEEP.refresh();
+  // print theme base info
+  KEEP.printThemeInfo = () => {
+    console.log(`\n %c ${KEEP.themeInfo.theme} %c ${KEEP.themeInfo.repository} \n`, `color: #fadfa3; background: #333; padding: 5px 0;`, `background: #fadfa3; padding: 5px 0;`);
+  }
 
-  // ================= READ.js
+
+
+
+  // =====left side toggle 
+  /* global KEEP */
+
+  function initLeftSideToggle() {
+    KEEP.utils.leftSideToggle = {
+      toggleBar: document.querySelector('.page-aside-toggle'),
+      pageTopDom: document.querySelector('.page-main-content-top'),
+      containerDom: document.querySelector('.page-container'),
+      leftAsideDom: document.querySelector('.page-aside'),
+      toggleBarIcon: document.querySelector('.page-aside-toggle i'),
+
+      isOpenPageAside: false,
+
+      initToggleBarButton() {
+        this.toggleBar && this.toggleBar.addEventListener('click', () => {
+          this.isOpenPageAside = !this.isOpenPageAside;
+          KEEP.styleStatus.isOpenPageAside = this.isOpenPageAside;
+          KEEP.setStyleStatus();
+          this.changePageLayoutWhenOpenToggle(this.isOpenPageAside);
+        });
+      },
+
+      changePageLayoutWhenOpenToggle(isOpen) {
+        this.toggleBarIcon && (this.toggleBarIcon.className = isOpen ? 'fas fa-outdent' : 'fas fa-indent');
+        const pageAsideWidth = KEEP.theme_config.style.left_side_width || '260px';
+        this.containerDom.style.paddingLeft = isOpen ? pageAsideWidth : '0';
+        this.pageTopDom.style.paddingLeft = isOpen ? pageAsideWidth : '0';
+        this.leftAsideDom.style.left = isOpen ? '0' : `-${pageAsideWidth}`;
+      },
+
+      pageAsideHandleOfTOC(isOpen) {
+        this.toggleBar.style.display = 'flex';
+        this.isOpenPageAside = isOpen;
+        this.changePageLayoutWhenOpenToggle(isOpen);
+      }
+    };
+
+    KEEP.utils.leftSideToggle.initToggleBarButton();
+  }
+
+
+  initLeftSideToggle();
+
 
   function addNewStyle(newStyle) {
     var styleElement = document.getElementById('styles_js');
@@ -804,79 +756,105 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 给不同的分类设置颜色
-  function setColorsInCategory() {
-    const markCount = 2; // 前2个
-    // 每个table标注种类最多的两个
-    // bestInvest: "linear-gradient(109.6deg, rgb(95, 207, 128) 71.8%, rgb(78, 158, 112) 71.8%)",
-    const coloredCateObj = {
-      投资: "rgb(95, 207, 128,.5)",
-      文学: "rgba(22, 138, 173,.3)",
-      传记: "rgba(255,150,0,.6)",
-      政治: "rgba(229, 107, 111,.3)",
-      社会: "rgba(124, 22, 46,.1)",
-      历史: "rgba(255, 214, 165,.3)",
-      哲学: "rgba(46, 196, 182,.4)",
-      心理学: "rgba(155, 246, 255,.5)",
-      best: "linear-gradient(109.6deg, rgb(214,180,148) 71.8%,rgb(10,5,0)  71.8%)"
-    }
 
-    let _categoryEs = document.querySelectorAll('table');
-    _categoryEs.forEach(table => {
-      let categoryEs = Array.from(table.querySelectorAll("tbody tr td:nth-child(2)")).map(v => v.innerText);
-      // 统计当前Table分类最多的
-      let uniqCategoryEs = [...new Set(categoryEs)];
-      let cateObj = {};
-      uniqCategoryEs.forEach(c => {
-        cateObj[c] = 0;
-      });
-      categoryEs.forEach(c => {
-        cateObj[c] += 1;
-      })
-      // {投资: 3}
-      cateObj['投资'] += !isNaN(cateObj['投资/行业研究']) ? cateObj['投资/行业研究'] : 0;
-      delete cateObj['投资/行业研究'];
-
-      let objArr = Object.keys(cateObj).map(key => {
-        return {
-          category: key,
-          number: cateObj[key]
-        }
-      })
-      objArr.sort((a, b) => b.number - a.number);
-
-      let Tops = objArr.slice(0, markCount);
-
-      let specTableCateObj = {};
-      Tops.forEach(item => {
-        let key = item.category;
-        specTableCateObj[key] = coloredCateObj[key];
-      })
-
-      table.querySelectorAll("tbody tr td:nth-child(2)").forEach(tr => {
-        let text = tr.innerText;
-        if (text === '投资/行业研究') text = '投资';
-
-        let color = specTableCateObj[text];
-
-        let td = tr.parentElement;
-        let rate = td.querySelector("td:last-child");
-        if (rate.innerText.trim().length === 5) {
-          rate.style.color = 'gold'
-          color = coloredCateObj['best']
-          td.style.background = color;
-        } else {
-          if (document.body.clientWidth > 700) {
-            // td.style.background = color;
+  /* global KEEP */
+  function initTOC() {
+    KEEP.utils.navItems = document.querySelectorAll('.post-toc-wrap .post-toc li');
+    console.log(KEEP.utils.navItems);
+    if (KEEP.utils.navItems.length > 0) {
+      KEEP.utils = {
+        ...KEEP.utils,
+        findActiveIndexByTOC() {
+          if (!Array.isArray(KEEP.utils.sections)) return;
+          let index = KEEP.utils.sections.findIndex(element => {
+            return element && element.getBoundingClientRect().top - 20 > 0;
+          });
+          if (index === -1) {
+            index = KEEP.utils.sections.length - 1;
+          } else if (index > 0) {
+            index--;
           }
-        }
+          this.activateNavByIndex(index);
+        },
 
-      })
-    })
+        registerSidebarTOC() {
+          KEEP.utils.sections = [...document.querySelectorAll('.post-toc li a.nav-link')].map(element => {
+            const target = document.getElementById(decodeURI(element.getAttribute('href')).replace('#', ''));
+            element.addEventListener('click', event => {
+              event.preventDefault();
+              const offset = target.getBoundingClientRect().top + window.scrollY;
+              window.anime({
+                targets: document.scrollingElement,
+                duration: 500,
+                easing: 'linear',
+                scrollTop: offset - 10,
+                complete: function () {
+                  setTimeout(() => {
+                    KEEP.utils.pageTop_dom.classList.add('hide');
+                  }, 100)
+                }
+              });
+            });
+            return target;
+          });
+        },
+
+        activateNavByIndex(index) {
+          const target = document.querySelectorAll('.post-toc li a.nav-link')[index];
+          if (!target || target.classList.contains('active-current')) return;
+
+          document.querySelectorAll('.post-toc .active').forEach(element => {
+            element.classList.remove('active', 'active-current');
+          });
+          target.classList.add('active', 'active-current');
+          let parent = target.parentNode;
+          while (!parent.matches('.post-toc')) {
+            if (parent.matches('li')) parent.classList.add('active');
+            parent = parent.parentNode;
+          }
+          // Scrolling to center active TOC element if TOC content is taller then viewport.
+          const tocElement = document.querySelector('.post-toc-wrap');
+          window.anime({
+            targets: tocElement,
+            duration: 200,
+            easing: 'linear',
+            scrollTop: tocElement.scrollTop - (tocElement.offsetHeight / 2) + target.getBoundingClientRect().top - tocElement.getBoundingClientRect().top
+          });
+        },
+
+        showPageAsideWhenHasTOC() {
+          const openHandle = () => {
+            const styleStatus = KEEP.getStyleStatus();
+            const key = 'isOpenPageAside';
+            if (styleStatus && styleStatus.hasOwnProperty(key)) {
+              KEEP.utils.leftSideToggle.pageAsideHandleOfTOC(styleStatus[key]);
+            } else {
+              KEEP.utils.leftSideToggle.pageAsideHandleOfTOC(true);
+            }
+          }
+          const initOpenKey = 'init_open';
+          if (KEEP.theme_config.toc.hasOwnProperty(initOpenKey)) {
+            KEEP.theme_config.toc[initOpenKey] ? openHandle() : KEEP.utils.leftSideToggle.pageAsideHandleOfTOC(false);
+
+          } else {
+            openHandle();
+          }
+
+        }
+      }
+
+      KEEP.utils.showPageAsideWhenHasTOC();
+      KEEP.utils.registerSidebarTOC();
+
+    } else {
+      KEEP.utils.pageContainer_dom.removeChild(document.querySelector('.page-aside'));
+    }
   }
 
-  addReadStyle();
 
+  initLeftSideToggle();
   KEEP.printThemeInfo();
-  KEEP.refresh();
+  // KEEP.refresh();
+  addReadStyle();
+  initTOC();
 });
