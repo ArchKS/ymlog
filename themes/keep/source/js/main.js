@@ -71,11 +71,6 @@ function setColorsInCategory() {
     })
   })
 }
-
-
-
-/* global KEEP */
-
 window.addEventListener('DOMContentLoaded', () => {
 
   KEEP.themeInfo = {
@@ -92,9 +87,6 @@ window.addEventListener('DOMContentLoaded', () => {
     fontSizeLevel: 0,
     isOpenPageAside: true
   }
-  /* global KEEP */
-
-  /* global KEEP */
 
   KEEP.initUtils = () => {
 
@@ -634,17 +626,13 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
   KEEP.refresh();
-  // print theme base info
   KEEP.printThemeInfo = () => {
     console.log(`\n %c ${KEEP.themeInfo.theme} %c ${KEEP.themeInfo.repository} \n`, `color: #fadfa3; background: #333; padding: 5px 0;`, `background: #fadfa3; padding: 5px 0;`);
   }
 
 
 
-
   // =====left side toggle 
-  /* global KEEP */
-
   function initLeftSideToggle() {
     KEEP.utils.leftSideToggle = {
       toggleBar: document.querySelector('.page-aside-toggle'),
@@ -757,7 +745,6 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  /* global KEEP */
   function initTOC() {
     KEEP.utils.navItems = document.querySelectorAll('.post-toc-wrap .post-toc li');
     console.log(KEEP.utils.navItems);
@@ -854,7 +841,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   initLeftSideToggle();
   KEEP.printThemeInfo();
-  // KEEP.refresh();
   addReadStyle();
   initTOC();
 });
