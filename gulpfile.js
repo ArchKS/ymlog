@@ -8,7 +8,7 @@ const htmlmin = require('gulp-html-minifier-terser');
 // 可接受参数的文档：https://github.com/jakubpawlowicz/clean-css#constructor-options
 gulp.task('minify-css', () => {
     return gulp.src('./public/**/*.css')           // 处理public目录下所有的css文件，下同
-        .pipe(gulp.dest('./public'));
+        .pipe(gulp.dest('./dist'));
     // .pipe(cleancss({ compatibility: 'ie8' }))  // 兼容到IE8
 });
 
@@ -16,7 +16,7 @@ gulp.task('minify-css', () => {
 gulp.task('minify-js', () => {
     return gulp.src('./public/**/*.js')
         .pipe(uglify())
-        .pipe(gulp.dest('./public'));
+        .pipe(gulp.dest('./dist'));
 });
 
 // 压缩public目录下的html文件
@@ -33,7 +33,7 @@ gulp.task('minify-html', () => {
             minifyJS: true,                       // 压缩HTML中的JS
             minifyURLs: true                      // 压缩HTML中的链接
         }))
-        .pipe(gulp.dest('./public'))
+        .pipe(gulp.dest('./dist'))
 });
 
 // 默认任务，不带任务名运行gulp时执行的任务

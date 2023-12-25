@@ -19,8 +19,8 @@ jobs:
           persist-credentials: false
 
       # 1、生成静态文件
-      # - name: Build
-      #   run: npm install && npm run build
+      - name: Build
+        run: npm install && npm run build
 
       # 2、部署到 GitHub Pages
       - name: Deploy
@@ -28,7 +28,7 @@ jobs:
         env:
           PUBLISH_REPOSITORY: archks/archks.github.io
           BRANCH: main
-          PUBLISH_DIR: ./public
+          PUBLISH_DIR: ./dist
           PERSONAL_TOKEN: ${{ secrets.BK_TOKEN }} 
         # uses: JamesIves/github-pages-deploy-action@releases/v3
         # with:
