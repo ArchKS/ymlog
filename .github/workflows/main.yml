@@ -28,7 +28,7 @@ jobs:
         env:
           PUBLISH_REPOSITORY: archks/archks.github.io
           BRANCH: main
-          PUBLISH_DIR: ./dist
+          PUBLISH_DIR: ./public
           PERSONAL_TOKEN: ${{ secrets.BK_TOKEN }} 
         # uses: JamesIves/github-pages-deploy-action@releases/v3
         # with:
