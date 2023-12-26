@@ -17,6 +17,28 @@
 # git config --global core.autocrlf true
 
 # https://ymlog.cn/images -> /img/
+
+found_exception=false
+
+# 遍历 source/_posts 目录下的所有 .md 文件
+for file in source/_posts/*.md; do
+    # 使用 grep 检查文件内容是否包含特定字符串，并获取行号
+    if grep -n "/_posts/img" "$file"; then
+        # 打印出现异常的文件名和行号
+        echo -e "\e[41m\e[97m在文件 $file 发现图片路径异常\e[0m"
+        found_exception=true
+    fi
+done
+
+# 如果发现了异常，退出脚本
+if [ "$found_exception" = true ]; then
+    exit 1
+else
+    echo "---Image Checkout----"
+fi
+
+# hexo clean
+
 cp -r source/_posts/img source/
 
 git add .
