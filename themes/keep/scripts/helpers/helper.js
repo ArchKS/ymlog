@@ -14,20 +14,28 @@ hexo.extend.helper.register('isInHomePaging', function (pagePath, route) {
 
 hexo.extend.helper.register('createNewArchivePosts', function (posts) {
   const postList = [], postYearList = [];
-  posts.forEach(post => postYearList.push(post.date.year()));
+  posts.forEach((post, index) => {
+    // ['title', 'typora-root-url', 'create', 'update', '_content', 'source', 'raw', 'slug', 'published', 'date', 'updated', '__permalink', 'comments', 'layout', 'photos', 'link', '_id', 'content', 'site', 'excerpt', 'more', 'path', 'permalink', 'full_source', 'asset_dir', 'tags', 'categories', 'next', '__post']
+    postYearList.push(new Date(post.create).getFullYear())
+  });
   Array.from(new Set(postYearList)).forEach(year => {
     postList.push({
       year: year,
       postList: []
     })
   });
+
   postList.sort((a, b) => b.year - a.year)
   postList.forEach(item => {
-    posts.forEach(post => item.year === post.date.year() && item.postList.push(post))
+    posts.forEach(post => item.year === new Date(post.create).getFullYear() && item.postList.push(post))
   });
-  postList.forEach(item => item.postList.sort((a, b) => b.date.unix() - a.date.unix()));
+  postList.forEach(item => item.postList.sort((a, b) => new Date(a.create) - new Date(b.create)));
   return postList;
 });
+
+
+
+
 
 hexo.extend.helper.register('getAuthorLabel', function (postCount, isAuto, labelList) {
 

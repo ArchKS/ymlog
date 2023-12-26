@@ -361,7 +361,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // const post = document.querySelectorAll('.home-article-meta-info .home-article-date');
         // post && post.forEach(v => {
         // const nowDate = Date.now();
-        // const postDate = new Date(v.dataset.date.split(' GMT')[0]).getTime();
+        // const postDate = new Date(v.dataset.create.split(' GMT')[0]).getTime();
         // v.innerHTML = this.getHowLongAgo(Math.floor((nowDate - postDate) / 1000));
         // });
       },
@@ -834,7 +834,7 @@ window.addEventListener('DOMContentLoaded', () => {
       KEEP.utils.registerSidebarTOC();
 
     } else {
-      KEEP.utils.pageContainer_dom.removeChild(document.querySelector('.page-aside'));
+      // KEEP.utils.pageContainer_dom.removeChild(document.querySelector('.page-aside'));
     }
   }
 

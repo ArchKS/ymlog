@@ -1,42 +1,20 @@
+<% const postList = page.posts.sort((a, b) => b.sticky - a.sticky || new Date(b.create) - new Date(a.create)) %>
 <div class="home-content-container fade-in-down-animation">
     <ul class="home-article-list">
-        <% page.posts.forEach(post=> { %>
-            <% if (post.sticky) { %>
-                <li class="home-article-item post_sticky">
-                    <% } else{ %>
-                <li class="home-article-item">
+        <% postList.each(post => { %>
+            <li class="home-article-item <%= post.sticky ? 'post_sticky' : '' %>">
+                <h3 class="home-article-title">
+                    <% if (post.sticky) { %>
+                        <i class="fa-solid fa-angles-right fa fa-icon-top"></i>
                     <% } %>
-
-
-                    <h3 class="home-article-title">
-                        <% if (post.sticky != null ) { %>
-                            <!-- <i class="fa-solid fa-thumbtack fas"></i> -->
-                            <!-- <i class="fa-brands fa-gg fa fa-icon-top"></i> -->
-                            <i class="fa-solid fa-angles-right fa fa-icon-top"></i>
-                            <!-- <i class="fa-solid fa-bolt-lightning fa"></i> -->
-                            <!-- https://fontawesome.com/search?q=arrow&o=r&m=free -->
-                            <!-- <i class="fa-solid fa-hand-peace"></i> -->
-                        <% } %>
-                        <a href="<%- url_for(post.path) %>">
-                            <%= post.title %>
-                        </a>
-                    </h3>
-
-                        <!--
-                <div class="home-article-content markdown-body">
-                    <% if (post.excerpt) { %>
-                        <%- post.excerpt %>
-                    <% } else { %>
-                        <%- truncate(strip_html(post.content), {length: 128}) %>
-                    <% } %>
-                </div>
-                -->
-                        <%- partial('_partial/home-article-meta-info', {post: post}) %>
-                </li>
-                <% }) %>
+                    <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+                </h3>
+                <%- partial('_partial/home-article-meta-info', { post: post }) %>
+            </li>
+        <% }); %>
     </ul>
 
     <div class="home-paginator">
-        <%- partial('_partial/paginator', {pageObject: page}) %>
+        <%- partial('_partial/paginator', { pageObject: page }) %>
     </div>
 </div>
