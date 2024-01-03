@@ -747,7 +747,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function initTOC() {
     KEEP.utils.navItems = document.querySelectorAll('.post-toc-wrap .post-toc li');
-    console.log(KEEP.utils.navItems);
     if (KEEP.utils.navItems.length > 0) {
       KEEP.utils = {
         ...KEEP.utils,
