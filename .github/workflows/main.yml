@@ -51,7 +51,7 @@ jobs:
           --data-raw '{
             "noif": 42,
             "delay": 42,
-            "source_url": "https://i.ymlog.cn/*"
+            "source_url": "https://ymlog.cn/*"
           }'
 
       # # 3、同步到 gitee 的仓库
