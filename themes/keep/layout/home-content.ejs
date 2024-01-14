@@ -1,7 +1,9 @@
 <% const postList = page.posts
-    .sort((a, b) => b.sticky - a.sticky || new Date(b.create) - new Date(a.create))
+    .sort((a, b)=>  b.sticky - a.sticky)
     .filter(post => !post.draft); 
 %>
+
+
 <div class="home-content-container fade-in-down-animation">
     <ul class="home-article-list">
         <% postList.each(post => { %>
