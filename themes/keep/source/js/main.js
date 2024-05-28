@@ -71,6 +71,19 @@ function setColorsInCategory() {
     })
   })
 }
+
+function addWidthStyle() {
+  let bw = document.body.clientWidth;
+  if (bw >= 620 && bw <= 1024) {
+    let mc = document.querySelector(".main-content")
+    if (mc) {
+      mc.style.maxWidth = '90%';
+      mc.style.width = '90%';
+      mc.classList.add("read-wrapper")
+    }
+  }
+}
+
 window.addEventListener('DOMContentLoaded', () => {
 
   KEEP.themeInfo = {
@@ -209,7 +222,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const mainContentDom = document.querySelector('.main-content');
         const iconDom = toolExpandDom.querySelector('i');
 
-        const defaultMaxWidth = KEEP.theme_config.style.content_max_width || '1000px';
+        let defaultMaxWidth = KEEP.theme_config.style.content_max_width || '1000px';
         const expandMaxWidth = '90%';
         let headerMaxWidth = defaultMaxWidth;
 
@@ -738,6 +751,8 @@ window.addEventListener('DOMContentLoaded', () => {
     let url = window.location.href;
     if (/\/Read\/$/.test(url)) {
       setColorsInCategory();
+      addWidthStyle();
+
       if (document.body.clientWidth < 700) {
         generatorCss();
       }

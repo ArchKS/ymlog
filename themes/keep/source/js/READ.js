@@ -59,13 +59,11 @@ function generatorCss() {
 }
 
 function addReadStyle() {
-    let url = window.location.href;
-    if (url.indexOf("/Read/") > 0) {
-        setColorsInCategory();
-        if (document.body.clientWidth < 700) {
-            generatorCss();
-        }
+    setColorsInCategory();
+    if (document.body.clientWidth < 700) {
+        generatorCss();
     }
+
 }
 
 // 给不同的分类设置颜色
@@ -141,4 +139,21 @@ function setColorsInCategory() {
     })
 }
 
-addReadStyle();
+function addWidthStyle() {
+    let bw = document.body.clientWidth;
+
+    alert(bw);
+
+    if (bw >= 768 && bw <= 1024) {
+        let mc = document.querySelector(".main-content")
+        if (mc) {
+            mc.style.maxWidth = 'auto';
+        }
+    }
+}
+
+alert(1)
+if (window.location.href.indexOf("/Read/") > 0) {
+    addReadStyle();
+    addWidthStyle();
+}

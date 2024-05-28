@@ -1,0 +1,31 @@
+@media screen and (min-width: 620px) and (max-width: 1024px) {
+    .main-content.read-wrapper {
+        table {
+            td, th, tr {
+                padding: 4px 6px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            th:nth-child(1), td:nth-child(1) {
+                width: 40px !important;
+                text-align: center;
+            }
+
+            th:nth-child(2), td:nth-child(2) {
+                width: 70px !important;
+                text-align: center;
+            }
+
+            td:nth-child(3) {
+                width: 70px !important;
+                max-width: 120px !important;
+            }
+
+            td:nth-child(4) {
+                max-width: 200px;
+            }
+        }
+    }
+}
