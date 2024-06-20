@@ -152,7 +152,6 @@ function addWidthStyle() {
     }
 }
 
-alert(1)
 if (window.location.href.indexOf("/Read/") > 0) {
     addReadStyle();
     addWidthStyle();
