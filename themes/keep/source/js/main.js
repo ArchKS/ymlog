@@ -71,6 +71,31 @@ function setColorsInCategory() {
     })
   })
 }
+// 设置每年阅读量
+function setYearReadCount() {
+  // 获取所有的h1元素
+  const h1Elements = document.querySelectorAll('h1');
+
+  // 遍历每个h1元素
+  h1Elements.forEach(h1 => {
+    // 对于每个h1元素，查找其下一个兄弟元素，如果该兄弟元素是table，则进行操作
+    const table = h1.nextElementSibling;
+    if (table && table.tagName === 'TABLE') {
+      try{
+        
+        let len = table.querySelectorAll('tbody tr').length;
+        let fmtH1 = h1.innerHTML.replace(/(\d{4}) ‹(.*?)›/g,(match,p1)=>{
+          return `${p1} ‹${len}›`
+        });
+        h1.innerHTML = fmtH1;
+        // console.log(`h1:${h1.innerHTML} \nfmtH1:${fmtH1}`);
+      }catch(e){
+        console.log(e);
+      }
+    }
+  });
+}
+
 
 function addWidthStyle() {
   let bw = document.body.clientWidth;
@@ -752,6 +777,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (/\/Read\/$/.test(url)) {
       setColorsInCategory();
       addWidthStyle();
+      setYearReadCount();
 
       if (document.body.clientWidth < 700) {
         generatorCss();
