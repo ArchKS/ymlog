@@ -18,6 +18,8 @@ function setColorsInCategory() {
     best: "linear-gradient(109.6deg, rgb(214,180,148) 71.8%,rgb(10,5,0)  71.8%)"
   }
 
+  const isDark = document.body.classList.contains('dark-mode');
+
   let _categoryEs = document.querySelectorAll('table');
   _categoryEs.forEach(table => {
     let categoryEs = Array.from(table.querySelectorAll("tbody tr td:nth-child(2)")).map(v => v.innerText);
@@ -62,6 +64,12 @@ function setColorsInCategory() {
         rate.style.color = 'gold'
         color = coloredCateObj['best']
         td.style.background = color;
+
+        if (isDark) {
+          td.style.color = '#000';
+        }
+
+
       } else {
         if (document.body.clientWidth > 700) {
           // td.style.background = color;
@@ -75,21 +83,24 @@ function setColorsInCategory() {
 function setYearReadCount() {
   // 获取所有的h1元素
   const h1Elements = document.querySelectorAll('h1');
-
+  const titleElements = document.querySelectorAll('.nav-item.nav-level-1 .nav-text');
   // 遍历每个h1元素
-  h1Elements.forEach(h1 => {
+
+  h1Elements.forEach((h1, index) => {
     // 对于每个h1元素，查找其下一个兄弟元素，如果该兄弟元素是table，则进行操作
     const table = h1.nextElementSibling;
     if (table && table.tagName === 'TABLE') {
-      try{
-        
+      try {
+
         let len = table.querySelectorAll('tbody tr').length;
-        let fmtH1 = h1.innerHTML.replace(/(\d{4}) ‹(.*?)›/g,(match,p1)=>{
-          return `${p1} ‹${len}›`
+        let fmtH1 = h1.innerHTML.replace(/(\d{4}) ‹(.*?)›/g, (match, p1) => {
+          let ret = `${p1} ‹${len < 10 ? '0' + len : len}›`
+          titleElements[index].innerHTML = ret;
+          return ret;
         });
         h1.innerHTML = fmtH1;
         // console.log(`h1:${h1.innerHTML} \nfmtH1:${fmtH1}`);
-      }catch(e){
+      } catch (e) {
         console.log(e);
       }
     }
