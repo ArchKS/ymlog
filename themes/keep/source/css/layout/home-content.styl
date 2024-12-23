@@ -16,11 +16,11 @@
     .home-article-item:hover::after{
         content: "";
         position: absolute;
-        width: 100%;
+        width: 87%;
         height: 1px;
         border-top: 1px dotted #ccc;
         top: 50%;
-        left: 0;
+        left: 5%;
         z-index -1;
     }
     .home-article-item {
@@ -30,7 +30,7 @@
       position: relative;
       display: flex;
       justify-content: space-between;
-      padding: 10px 40px;
+      padding: 10px 30px;
       border-radius: 5px;
       box-sizing: border-box;
       transition-property: color, background, box-shadow, border-color, transform;
@@ -60,6 +60,8 @@
         font-size: 1.2rem;
         line-height: 1.5;
         color: var(--second-text-color);
+        background:#fff;
+        padding: 0 10px;
         z-index 1;
         .fa-icon-top{
           position: absolute;
@@ -99,6 +101,8 @@
         font-size: 0.92rem;
         z-index 1;
         color: var(--third-text-color);
+        background:#fff;
+        padding: 0 10px;
 
 
         .home-article-meta-info {
