@@ -8,6 +8,14 @@
   }
 }
 
+.dark-mode .home-article-item:hover::after {
+  border-color: #000;
+}
+.dark-mode .home-article-title,
+.dark-mode .home-article-meta-info-container{
+  background:#383940 !important;
+}
+
 .home-content-container {
   background: var(--background-color);
 
@@ -16,11 +24,11 @@
     .home-article-item:hover::after{
         content: "";
         position: absolute;
-        width: 87%;
+        width: 80%;
         height: 1px;
         border-top: 1px dotted #ccc;
         top: 50%;
-        left: 5%;
+        left: 10%;
         z-index -1;
     }
     .home-article-item {
