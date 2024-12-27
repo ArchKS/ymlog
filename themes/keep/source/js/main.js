@@ -900,7 +900,8 @@ window.addEventListener('DOMContentLoaded', () => {
 // 展示印章
 // /img/stamp.png
 function showStamp() {
-  if (/stamp=1/.test(window.location.href)) {
+  // if (/\/Read\/$/.test(url)) {
+  if (/\/Read\/$/.test(window.location.href)) {
     const styles = {
       position: 'absolute',
       right: '3px',
