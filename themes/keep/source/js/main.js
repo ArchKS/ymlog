@@ -893,5 +893,28 @@ window.addEventListener('DOMContentLoaded', () => {
   initLeftSideToggle();
   KEEP.printThemeInfo();
   addReadStyle();
+  showStamp();
   initTOC();
 });
+
+// 展示印章
+// /img/stamp.png
+function showStamp() {
+  if (/stamp=1/.test(window.location.href)) {
+    const styles = {
+      position: 'absolute',
+      right: '3px',
+      bottom: '3px',
+      zIndex: 100,
+      width: '32px'
+    }
+    let blocks = document.querySelectorAll('.article-content.markdown-body blockquote');
+    blocks.forEach(block=>{
+      block.style.position = 'relative';
+      var img = document.createElement('img');
+      img.src = '/img/stamp.png'; 
+      Object.keys(styles).forEach(key => {img.style[key] = styles[key]})
+      block.appendChild(img); 
+    })
+  }
+}
