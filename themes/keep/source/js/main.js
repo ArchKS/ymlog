@@ -1,4 +1,6 @@
-
+function isReadpage(){
+  return window.location.pathname.replace(/\/| /g,'') == 'Read';
+}
 
 
 // 给不同的分类设置颜色
@@ -317,18 +319,18 @@ window.addEventListener('DOMContentLoaded', () => {
       // init page height handle
       initPageHeightHandle() {
         if (this.firstScreen_dom) return;
-        const temp_h1 = this.getElementHeight('.page-main-content-top');
-        const temp_h2 = this.getElementHeight('.page-main-content-middle');
-        const temp_h3 = this.getElementHeight('.page-main-content-bottom');
-        const allDomHeight = temp_h1 + temp_h2 + temp_h3;
-        const innerHeight = window.innerHeight;
-        const pb_dom = document.querySelector('.page-main-content-bottom');
-        if (allDomHeight < innerHeight) {
-          const marginTopValue = Math.floor(innerHeight - allDomHeight);
-          if (marginTopValue > 0) {
-            pb_dom.style.marginTop = `${marginTopValue - 2}px`;
-          }
-        }
+        // const temp_h1 = this.getElementHeight('.page-main-content-top');
+        // const temp_h2 = this.getElementHeight('.page-main-content-middle');
+        // const temp_h3 = this.getElementHeight('.page-main-content-bottom');
+        // const allDomHeight = temp_h1 + temp_h2 + temp_h3;
+        // const innerHeight = window.innerHeight;
+        // const pb_dom = document.querySelector('.page-main-content-bottom');
+        // if (allDomHeight < innerHeight) {
+        //   const marginTopValue = Math.floor(innerHeight - allDomHeight);
+        //   if (marginTopValue > 0) {
+        //     pb_dom.style.marginTop = `${marginTopValue - 2}px`;
+        //   }
+        // }
       },
 
       // big image viewer
@@ -785,7 +787,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function addReadStyle() {
     let url = window.location.href;
-    if (/\/Read\/$/.test(url)) {
+    if (isReadpage()) {
       setColorsInCategory();
       addWidthStyle();
       setYearReadCount();
@@ -900,8 +902,7 @@ window.addEventListener('DOMContentLoaded', () => {
 // 展示印章
 // /img/stamp.png
 function showStamp() {
-  // if (/\/Read\/$/.test(url)) {
-  if (/\/Read\/$/.test(window.location.href)) {
+  if (isReadpage()) {
     const styles = {
       position: 'absolute',
       right: '3px',
@@ -909,13 +910,11 @@ function showStamp() {
       zIndex: 100,
       width: '32px'
     }
-    let blocks = document.querySelectorAll('.article-content.markdown-body blockquote');
-    blocks.forEach(block=>{
-      block.style.position = 'relative';
-      var img = document.createElement('img');
-      img.src = '/img/stamp.png'; 
-      Object.keys(styles).forEach(key => {img.style[key] = styles[key]})
-      block.appendChild(img); 
-    })
+    let block = document.querySelector('.article-content.markdown-body blockquote');
+    block.style.position = 'relative';
+    var img = document.createElement('img');
+    img.src = '/img/stamp.png'; 
+    Object.keys(styles).forEach(key => {img.style[key] = styles[key]})
+    block.appendChild(img); 
   }
 }
