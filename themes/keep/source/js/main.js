@@ -319,18 +319,18 @@ window.addEventListener('DOMContentLoaded', () => {
       // init page height handle
       initPageHeightHandle() {
         if (this.firstScreen_dom) return;
-        // const temp_h1 = this.getElementHeight('.page-main-content-top');
-        // const temp_h2 = this.getElementHeight('.page-main-content-middle');
-        // const temp_h3 = this.getElementHeight('.page-main-content-bottom');
-        // const allDomHeight = temp_h1 + temp_h2 + temp_h3;
-        // const innerHeight = window.innerHeight;
-        // const pb_dom = document.querySelector('.page-main-content-bottom');
-        // if (allDomHeight < innerHeight) {
-        //   const marginTopValue = Math.floor(innerHeight - allDomHeight);
-        //   if (marginTopValue > 0) {
-        //     pb_dom.style.marginTop = `${marginTopValue - 2}px`;
-        //   }
-        // }
+        const temp_h1 = this.getElementHeight('.page-main-content-top');
+        const temp_h2 = this.getElementHeight('.page-main-content-middle');
+        const temp_h3 = this.getElementHeight('.page-main-content-bottom');
+        const allDomHeight = temp_h1 + temp_h2 + temp_h3;
+        const innerHeight = window.innerHeight;
+        const pb_dom = document.querySelector('.page-main-content-bottom');
+        if (allDomHeight < innerHeight) {
+          const marginTopValue = Math.floor(innerHeight - allDomHeight);
+          if (marginTopValue > 0) {
+            pb_dom.style.marginTop = `${marginTopValue - 2}px`;
+          }
+        }
       },
 
       // big image viewer
@@ -476,7 +476,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     // init page height handle
-    KEEP.utils.initPageHeightHandle();
+    // KEEP.utils.initPageHeightHandle();
 
     // init first screen height
     KEEP.utils.initFirstScreenHeight();
