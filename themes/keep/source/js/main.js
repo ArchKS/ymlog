@@ -895,13 +895,13 @@ window.addEventListener('DOMContentLoaded', () => {
   initLeftSideToggle();
   KEEP.printThemeInfo();
   addReadStyle();
-  showStamp();
+  showStampInReadPage();
   initTOC();
 });
 
 // 展示印章
 // /img/stamp.png
-function showStamp() {
+function showStampInReadPage() {
   if (isReadpage()) {
     const styles = {
       position: 'absolute',
@@ -918,3 +918,22 @@ function showStamp() {
     block.appendChild(img); 
   }
 }
+
+// function showStampInPageBottom(){
+//   let container = document.querySelector('.article-content-container');
+//   if(!container){
+//     return;
+//   }
+//   const styles = {
+//     position: 'absolute',
+//     right: '3px',
+//     bottom: '3px',
+//     zIndex: 100,
+//     width: '32px'
+//   }
+//   container.style.position = 'relative';
+//   var img = document.createElement('img');
+//   img.src = '/img/stamp.png'; 
+//   Object.keys(styles).forEach(key => {img.style[key] = styles[key]})
+//   container.appendChild(img); 
+// }
