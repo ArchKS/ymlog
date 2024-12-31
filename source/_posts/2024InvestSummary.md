@@ -48,7 +48,7 @@ h2::after {
   right: 0;
   left: 0;
   height: calc(50% - 5px);
-  border: 1px solid #2E5077;
+  border: 1px solid #E82561;
   transition: all .15s ease;
 }
 

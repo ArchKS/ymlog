@@ -7,13 +7,71 @@ create: 2022-03-05 14:01:54
 update: 2022-03-05 14:01:54
 ---
 
+
+<style>
+.main-content .high-image {
+ max-height: 30vh !important;
+ overflow-y: scroll;
+ box-shadow: 0 0 10px rgba(0,0,0,0.08);
+ margin-bottom:10px;
+}
+.main-content img{
+   border: 1px solid #ebebeb;
+   margin: 0 !important;
+}
+
+
+h2 {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  width:fit-content;
+  appearance: none;
+  border: none;
+  background: none;
+   color:#C30E59 !important;
+   margin: 60px 0  20px 0 !important;
+
+  cursor: pointer;
+  position: relative;
+  padding: 8px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+  transition: all .15s ease;
+}
+
+h2::before,
+h2::after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: calc(50% - 5px);
+  border: 1px solid #E82561;
+  transition: all .15s ease;
+}
+
+h2::before {
+  top: 0;
+  border-bottom-width: 0;
+}
+
+h2::after {
+  bottom: 0;
+  border-top-width: 0;
+}
+
+</style>
+
 >   2021/06/24，买入第一只股票三峡能源，怀着对碳中和的美好期待，开启了我2021的交易生涯
 
 主要分一下几个方面来写：
 
 ![](/img/image-20220306120939233.png)
 
-# 行情梳理
+## 行情梳理
 
 先来几张图
 
@@ -40,7 +98,7 @@ update: 2022-03-05 14:01:54
 
 
 
-# 行为分析
+## 行为分析
 
 >   2021 不知道自己买入的原因，不知道自己卖出的原因，不知道自己买的是什么。
 
@@ -63,7 +121,7 @@ update: 2022-03-05 14:01:54
 
 
 
-# 认知改变
+## 认知改变
 
 
 
@@ -118,7 +176,7 @@ update: 2022-03-05 14:01:54
 
 
 
-# 展望2022
+## 展望2022
 
 
 
@@ -143,7 +201,7 @@ update: 2022-03-05 14:01:54
 
 
 
-# 以我为鉴
+## 以我为鉴
 
 
 忆往昔，警当下。

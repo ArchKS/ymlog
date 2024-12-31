@@ -7,6 +7,64 @@ create: 2024-01-14 14:47:00
 update: 2024-01-16 20:14:47
 ---
 
+
+<style>
+.main-content .high-image {
+ max-height: 30vh !important;
+ overflow-y: scroll;
+ box-shadow: 0 0 10px rgba(0,0,0,0.08);
+ margin-bottom:10px;
+}
+.main-content img{
+   border: 1px solid #ebebeb;
+   margin: 0 !important;
+}
+
+
+h2 {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  width:fit-content;
+  appearance: none;
+  border: none;
+  background: none;
+   color:#C30E59 !important;
+   margin: 60px 0  20px 0 !important;
+
+  cursor: pointer;
+  position: relative;
+  padding: 8px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+  transition: all .15s ease;
+}
+
+h2::before,
+h2::after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: calc(50% - 5px);
+  border: 1px solid #E82561;
+  transition: all .15s ease;
+}
+
+h2::before {
+  top: 0;
+  border-bottom-width: 0;
+}
+
+h2::after {
+  bottom: 0;
+  border-top-width: 0;
+}
+
+</style>
+
 > 本文旨在还原我2023年的思想层次和思考方向
 
 
