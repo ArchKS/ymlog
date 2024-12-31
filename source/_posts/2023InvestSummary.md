@@ -9,16 +9,6 @@ update: 2024-01-16 20:14:47
 
 
 <style>
-.main-content .high-image {
- max-height: 30vh !important;
- overflow-y: scroll;
- box-shadow: 0 0 10px rgba(0,0,0,0.08);
- margin-bottom:10px;
-}
-.main-content img{
-   border: 1px solid #ebebeb;
-   margin: 0 !important;
-}
 
 
 h2 {
@@ -261,12 +251,13 @@ h2::after {
 -   国际局势方面，俄乌战争仍在持续，巴以冲突10月份爆发
 
     
-
-![image-20240103193451319](/img/image-20240103193451319.png)
-
-![Global_Market_Index](/img/Global_Market_Index.png)
-
-![CN_Industry_ETF](/img/CN_Industry_ETF.png)
+ <img src="/img/image-20240103193451319.png"/>
+<div class="high-image" style="min-height:500px;">
+ <img src="/img/Global_Market_Index.png"/>
+</div>
+<div class="high-image" style="min-height:500px;">
+ <img src="/img/CN_Industry_ETF.png"/>
+</div>
 
 
 

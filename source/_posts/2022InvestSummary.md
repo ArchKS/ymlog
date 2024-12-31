@@ -8,17 +8,6 @@ update: 2023-01-11 14:04:00
 ---
 
 <style>
-.main-content .high-image {
- max-height: 30vh !important;
- overflow-y: scroll;
- box-shadow: 0 0 10px rgba(0,0,0,0.08);
- margin-bottom:10px;
-}
-.main-content img{
-   border: 1px solid #ebebeb;
-   margin: 0 !important;
-}
-
 
 h2 {
   -moz-appearance: none;
@@ -83,7 +72,10 @@ Q4交割单，交易共创草坪、海康威视、牧原股份、分众传媒、
 
 **今年的盈亏节点：**
 
-<img src="/img/2022YearReturn.jpg" alt="2022YearReturn" />
+<div class="high-image" style="min-height:400px;">
+ <img src="/img/2022YearReturn.jpg"/>
+</div>
+
 
 
 
@@ -166,7 +158,7 @@ Q4交割单，交易共创草坪、海康威视、牧原股份、分众传媒、
 
 股票交易是如何盈利（赚钱）的？答案是低买高卖！
 
-![投资哲学的推导](%E6%8A%95%E8%B5%84%E5%93%B2%E5%AD%A6%E7%9A%84%E6%8E%A8%E5%AF%BC.jpg)
+![投资哲学的推导](/img/投资哲学的推导.jpg)
 
 
 

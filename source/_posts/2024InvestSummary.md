@@ -8,16 +8,6 @@ update: 2024-12-30 17:10:24
 ---
 
 <style>
-.main-content .high-image {
- max-height: 30vh !important;
- overflow-y: scroll;
- box-shadow: 0 0 10px rgba(0,0,0,0.08);
- margin-bottom:10px;
-}
-.main-content img{
-   border: 1px solid #ebebeb;
-   margin: 0 !important;
-}
 
 
 h2 {
