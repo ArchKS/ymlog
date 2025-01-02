@@ -7,52 +7,7 @@ create: 2024-12-30 17:10:24
 update: 2024-12-30 17:10:24
 ---
 
-<style>
 
-
-h2 {
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  width:fit-content;
-  appearance: none;
-  border: none;
-  background: none;
-   color:#C30E59 !important;
-   margin: 60px 0  20px 0 !important;
-
-  cursor: pointer;
-  position: relative;
-  padding: 8px;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 14px;
-  transition: all .15s ease;
-}
-
-h2::before,
-h2::after {
-  content: '';
-  display: block;
-  position: absolute;
-  right: 0;
-  left: 0;
-  height: calc(50% - 5px);
-  border: 1px solid #E82561;
-  transition: all .15s ease;
-}
-
-h2::before {
-  top: 0;
-  border-bottom-width: 0;
-}
-
-h2::after {
-  bottom: 0;
-  border-top-width: 0;
-}
-
-</style>
 
 鉴于当下的自媒体已经有很丰富的 2024 市场行情回顾，且今年的市场行情和 22、23 年差不多，只是各种叫不上名字的题材的轮动，没有业绩主线。故本篇不再像以往一样展示 24 年市场整体走势及叙事。
 
