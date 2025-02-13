@@ -19,7 +19,7 @@ update: 2024-01-16 20:14:47
 
 -   A股贡献2.84%，港美贡献1.62%，理财（逆回购等）贡献0.77%，共计5.23%。同期沪深300（-11.38%），标普500（24.58%）
 
--   A股今年盈利1.5w、港美0.8w、理财0.4w，整体2.77w。
+-   A股今年盈利<span class="hide_star">1.5</span>、港美<span class="hide_star">0.8</span>、理财<span class="hide_star">0.4</span>，整体<span class="hide_star">2.77</span>。
 
 
 

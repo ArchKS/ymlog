@@ -919,6 +919,10 @@ function showStampInReadPage() {
   }
 }
 
+if(window.location.href.indexOf("showstar")>-1){
+  document.body.classList.add('show_star');
+}
+
 // function showStampInPageBottom(){
 //   let container = document.querySelector('.article-content-container');
 //   if(!container){

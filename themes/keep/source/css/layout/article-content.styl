@@ -221,3 +221,28 @@ $article-title-font-size = 1.6rem;
 
 }
 
+.hide_star{
+  position: relative;
+}
+
+.hide_star::after{
+  position: absolute;
+  left: 0;
+  right: 0;
+  content: "***";
+  height: 22px;
+  background: white;
+  white-space: nowrap;
+}
+
+.show_star .hide_star::after {
+  display: none;
+}
+
+.hide-img{
+ display:none !important;
+}
+
+.show_star .hide-img{
+  display:block !important;
+}

@@ -28,7 +28,7 @@ Q4交割单，交易共创草坪、海康威视、牧原股份、分众传媒、
 **今年的盈亏节点：**
 
 <div class="high-image" style="min-height:400px;">
- <img src="/img/2022YearReturn.jpg"/>
+ <img src="/img/2022YearReturn.jpg" class="hide-img"/>
 </div>
 
 
@@ -223,11 +223,11 @@ Q4交割单，交易共创草坪、海康威视、牧原股份、分众传媒、
 
 
 
-1.   一开始是买2000 RMB玩玩，后来觉得2000不过瘾，加到了12000
-2.   之后12000跌了十几个点，想着-20%止损，亏2400也能接受
-3.   后来亏损幅度加大，当时总共有18w资金，想着做到10%的仓位，于是又加了6000RMB
+1.   一开始是买<span class="hide_star">2000</span>RMB玩玩，后来觉得2000不过瘾，加到了<span class="hide_star">12000</span>
+2.   之后<span class="hide_star">12000</span>跌了十几个点，想着-20%止损，亏<span class="hide_star">2400</span>也能接受
+3.   后来亏损幅度加大，当时总共有<span class="hide_star">18</span>资金，想着做到10%的仓位，于是又加了<span class="hide_star">6000</span>RMB
 4.   后来亏损幅度又加大了，想着-20%止损不科学，不如等到4/1止损，最开始是2022/12/5买的，这时候已经是2023/1/5了
-5.   后有大跌12%，想着凑个整数，又加了2000RMB，凑够了2w
+5.   后有大跌12%，想着凑个整数，又加了 <span class="hide_star">2000</span> RMB，凑够了<span class="hide_star">2</span>
 6.   不知道该怎么操作，割肉又害怕涨上去，拿着又害怕亏损幅度加大，中概反弹的很多应该要回调了，但中概同样跌的很多，又可能继续涨。当时心里十分矛盾，每天都很恶心。
 
 
