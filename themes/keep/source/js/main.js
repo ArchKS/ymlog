@@ -919,7 +919,7 @@ function showStampInReadPage() {
   }
 }
 
-if(window.location.href.indexOf("showstar")>-1){
+if(window.location.href.indexOf("star")>-1){
   document.body.classList.add('show_star');
 }
 
