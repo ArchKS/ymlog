@@ -83,6 +83,7 @@ function setColorsInCategory() {
 }
 // 设置每年阅读量
 function setYearReadCount() {
+  console.log('set reader page year read count');
   // 获取所有的h1元素
   const h1Elements = document.querySelectorAll('h1');
   const titleElements = document.querySelectorAll('.nav-item.nav-level-1 .nav-text');
