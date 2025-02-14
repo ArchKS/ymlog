@@ -85,8 +85,8 @@ function setColorsInCategory() {
 function setYearReadCount() {
   console.log('set reader page year read count');
   // 获取所有的h1元素
-  const h1Elements = document.querySelectorAll('h1');
-  const titleElements = document.querySelectorAll('.nav-item.nav-level-1 .nav-text');
+  const h1Elements = document.querySelectorAll('h2');
+  const titleElements = document.querySelectorAll('.nav-item.nav-level-2 .nav-text');
   // 遍历每个h1元素
 
   h1Elements.forEach((h1, index) => {
@@ -215,7 +215,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
       // toggle show tools list
       toggleShowToolsList() {
-        document.querySelector('.tool-toggle-show').addEventListener('click', () => {
+        let s= document.querySelector('.tool-toggle-show');
+        if(!s){
+          return
+        }
+        s.addEventListener('click', () => {
           document.querySelector('.side-tools-list').classList.toggle('show');
         });
       },
