@@ -49,8 +49,6 @@ index_generator:
 default_category: uncategorized
 
 
-
-
 category_map:
 tag_map:
 meta_generator: true

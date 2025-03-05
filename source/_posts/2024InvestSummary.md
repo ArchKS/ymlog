@@ -5,6 +5,8 @@ permalink: 2024-invest-summary/
 date: 2024-12-30 17:10:24
 create: 2024-12-30 17:10:24
 update: 2024-12-30 17:10:24
+categories:
+    - 投资总结
 ---
 
 

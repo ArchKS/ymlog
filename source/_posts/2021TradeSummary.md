@@ -5,6 +5,8 @@ permalink: 2021-trade-summary/
 date: 2022-03-05 14:01:54
 create: 2022-03-05 14:01:54
 update: 2022-03-05 14:01:54
+categories:
+    - 投资总结
 ---
 
 

@@ -1,21 +1,22 @@
 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><span class="home-article-date" data-date="<%= post.create %>"><%= date(post.create, 'YYYY-MM-DD') %></span></span>
-        <!-- <% if (post.categories.length && theme.home_article.category.enable === true) { %>
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+        <span><span class="home-article-date"  style="position: relative;" data-date="<%= post.create %>"><%= date(post.create, 'YYYY-MM-DD') %></span></span>
+        <% if (post.categories.length && theme.home_article.category.enable === true) { %>
+            <div class="home-article-category" style="position: absolute; right: 200px; top: 50%; transform: translateY(-50%);">
                 <ul>
                     <% post.categories.forEach((category, i) => {
                     if (theme.home_article.category.limit === 0 || i + 1 <= theme.home_article.category.limit) { %>
                         <li>
                             <%= i === 0 ? '' : '> ' %>
-                            <a href="<%- url_for(category.path) %>"><%= category.name %></a>&nbsp;
+                            <i class="fas fa-folder"></i>
+                            <a target="_blank" href="<%- url_for(category.path) %>"><%= category.name %></a>&nbsp;
                         </li>
                     <% } %>
                     <% }); %>
                 </ul>
-            </span>
+            </div>
         <% } %>
-        <% if (post.tags.length && theme.home_article.tag.enable === true) { %>
+        <!-- <% if (post.tags.length && theme.home_article.tag.enable === true) { %>
             <span class="home-article-tag">
                 <i class="fas fa-tags"></i>&nbsp;
                 <ul>

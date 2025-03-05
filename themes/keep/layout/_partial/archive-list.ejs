@@ -9,17 +9,26 @@
                     <span class="archive-year-post-count">[<%= postYear.postList.length %>]</span>
                 </div>
                 <ul class="article-list">
-                    <% postYear.postList.forEach(post=> { %>
-                        <li class="article-item">
-                            <a class="article-title" href="<%- url_for(post.path) %>">
-                                <%= post.title %>
-                            </a>
-                            <span class="article-date">
-                                <%= date(post.create, 'MM-DD' ) %>
-                            </span>
-                        </li>
-                        <% }) %>
-                </ul>
+                    <% 
+                      // 根据 createtime 字段排序（降序：新文章在前）
+                      const sortedPosts = postYear.postList.sort((a, b) => {
+                        const dateA = new Date(a.create || a.createtime || a.date);
+                        const dateB = new Date(b.create || b.createtime || b.date);
+                        return dateB - dateA; // 降序
+                      });
+                  
+                      sortedPosts.forEach(post => { 
+                    %>
+                      <li class="article-item">
+                        <a class="article-title" href="<%- url_for(post.path) %>">
+                          <%= post.title %>
+                        </a>
+                        <span class="article-date">
+                          <%= date(post.create, 'MM-DD' ) %>
+                        </span>
+                      </li>
+                    <% }) %>
+                  </ul>
             </section>
             <% }) %>
     </div>

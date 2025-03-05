@@ -5,6 +5,8 @@ date: 2024-05-07 22:00:22
 create: 2024-05-07 22:00:22
 update: 2024-05-07 22:00:22
 permalink: my-invest-theory/
+categories:
+  - 其他文章
 ---
 
 
