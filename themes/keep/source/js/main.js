@@ -1,5 +1,5 @@
-function isReadpage(){
-  return window.location.pathname.replace(/\/| /g,'') == 'Read';
+function isReadpage() {
+  return window.location.pathname.replace(/\/| /g, '') == 'Read';
 }
 
 
@@ -215,8 +215,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
       // toggle show tools list
       toggleShowToolsList() {
-        let s= document.querySelector('.tool-toggle-show');
-        if(!s){
+        let s = document.querySelector('.tool-toggle-show');
+        if (!s) {
           return
         }
         s.addEventListener('click', () => {
@@ -918,15 +918,15 @@ function showStampInReadPage() {
     let block = document.querySelector('.article-content.markdown-body blockquote');
     block.style.position = 'relative';
     var img = document.createElement('img');
-    img.src = '/img/stamp.png'; 
-    Object.keys(styles).forEach(key => {img.style[key] = styles[key]})
-    block.appendChild(img); 
+    img.src = '/img/stamp.png';
+    Object.keys(styles).forEach(key => { img.style[key] = styles[key] })
+    block.appendChild(img);
   }
 }
 
-if(window.location.href.indexOf("star")>-1){
-  document.body.classList.add('show_star');
-}
+// if (window.location.href.indexOf("star") > -1) {
+//   document.body.classList.add('show_star');
+// }
 
 // function showStampInPageBottom(){
 //   let container = document.querySelector('.article-content-container');
@@ -946,3 +946,20 @@ if(window.location.href.indexOf("star")>-1){
 //   Object.keys(styles).forEach(key => {img.style[key] = styles[key]})
 //   container.appendChild(img); 
 // }
+
+const starStr = '********************************************************************************************'
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const elements = document.querySelectorAll('.hide_star');
+  elements.forEach(el => {
+    const text = el.textContent.trim();
+    // el.setAttribute('tlen', text.length);
+    // 可选：隐藏原始文本
+    if (window.location.href.indexOf("star") > -1) {
+      // document.body.classList.add('show_star');
+    }else{
+      el.textContent = starStr.slice(0, text.length);
+    }
+  });
+});
