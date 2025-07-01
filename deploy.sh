@@ -20,6 +20,11 @@
 
 found_exception=false
 
+
+git config --global http.proxy http://localhost:7890
+git config --global https.proxy http://localhost:7890
+
+
 # 遍历 source/_posts 目录下的所有 .md 文件
 for file in source/_posts/*.md; do
     # 使用 grep 检查文件内容是否包含特定字符串，并获取行号
@@ -51,4 +56,12 @@ fi
 git commit -m "$commit_message"
 git push 
 
+
+
+git config --global --unset http.proxy;
+git config --global --unset https.proxy;
+
+
 echo -e "\n [ Deploy Finish ] \n"
+
+
