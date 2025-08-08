@@ -11,7 +11,7 @@ on:
 jobs:
   build-and-deploy:
     # 服务器环境：最新版 Ubuntu
-    runs-on: ubuntu-latest
+    runs-on: ubuntu:20.04
     steps:
       # 拉取代码
       - name: Checkout
@@ -40,17 +40,17 @@ jobs:
           #注意这里的 public 是仓库根目录下的 public，也就是 npm run build 生成静态资源的路径，比如有的人是 `docs/.vuepress/dist`
 
       # 3、刷新cdn
-      - name: Refresh CDN
-        run: |
-          curl --location --request POST 'https://api.upyun.com/buckets/purge/batch' \
-          --header 'Authorization: Bearer bcb60ea8-d653-4f4f-8baf-394d2c4c83b9' \
-          --header 'User-Agent: Apifox/1.0.0 (https://apifox.com)' \
-          --header 'Content-Type: application/json' \
-          --header 'Accept: */*' \
-          --header 'Host: api.upyun.com' \
-          --header 'Connection: keep-alive' \
-          --data-raw '{
-            "noif": 42,
-            "delay": 42,
-            "source_url": "https://ymlog.cn/*"
-          }'
+      # - name: Refresh CDN
+      #   run: |
+      #     curl --location --request POST 'https://api.upyun.com/buckets/purge/batch' \
+      #     --header 'Authorization: Bearer bcb60ea8-d653-4f4f-8baf-394d2c4c83b9' \
+      #     --header 'User-Agent: Apifox/1.0.0 (https://apifox.com)' \
+      #     --header 'Content-Type: application/json' \
+      #     --header 'Accept: */*' \
+      #     --header 'Host: api.upyun.com' \
+      #     --header 'Connection: keep-alive' \
+      #     --data-raw '{
+      #       "noif": 42,
+      #       "delay": 42,
+      #       "source_url": "https://ymlog.cn/*"
+      #     }'
