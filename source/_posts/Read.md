@@ -31,7 +31,7 @@ categories:
 | 15 | 社会学 | 埃里克•霍弗 | 《狂热份子》 | ★★★★  |
 | 16 | 灵 | Eckhart Tolle | 《当下的力量》 | ★★★★★  |
 | 17 | 社会 | 潘绥铭 | 《生存与体验》 | ★★★★  |
-| 18 | 其他 | <span class="hide_star">沈栋</span> | <span class="hide_star">《紅色輪盤》</span> | ★★★  |
+| 18 | 其他 | <span class="hide_star">沈栋</span> | 《<span class="hide_star">紅色輪盤</span>》 | ★★★  |
 
 
 >   今年的主题：历史的节奏，未来的秩序，当下的生活
