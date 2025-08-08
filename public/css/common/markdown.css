@@ -1,0 +1,192 @@
+.markdown-body {
+  font-size: 1rem;
+}
+.markdown-body blockquote {
+  padding: 1px 0;
+  box-sizing: border-box;
+  border-left: 5px solid #ff9800;
+  margin: 20px 0;
+  color: var(--default-text-color);
+  background: var(--second-background-color);
+}
+.markdown-body blockquote p,
+.markdown-body blockquote ul,
+.markdown-body blockquote ol {
+  padding: 1px 1px 1px 10px;
+  line-height: initial;
+  font-size: 13px;
+  margin: 6px 0;
+}
+.markdown-body p {
+  line-height: 2;
+  color: var(--default-text-color);
+}
+.markdown-body a {
+  position: relative;
+  outline: 0;
+  text-decoration: none;
+  overflow-wrap: break-word;
+  cursor: pointer;
+  border-bottom: 1px solid var(--third-text-color);
+  box-sizing: border-box;
+  padding-bottom: 2px;
+}
+.markdown-body a .fas,
+.markdown-body a .far,
+.markdown-body a fab {
+  margin: 0 2px 0 6px;
+  position: relative;
+  color: var(--third-text-color);
+  font-size: 0.88rem;
+}
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+.markdown-body a:hover::after {
+  background: var(--primary-color);
+}
+.markdown-body strong {
+  color: var(--default-text-color);
+}
+.markdown-body em {
+  color: var(--default-text-color);
+}
+.markdown-body ul > li,
+.markdown-body ol > li {
+  margin-left: 16px;
+  line-height: 2rem;
+}
+.markdown-body ul li {
+  list-style: disc;
+}
+.markdown-body ul li ul li {
+  list-style: circle;
+}
+.markdown-body ul li ul li ul li {
+  list-style: square;
+}
+.markdown-body ol li {
+  list-style: decimal;
+}
+.markdown-body ol li ol li {
+  list-style: upper-alpha;
+}
+.markdown-body ol li ol li ol li {
+  list-style: upper-roman;
+}
+.markdown-body li {
+  color: var(--default-text-color);
+}
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  color: var(--second-text-color);
+  line-height: 1.5;
+keep-tablet()
+}
+.markdown-body h1 {
+  font-size: 1.8rem;
+  font-weight: normal;
+keep-tablet()
+}
+.markdown-body h2 {
+  font-size: 1.7rem;
+  font-weight: normal;
+keep-tablet()
+}
+.markdown-body h2 {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  width: fit-content;
+  appearance: none;
+  border: none;
+  background: none;
+  color: #c30e59 !important;
+  margin: 60px 0 20px 0 !important;
+  cursor: pointer;
+  position: relative;
+  padding: 8px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: all 0.15s ease;
+}
+.markdown-body h2::before,
+.markdown-body h2::after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: calc(50% - 5px);
+  border: 1px solid #e82561;
+  transition: all 0.15s ease;
+}
+.markdown-body h2::before {
+  top: 0;
+  border-bottom-width: 0;
+}
+.markdown-body h2::after {
+  bottom: 0;
+  border-top-width: 0;
+}
+.markdown-body h3 {
+  font-size: 1.6rem;
+  font-weight: normal;
+keep-tablet()
+}
+.markdown-body h4 {
+  font-size: 1.5rem;
+  font-weight: normal;
+keep-tablet()
+}
+.markdown-body h5 {
+  font-size: 1.28rem;
+  font-weight: normal;
+keep-tablet()
+}
+.markdown-body h6 {
+  font-size: 1.2rem;
+  font-weight: normal;
+  line-height: 1.2;
+keep-tablet()
+}
+.markdown-body img {
+  box-sizing: border-box;
+  max-width: 100%;
+  cursor: zoom-in;
+  display: block;
+  box-shadow: 0 0 2px var(--shadow-color);
+  margin: 10px auto 2px;
+}
+.markdown-body > table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+  overflow: auto;
+}
+.markdown-body > table td,
+.markdown-body > table th {
+  padding: 0;
+}
+.markdown-body > table th {
+  font-weight: 600;
+}
+.markdown-body > table td,
+.markdown-body > table th {
+  padding: 6px 13px;
+  border: 1px solid var(--border-color);
+}
+.main-content .high-image {
+  max-height: 30vh !important;
+  overflow-y: scroll;
+  box-shadow: 0 0 10px rgba(0,0,0,0.08);
+  margin-bottom: 10px;
+}
+.main-content img {
+  border: 1px solid #ebebeb;
+  margin: 0 !important;
+}
