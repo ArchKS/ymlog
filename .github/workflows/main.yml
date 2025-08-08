@@ -8,29 +8,29 @@ on:
       - main
 
 # 任务
-jobs:
-  build-and-deploy:
-    # 服务器环境：最新版 Ubuntu
-    runs-on: ubuntu-22.04
-    steps:
-      # 拉取代码
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          persist-credentials: false
+# jobs:
+#   build-and-deploy:
+#     # 服务器环境：最新版 Ubuntu
+#     runs-on: ubuntu-22.04
+#     steps:
+#       # 拉取代码
+#       - name: Checkout
+#         uses: actions/checkout@v2
+#         with:
+#           persist-credentials: false
 
-      # 1、生成静态文件
-      - name: Build
-        run: npm install && npm run build
+#       # 1、生成静态文件
+#       - name: Build
+#         run: npm install && npm run build
 
-      # 2、部署到 GitHub Pages
-      - name: Deploy
-        uses: theme-keep/hexo-deploy-github-pages-action@master
-        env:
-          PUBLISH_REPOSITORY: archks/archks.github.io
-          BRANCH: main
-          PUBLISH_DIR: ./public
-          PERSONAL_TOKEN: ${{ secrets.BK_TOKEN }} 
+#       # 2、部署到 GitHub Pages
+#       - name: Deploy
+#         uses: theme-keep/hexo-deploy-github-pages-action@master
+#         env:
+#           PUBLISH_REPOSITORY: archks/archks.github.io
+#           BRANCH: main
+#           PUBLISH_DIR: ./public
+#           PERSONAL_TOKEN: ${{ secrets.BK_TOKEN }} 
         # uses: JamesIves/github-pages-deploy-action@releases/v3
         # with:
         #   BK_TOKEN: ${{ secrets.BK_TOKEN }}
@@ -54,3 +54,40 @@ jobs:
       #       "delay": 42,
       #       "source_url": "https://ymlog.cn/*"
       #     }'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-22.04
+
+    steps:
+      # 1. 拉取源码
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # 2. 安装 Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # 3. 安装 Hexo 及依赖
+      - name: Install dependencies
+        run: |
+          npm install -g hexo-cli
+          npm install
+
+      # 4. 生成静态文件
+      - name: Build
+        run: hexo generate
+
+      # 5. 部署到 GitHub Pages（main 分支）
+      - name: Deploy to GitHub Pages
+        run: |
+          cd public
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Deploy from GitHub Actions"
+          git branch -M main
+          git push -f https://x-access-token:${{ secrets.BK_TOKEN }}@github.com/archks/archks.github.io.git main
