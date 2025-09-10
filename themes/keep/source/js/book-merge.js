@@ -242,13 +242,24 @@
         // 构建表头
         let tableHeaders = '';
         if (isMobile) {
-            tableHeaders = `
-                <tr>
-                    <th>作者</th>
-                    <th>书名</th>
-                    <th>评级</th>
-                </tr>
-            `;
+            if (sortMode === 'category') {
+                tableHeaders = `
+                    <tr>
+                        <th>作者</th>
+                        <th>分类</th>
+                        <th>书名</th>
+                        <th>评级</th>
+                    </tr>
+                `;
+            } else {
+                tableHeaders = `
+                    <tr>
+                        <th>作者</th>
+                        <th>书名</th>
+                        <th>评级</th>
+                    </tr>
+                `;
+            }
         } else {
             if (sortMode === 'rating') {
                 tableHeaders = `
@@ -279,7 +290,7 @@
             <div style="margin-bottom: 20px; padding: 15px; background: ${getHeaderBackground(sortMode)}; border-radius: 10px; color: white; text-align: center;">
                 <strong>共收录 ${sortedBooks.length} 本书籍，${descriptionText}</strong>
             </div>
-            <table class="merged-table">
+            <table class="merged-table ${isMobile && sortMode === 'category' ? 'four-columns' : isMobile ? 'three-columns' : ''}">
                 <thead>
                     ${tableHeaders}
                 </thead>
@@ -338,14 +349,27 @@
         const categoryColor = getCategoryColor(book.category);
         
         if (isMobile) {
-            // 手机端只显示作者、书名、评级
-            return `
-                <tr class="${rowClass}" data-year="${book.year}" data-stars="${book.starCount}" data-category="${book.category}">
-                    <td>${book.author}</td>
-                    <td>${book.bookName}</td>
-                    <td class="rating-cell">${book.rating}</td>
-                </tr>
-            `;
+            // 手机端根据排序模式显示不同列数
+            if (sortMode === 'category') {
+                // 分类排序：作者、分类、书名、评级 (4列)
+                return `
+                    <tr class="${rowClass}" data-year="${book.year}" data-stars="${book.starCount}" data-category="${book.category}">
+                        <td>${book.author}</td>
+                        <td><span class="category-badge-mobile" style="background: ${categoryColor};">${book.category}</span></td>
+                        <td>${book.bookName}</td>
+                        <td class="rating-cell">${book.rating}</td>
+                    </tr>
+                `;
+            } else {
+                // 评级排序：作者、书名、评级 (3列)
+                return `
+                    <tr class="${rowClass}" data-year="${book.year}" data-stars="${book.starCount}" data-category="${book.category}">
+                        <td>${book.author}</td>
+                        <td>${book.bookName}</td>
+                        <td class="rating-cell">${book.rating}</td>
+                    </tr>
+                `;
+            }
         } else {
             // 桌面端根据排序模式显示不同列
             if (sortMode === 'rating') {
@@ -407,6 +431,9 @@
         const isMobile = window.innerWidth <= 768;
         
         const mergedStyles = `
+            .merged-table thead th{
+                background: inherit !important;
+            }
             .year-badge {
                 background: linear-gradient(45deg, #667eea, #764ba2);
                 color: white;
@@ -417,13 +444,22 @@
                 white-space: nowrap;
             }
             
-            .category-badge, .category-badge-main {
+            .category-badge, .category-badge-main, .category-badge-mobile {
                 color: white;
                 padding: 2px 8px;
                 border-radius: 12px;
                 font-size: ${isMobile ? '10px' : '12px'};
                 font-weight: bold;
                 white-space: nowrap;
+            }
+            
+            .category-badge-mobile {
+                font-size: 9px;
+                padding: 2px 6px;
+                border-radius: 8px;
+                max-width: 100%;
+                text-overflow: ellipsis;
+                overflow: hidden;
             }
             
             .category-badge-main {
@@ -501,9 +537,11 @@
                 .merged-table th,
                 .merged-table td {
                     display: table-cell !important;
+                    vertical-align: middle;
                 }
                 
-                .merged-table td:nth-child(1) {
+                /* 3列布局 (评级排序) */
+                .merged-table.three-columns td:nth-child(1) {
                     width: 30%;
                     max-width: 80px;
                     overflow: hidden;
@@ -511,7 +549,7 @@
                     white-space: nowrap;
                 }
                 
-                .merged-table td:nth-child(2) {
+                .merged-table.three-columns td:nth-child(2) {
                     width: 50%;
                     max-width: 120px;
                     overflow: hidden;
@@ -519,7 +557,34 @@
                     white-space: nowrap;
                 }
                 
-                .merged-table td:nth-child(3) {
+                .merged-table.three-columns td:nth-child(3) {
+                    width: 20%;
+                    min-width: 50px;
+                }
+                
+                /* 4列布局 (分类排序) */
+                .merged-table.four-columns td:nth-child(1) {
+                    width: 22%;
+                    max-width: 60px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+                
+                .merged-table.four-columns td:nth-child(2) {
+                    width: 20%;
+                    text-align: center;
+                }
+                
+                .merged-table.four-columns td:nth-child(3) {
+                    width: 35%;
+                    max-width: 100px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+                
+                .merged-table.four-columns td:nth-child(4) {
                     width: 20%;
                     min-width: 50px;
                 }
