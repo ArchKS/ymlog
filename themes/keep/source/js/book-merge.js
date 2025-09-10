@@ -596,9 +596,10 @@
             
             /* 分类排序时的样式 */
             .merged-row[data-category] {
-                border-left: 3px solid transparent;
+                
             }
         `;
+        // border-left: 3px solid transparent;
         
         addNewStyle(mergedStyles);
     }
