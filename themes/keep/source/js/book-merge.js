@@ -402,7 +402,7 @@
                 return `
                     <tr class="${rowClass}" data-year="${book.year}" data-stars="${book.starCount}" data-category="${book.category}">
                         <td style="font-weight: bold; text-align: center; color: #667eea; font-size: 14px;">${book.categoryIndex}</td>
-                        <td><span class="category-badge-main" style="background: ${categoryColor};">${book.category}</span></td>
+                        <td style="text-align: center;"><span class="category-badge-main" style="background: ${categoryColor};">${book.category}</span></td>
                         <td><span class="year-badge">${book.year}</span></td>
                         <td>${book.author}</td>
                         <td>${book.bookName}</td>
