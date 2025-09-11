@@ -235,8 +235,18 @@
                 return b.starCount - a.starCount;
             });
             
-            titleText = '📂 按分类排序的完整书单';
-            descriptionText = '按照分类数量降序排列，同分类内按评分排序';
+            // 为每个分类添加分类内序号
+            const categoryIndexMap = {};
+            sortedBooks.forEach(function(book) {
+                if (!categoryIndexMap[book.category]) {
+                    categoryIndexMap[book.category] = 0;
+                }
+                categoryIndexMap[book.category]++;
+                book.categoryIndex = categoryIndexMap[book.category];
+            });
+            
+            titleText = '📂 按分类排序的完整书单（含分类内序号）';
+            descriptionText = '按照分类数量降序排列，同分类内按评分排序，每个分类内独立编号';
         }
         
         // 构建表头
@@ -245,8 +255,9 @@
             if (sortMode === 'category') {
                 tableHeaders = `
                     <tr>
+                        <th style="text-align: center !important;">序号</th>
+                        <th style="text-align: center !important;">分类</th>
                         <th>作者</th>
-                        <th>分类</th>
                         <th>书名</th>
                         <th>评级</th>
                     </tr>
@@ -275,7 +286,8 @@
             } else {
                 tableHeaders = `
                     <tr>
-                        <th>分类</th>
+                        <th style="text-align: center !important;">序号</th>
+                        <th style="text-align: center !important;">分类</th>
                         <th>年份</th>
                         <th>作者</th>
                         <th>书名</th>
@@ -290,7 +302,7 @@
             <div style="margin-bottom: 20px; padding: 15px; background: ${getHeaderBackground(sortMode)}; border-radius: 10px; color: white; text-align: center;">
                 <strong>共收录 ${sortedBooks.length} 本书籍，${descriptionText}</strong>
             </div>
-            <table class="merged-table ${isMobile && sortMode === 'category' ? 'four-columns' : isMobile ? 'three-columns' : ''}">
+            <table class="merged-table ${isMobile && sortMode === 'category' ? 'five-columns' : isMobile ? 'three-columns' : ''}">
                 <thead>
                     ${tableHeaders}
                 </thead>
@@ -351,11 +363,12 @@
         if (isMobile) {
             // 手机端根据排序模式显示不同列数
             if (sortMode === 'category') {
-                // 分类排序：作者、分类、书名、评级 (4列)
+                // 分类排序：序号、分类、书名、评级 (4列)
                 return `
                     <tr class="${rowClass}" data-year="${book.year}" data-stars="${book.starCount}" data-category="${book.category}">
-                        <td>${book.author}</td>
+                        <td style="font-weight: bold; text-align: center; color: #667eea;">${book.categoryIndex}</td>
                         <td><span class="category-badge-mobile" style="background: ${categoryColor};">${book.category}</span></td>
+                        <td style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;text-align:left;">${book.author}</td>
                         <td>${book.bookName}</td>
                         <td class="rating-cell">${book.rating}</td>
                     </tr>
@@ -385,8 +398,10 @@
                     </tr>
                 `;
             } else {
+                // 分类排序：序号、分类、年份、作者、书名、评级 (6列)
                 return `
                     <tr class="${rowClass}" data-year="${book.year}" data-stars="${book.starCount}" data-category="${book.category}">
+                        <td style="font-weight: bold; text-align: center; color: #667eea; font-size: 14px;">${book.categoryIndex}</td>
                         <td><span class="category-badge-main" style="background: ${categoryColor};">${book.category}</span></td>
                         <td><span class="year-badge">${book.year}</span></td>
                         <td>${book.author}</td>
@@ -562,31 +577,39 @@
                     min-width: 50px;
                 }
                 
-                /* 4列布局 (分类排序) */
-                .merged-table.four-columns td:nth-child(1) {
-                    width: 22%;
+                /* 5列布局 (分类排序：序号、分类、作者、书名、评级) */
+                .merged-table.five-columns td:nth-child(1) {
+                    width: 12%;
+                    max-width: 35px;
+                    text-align: center;
+                    min-width: 25px;
+                }
+                
+                .merged-table.five-columns td:nth-child(2) {
+                    width: 18%;
+                    text-align: center;
+                    max-width: 50px;
+                }
+                
+                .merged-table.five-columns td:nth-child(3) {
+                    width: 20%;
                     max-width: 60px;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
                 }
                 
-                .merged-table.four-columns td:nth-child(2) {
-                    width: 20%;
-                    text-align: center;
-                }
-                
-                .merged-table.four-columns td:nth-child(3) {
-                    width: 35%;
-                    max-width: 100px;
+                .merged-table.five-columns td:nth-child(4) {
+                    width: 32%;
+                    max-width: 90px;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
                 }
                 
-                .merged-table.four-columns td:nth-child(4) {
-                    width: 20%;
-                    min-width: 50px;
+                .merged-table.five-columns td:nth-child(5) {
+                    width: 18%;
+                    min-width: 45px;
                 }
                 
                 .rating-cell {
