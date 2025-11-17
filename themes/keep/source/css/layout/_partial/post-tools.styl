@@ -40,7 +40,31 @@ $li-margin-bottom = 12px;
       hover-style(true, 1.06, 1.06);
 
       &.page-aside-toggle {
-        display: none;
+        display: flex;
+        width: auto;
+        height: auto;
+        border-radius: 20px;
+        padding: 10px 16px;
+        font-size: 13px;
+        font-weight: bold;
+        background: linear-gradient(45deg, #4ecdc4, #44a08d);
+        color: white;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+        white-space: nowrap;
+
+
+        
+
+        .button-text {
+          color: white;
+        }
+
+        &:hover {
+          background: linear-gradient(45deg, #4ecdc4, #44a08d);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        }
 
         +keep-tablet() {
           display: none !important;

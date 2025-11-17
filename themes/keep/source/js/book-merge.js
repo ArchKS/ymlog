@@ -23,40 +23,67 @@
     function createToggleButtons() {
         // 检查是否已存在按钮容器
         if (document.getElementById('book-merge-container')) return;
-        
+
         // 创建按钮容器
         const container = document.createElement('div');
         container.id = 'book-merge-container';
         container.style.cssText = `
             position: fixed;
-            top: 80px;
+            top: ${window.innerWidth < 600 ? '60px':'124px'};
             right: 10px;
             z-index: 1000;
             display: flex;
             flex-direction: column;
             gap: 8px;
         `;
-        
+
         // 检测是否为手机端
         const isMobile = window.innerWidth <= 768;
         const buttonSize = isMobile ? 'small' : 'normal';
-        
+
         // 按评级排序按钮
         const ratingButton = createButton('rating', '⭐ 评级', buttonSize);
-        
-        // 按分类排序按钮  
+
+        // 按分类排序按钮
         const categoryButton = createButton('category', '📂 分类', buttonSize);
-        
+
         // 恢复原始视图按钮
         const restoreButton = createButton('restore', '📋 原始', buttonSize);
         restoreButton.style.display = 'none'; // 初始隐藏
-        
+
         container.appendChild(ratingButton);
         container.appendChild(categoryButton);
         container.appendChild(restoreButton);
-        
+
         document.body.appendChild(container);
-        
+
+        // 添加滚动监听，实现半透明效果
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const buttons = [ratingButton, categoryButton, restoreButton];
+
+            if (scrollTop > 50) {
+                // 滚动超过50px时，添加半透明背景
+                buttons.forEach(function(btn) {
+                    btn.style.opacity = '0.7';
+                });
+            } else {
+                // 在顶部时，恢复完全不透明
+                buttons.forEach(function(btn) {
+                    btn.style.opacity = '1';
+                });
+            }
+
+            // 停止滚动后恢复不透明度
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(function() {
+                buttons.forEach(function(btn) {
+                    btn.style.opacity = '1';
+                });
+            }, 1000); // 停止滚动1秒后恢复
+        });
+
         console.log('书单合并按钮组已创建');
     }
     
@@ -65,12 +92,12 @@
         const button = document.createElement('button');
         button.id = `book-merge-${type}`;
         button.innerHTML = text;
-        
+
         const isSmall = size === 'small';
         const padding = isSmall ? '8px 12px' : '10px 16px';
         const fontSize = isSmall ? '12px' : '13px';
         const borderRadius = isSmall ? '18px' : '20px';
-        
+
         button.style.cssText = `
             background: ${getButtonColor(type)};
             color: white;
@@ -86,31 +113,31 @@
             white-space: nowrap;
             min-width: ${isSmall ? '60px' : '80px'};
         `;
-        
+
         // 悬停效果
         button.addEventListener('mouseover', function() {
             button.style.transform = 'translateY(-1px)';
             button.style.boxShadow = '0 4px 12px rgba(0,0,0,0.25)';
         });
-        
+
         button.addEventListener('mouseout', function() {
             button.style.transform = 'translateY(0)';
             button.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
         });
-        
+
         // 点击事件
         button.addEventListener('click', function() {
             handleButtonClick(type);
         });
-        
+
         return button;
     }
-    
+
     // 获取按钮颜色
     function getButtonColor(type) {
         const colors = {
             rating: 'linear-gradient(45deg, #667eea, #764ba2)',
-            category: 'linear-gradient(45deg, #f093fb, #f5576c)', 
+            category: 'linear-gradient(45deg, #f093fb, #f5576c)',
             restore: 'linear-gradient(45deg, #ff6b6b, #ee5a52)'
         };
         return colors[type];
@@ -696,22 +723,22 @@
     // 更新按钮状态
     function updateButtonStates(activeMode, merged) {
         const ratingBtn = document.getElementById('book-merge-rating');
-        const categoryBtn = document.getElementById('book-merge-category'); 
+        const categoryBtn = document.getElementById('book-merge-category');
         const restoreBtn = document.getElementById('book-merge-restore');
-        
+
         if (!ratingBtn || !categoryBtn || !restoreBtn) return;
-        
+
         if (merged) {
             // 合并视图：显示所有按钮，但高亮当前激活的按钮
             ratingBtn.style.display = 'block';
             categoryBtn.style.display = 'block';
             restoreBtn.style.display = 'block';
-            
+
             // 重置所有按钮样式
             resetButtonStyle(ratingBtn);
             resetButtonStyle(categoryBtn);
             resetButtonStyle(restoreBtn);
-            
+
             // 设置活跃按钮样式
             if (activeMode === 'rating') {
                 setActiveButtonStyle(ratingBtn);
@@ -723,14 +750,14 @@
             ratingBtn.style.display = 'block';
             categoryBtn.style.display = 'block';
             restoreBtn.style.display = 'none';
-            
+
             // 恢复所有按钮样式
             resetButtonStyle(ratingBtn);
             resetButtonStyle(categoryBtn);
             resetButtonStyle(restoreBtn);
         }
     }
-    
+
     // 重置按钮样式
     function resetButtonStyle(button) {
         button.style.opacity = '1';
@@ -738,7 +765,7 @@
         button.style.transform = 'scale(1)';
         button.style.filter = 'none';
     }
-    
+
     // 设置激活按钮样式
     function setActiveButtonStyle(button) {
         button.style.opacity = '0.8';

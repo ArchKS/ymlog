@@ -688,14 +688,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
-  // =====left side toggle 
+  // =====left side toggle
   function initLeftSideToggle() {
     KEEP.utils.leftSideToggle = {
       toggleBar: document.querySelector('.page-aside-toggle'),
       pageTopDom: document.querySelector('.page-main-content-top'),
       containerDom: document.querySelector('.page-container'),
       leftAsideDom: document.querySelector('.page-aside'),
-      toggleBarIcon: document.querySelector('.page-aside-toggle i'),
+      toggleBarText: document.querySelector('.page-aside-toggle .button-text'),
 
       isOpenPageAside: false,
 
@@ -706,10 +706,35 @@ window.addEventListener('DOMContentLoaded', () => {
           KEEP.setStyleStatus();
           this.changePageLayoutWhenOpenToggle(this.isOpenPageAside);
         });
+
+        // 添加滚动监听，实现半透明效果
+        if (this.toggleBar) {
+          let scrollTimeout;
+          window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > 50) {
+              // 滚动超过50px时，添加半透明背景
+              this.toggleBar.style.opacity = '0.7';
+            } else {
+              // 在顶部时，恢复完全不透明
+              this.toggleBar.style.opacity = '1';
+            }
+
+            // 停止滚动后恢复不透明度
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+              this.toggleBar.style.opacity = '1';
+            }, 1000); // 停止滚动1秒后恢复
+          });
+        }
       },
 
       changePageLayoutWhenOpenToggle(isOpen) {
-        this.toggleBarIcon && (this.toggleBarIcon.className = isOpen ? 'fas fa-outdent' : 'fas fa-indent');
+        // 更新按钮文字
+        if (this.toggleBarText) {
+          this.toggleBarText.textContent = isOpen ? '📑 收起' : '📑 目录';
+        }
         const pageAsideWidth = KEEP.theme_config.style.left_side_width || '260px';
         this.containerDom.style.paddingLeft = isOpen ? pageAsideWidth : '0';
         this.pageTopDom.style.paddingLeft = isOpen ? pageAsideWidth : '0';
