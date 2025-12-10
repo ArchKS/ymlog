@@ -21,8 +21,8 @@
 found_exception=false
 
 
-git config --global http.proxy http://localhost:7890
-git config --global https.proxy http://localhost:7890
+# git config --global http.proxy http://localhost:7890
+# git config --global https.proxy http://localhost:7890
 
 
 # 遍历 source/_posts 目录下的所有 .md 文件

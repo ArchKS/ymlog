@@ -149,25 +149,11 @@ $page-aside-width = $temp-width ? convert($temp-width) : 260px;
 
   .post-tools {
     position: fixed;
-    top: $header-height + $component-spacing-value;
-    right: $component-spacing-value;
+    top: 76px;
+    right: 12px;
     transition-t("top", "0", "0.2", "ease");
 
-    .header-shrink & {
-      top: $header-shrink-height + $component-spacing-value;
-
-      +keep-tablet() {
-        top: $header-shrink-height * 0.9 + $component-spacing-value;
-      }
-
-      +keep-mobile() {
-        top: $header-shrink-height * 0.8 + $component-spacing-value;
-      }
-    }
-
-
     +keep-tablet() {
-      top: $header-height * 0.9 + $component-spacing-value;
       right: 10px;
       transform: scale(0.82);
       transform-origin: right top;
@@ -175,7 +161,6 @@ $page-aside-width = $temp-width ? convert($temp-width) : 260px;
 
 
     +keep-mobile() {
-      top: $header-height * 0.8 + $component-spacing-value;
       right: 5px;
       transform: scale(0.72);
     }
