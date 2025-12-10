@@ -29,8 +29,8 @@
         container.id = 'book-merge-container';
         container.style.cssText = `
             position: fixed;
-            top: ${window.innerWidth < 600 ? '60px':'124px'};
-            right: 10px;
+            top: 10%;
+            right: 40px;
             z-index: 1000;
             display: flex;
             flex-direction: column;
@@ -98,9 +98,10 @@
         const fontSize = isSmall ? '12px' : '13px';
         const borderRadius = isSmall ? '18px' : '20px';
 
+        // background: ${getButtonColor(type)};
         button.style.cssText = `
-            background: ${getButtonColor(type)};
-            color: white;
+            background: #fafaf8;
+            color: black;
             border: none;
             border-radius: ${borderRadius};
             padding: ${padding};

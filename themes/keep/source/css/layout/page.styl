@@ -174,12 +174,22 @@ $page-aside-width = $temp-width ? convert($temp-width) : 260px;
   }
 }
 
+.read-page .page-container{
+  padding-left: 0 !important;
+}
+.read-page .page-aside{
+  height: fit-content;
+  width: 140px;
+  left: 30px !important;
+  top: 9%;
+}
 
 .read-page .article-title{
   text-align: center !important;
 }
 
 .read-page .article-nav,
+.read-page .post-tools-container,
 .read-page .article-header,{
   display: none !important;
 }
