@@ -1,5 +1,9 @@
 function isReadpage() {
-  return window.location.pathname.replace(/\/| /g, '') == 'Read';
+  let isRead = window.location.pathname.replace(/\/| /g, '') == 'Read';
+  if(isRead){
+    document.querySelector('html').classList.add('read-page');
+  }
+  return isRead;
 }
 
 
