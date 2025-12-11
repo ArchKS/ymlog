@@ -97,11 +97,12 @@
         const padding = isSmall ? '8px 12px' : '10px 16px';
         const fontSize = isSmall ? '12px' : '13px';
         const borderRadius = isSmall ? '18px' : '20px';
+        const isDark = document.body.classList.contains('dark-mode');
 
         // background: ${getButtonColor(type)};
         button.style.cssText = `
-            background: #fafaf8;
-            color: black;
+            background: ${isDark ? '#3d3d3d':'#fafaf8'};
+            color: ${isDark ? 'white': 'black'};
             border: none;
             border-radius: ${borderRadius};
             padding: ${padding};
@@ -363,9 +364,11 @@
     
     // 获取标题背景色
     function getHeaderBackground(sortMode) {
-        return sortMode === 'rating' 
-            ? 'linear-gradient(45deg, #667eea 0%, #764ba2 100%)'
-            : 'linear-gradient(45deg, #f093fb 0%, #f5576c 100%)';
+        const isDark = document.body.classList.contains('dark-mode');
+        // return sortMode === 'rating' 
+        //     ? 'linear-gradient(45deg, #667eea 0%, #764ba2 100%)'
+        //     : 'linear-gradient(45deg, #f093fb 0%, #f5576c 100%)';
+        return isDark ? '#000' : '#fafaf8';
     }
     
     // 获取行样式类
