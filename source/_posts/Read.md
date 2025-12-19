@@ -40,6 +40,7 @@ categories:
 | 24 | 心理学 | 姜振宇 | 《识人九段》 | ★★★★★  |
 | 25 | 传记 | 雷殿生 | 《信念》 | ★★★★  |
 | 26 | 科学 | 大卫·伊格曼 | 《1立方厘米银河系的我》 | ★★★  |
+| 27 | 支付 | Ahmed Siddiqui | 《The Anatomy of the Swipe Making Money Move》 | ★★★  |
 
 >   今年的主题：当下
 >
