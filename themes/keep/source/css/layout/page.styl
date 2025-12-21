@@ -189,14 +189,28 @@ $page-aside-width = $temp-width ? convert($temp-width) : 260px;
 }
 
 .read-page .article-nav,
-.read-page .post-tools-container,
-.read-page .article-header,{
+.read-page .post-tools-container{
   display: none !important;
 }
 
 .read-page .page-container .page-main-content {
   padding-top: 0 !important; 
 }
+
 .read-page .page-main-content-top {
   display:none;
+}
+
+.read-page .article-content h2:first-child{
+  margin-top: 0px !important;
+}
+
+.read-page .article-meta-info .article-categories{
+   display: none !important;
+}
+.read-page .article-meta-info{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+
 }

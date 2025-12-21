@@ -46,6 +46,13 @@ fi
 
 cp -r source/_posts/img source/
 
+# 检查 Read.md 是否有修改，如果有则更新 update 时间
+if git status --porcelain | grep -q "source/_posts/Read.md"; then
+    current_time=$(date +'%Y-%m-%d %H:%M:%S')
+    sed -i '' "s/^update: .*/update: $current_time/" source/_posts/Read.md
+    echo "已更新 Read.md 的 update 时间为: $current_time"
+fi
+
 git add .
 current_date=$(date +'%Y-%m-%d %H:%M')
 if [ "$#" -gt 0 ]; then
