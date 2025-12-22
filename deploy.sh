@@ -46,11 +46,30 @@ fi
 
 cp -r source/_posts/img source/
 
-# 检查 Read.md 是否有修改，如果有则更新 update 时间
-if git status --porcelain | grep -q "source/_posts/Read.md"; then
-    current_time=$(date +'%Y-%m-%d %H:%M:%S')
-    sed -i '' "s/^update: .*/update: $current_time/" source/_posts/Read.md
-    echo "已更新 Read.md 的 update 时间为: $current_time"
+# 检查 source/_posts/ 目录下所有修改的 .md 文件，并更新它们的 update 时间
+current_time=$(date +'%Y-%m-%d %H:%M:%S')
+modified_files=$(git status --porcelain | grep "^ M\|^M " | grep "source/_posts/.*\.md$" | awk '{print $2}')
+
+if [ -n "$modified_files" ]; then
+    echo "检测到以下 Markdown 文件被修改："
+    echo "$modified_files"
+    echo ""
+
+    while IFS= read -r file; do
+        if [ -f "$file" ]; then
+            # 检查文件是否包含 update 字段
+            if grep -q "^update:" "$file"; then
+                # Windows Git Bash 环境使用 sed -i (不需要空字符串参数)
+                sed -i "s/^update: .*/update: $current_time/" "$file"
+                echo "✓ 已更新 $file 的 update 时间为: $current_time"
+            else
+                echo "⚠ $file 中未找到 update 字段，跳过"
+            fi
+        fi
+    done <<< "$modified_files"
+    echo ""
+else
+    echo "未检测到 source/_posts/ 目录下有修改的 Markdown 文件"
 fi
 
 git add .

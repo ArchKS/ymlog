@@ -249,6 +249,8 @@ h2::after {
     border-collapse: collapse;
     width: 100%;
     overflow: auto;
+    display: block;
+    max-width: 100%;
 
     td,
     th {
@@ -263,14 +265,27 @@ h2::after {
     th {
       padding: 6px 13px;
       border: 1px solid var(--border-color);
+      white-space: nowrap;
     }
 
     tr {
-      
+
     }
 
     tr:nth-child(2n) {
-      
+
+    }
+
+    // Mobile responsive
+    +keep-tablet() {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      display: block;
+
+      td,
+      th {
+        white-space: nowrap;
+      }
     }
   }
 }

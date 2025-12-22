@@ -105,6 +105,27 @@ $article-title-font-size = 1.6rem;
     }
   }
 
+  // 投资总结页面第一个表格特殊处理
+  &.invest-summary-page {
+    .article-content {
+      table:first-of-type {
+        transform-origin: left top;
+        transition: transform 0.3s ease;
+        width: max-content;
+        max-width: none;
+
+        +keep-tablet() {
+          display: table;
+          overflow: visible;
+
+          td, th {
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+  }
+
 
   .post-tags-box {
     display: none;

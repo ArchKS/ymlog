@@ -1,5 +1,5 @@
 <div class="fade-in-down-animation">
-    <div class="article-content-container">
+    <div class="article-content-container <%= page.path && page.path.includes('invest-summary') ? 'invest-summary-page' : '' %>">
 
         <div class="article-title">
             <span class="title-hover-animation"><%= page.title %></span>
