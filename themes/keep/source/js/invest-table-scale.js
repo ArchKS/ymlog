@@ -43,11 +43,11 @@
   }
 
   // 窗口大小改变时重新计算
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(scaleFirstTable, 250);
-  });
+  // let resizeTimer;
+  // window.addEventListener('resize', () => {
+  //   clearTimeout(resizeTimer);
+  //   resizeTimer = setTimeout(scaleFirstTable, 250);
+  // });
 
   // 支持PJAX
   if (window.KEEP && window.KEEP.pjax) {
