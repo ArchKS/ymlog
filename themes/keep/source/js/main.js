@@ -87,7 +87,6 @@ function setColorsInCategory() {
 }
 // 设置每年阅读量
 function setYearReadCount() {
-  console.log('set reader page year read count');
   // 获取所有的h1元素
   const h1Elements = document.querySelectorAll('h2');
   const titleElements = document.querySelectorAll('.nav-item.nav-level-2 .nav-text');
@@ -106,7 +105,6 @@ function setYearReadCount() {
           return ret;
         });
         h1.innerHTML = fmtH1;
-        // console.log(`h1:${h1.innerHTML} \nfmtH1:${fmtH1}`);
       } catch (e) {
         console.log(e);
       }

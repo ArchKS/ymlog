@@ -24,6 +24,7 @@
       if (tableWidth > containerWidth) {
         // 计算缩放比例
         const scale = containerWidth / tableWidth;
+        console.log(`set_scale_to:${tableWidth}_${containerWidth}`,scale);
         firstTable.style.transform = `scale(${scale})`;
 
         // 调整表格的margin-bottom，补偿缩放后的高度变化
@@ -31,7 +32,7 @@
         const originalHeight = firstTable.offsetHeight;
         firstTable.style.marginBottom = `${scaledHeight - originalHeight}px`;
       }
-    }, 100);
+    }, 500);
   }
 
   // 页面加载完成后执行
