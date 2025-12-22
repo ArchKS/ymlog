@@ -2,9 +2,9 @@
 title: 2024投资总结
 typora-root-url: ..
 permalink: 2024-invest-summary/
-date: 2025-01-01 17:10:24
-create: 2025-01-01 17:10:24
-update: 2024-12-30 17:10:24
+date: 2024-12-31 17:10:24
+create: 2024-12-31 17:10:24
+update: 2025-01-01 17:10:24
 categories:
     - 投资总结
 ---

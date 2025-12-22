@@ -2,8 +2,8 @@
 title: 2021交易总结
 typora-root-url: ..
 permalink: 2021-trade-summary/
-date: 2022-03-05 14:01:54
-create: 2022-03-05 14:01:54
+date: 2021-12-30 14:01:54
+create: 2021-12-30 14:01:54
 update: 2022-03-05 14:01:54
 categories:
     - 投资总结

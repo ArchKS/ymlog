@@ -2,8 +2,8 @@
 title: 2022投资总结
 typora-root-url: ..
 permalink: 2022-invest-summary/
-date: 2023-01-11 14:04:00
-create: 2023-01-11 14:04:00
+date: 2022-12-30 14:04:00
+create: 2022-12-30 14:04:00
 update: 2023-01-11 14:04:00
 categories:
     - 投资总结
