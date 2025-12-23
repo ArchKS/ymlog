@@ -42,7 +42,7 @@ categories:
 年收益：<span class="hide_star">14.2</span>w，持仓年化+30%，实际年化24%。 
 
 <div style="position:relative">
-   <img src="/img/2024_year_return.jpg" width="">
+   <img src="/img/2024_year_return.jpg">
    <div class="hide_img_star" style="position: absolute;
     width: 14.5%;
     height: 6%;
