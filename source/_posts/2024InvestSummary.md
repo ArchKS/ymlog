@@ -43,7 +43,7 @@ categories:
 
 <div style="position:relative">
    <img src="/img/2024_year_return.jpg">
-   <div class="hide_img_star" style="position: absolute;
+   <div class="hide_img_star" d='https://htmlcolors.com/user/htmlcolors' style="position: absolute;
     width: 14.5%;
     height: 6%;
     background: linear-gradient(to left,rgb(52, 102, 174) 0%, rgb(83, 144, 241) 100%);;
