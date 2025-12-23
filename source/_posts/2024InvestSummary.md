@@ -41,9 +41,16 @@ categories:
 
 年收益：<span class="hide_star">14.2</span>w，持仓年化+30%，实际年化24%。 
 
-![收益走势图](/img/2024_year_return.jpg)
-
-
+<div style="position:relative">
+   <img src="/img/2024_year_return.jpg" width="">
+   <div class="hide_img_star" style="position: absolute;
+    width: 14.5%;
+    height: 6%;
+    background: linear-gradient(to left,rgb(52, 102, 174) 0%, rgb(83, 144, 241) 100%);;
+    top: 15%;
+    left: 2.5%;
+    border-radius: 5px;"></div>
+</div>
 
 
 ## 复盘牧原

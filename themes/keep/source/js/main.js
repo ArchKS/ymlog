@@ -984,7 +984,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // el.setAttribute('tlen', text.length);
     // 可选：隐藏原始文本
     if (window.location.href.indexOf("star") > -1) {
-      // document.body.classList.add('show_star');
+      document.body.classList.add('show_star_img');
     }else{
       el.textContent = starStr.slice(0, text.length);
     }
