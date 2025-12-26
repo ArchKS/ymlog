@@ -769,9 +769,9 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   function generatorCss() {
+    // , .article-content table th:nth-child(2), .article-content table td:nth-child(2)
     const cls = `
-        .article-content table th:nth-child(1), .article-content table td:nth-child(1), 
-        .article-content table th:nth-child(2), .article-content table td:nth-child(2) {
+        .article-content table th:nth-child(1), .article-content table td:nth-child(1) {
             display: none;
         }
         .article-content table th{
@@ -785,12 +785,14 @@ window.addEventListener('DOMContentLoaded', () => {
             display: flex;
             justify-content: space-between;
         }
-
+.article-content table th:nth-child(2), .article-content table td:nth-child(2){
+            width: 10%;
+        } 
         .article-content table th:nth-child(3), .article-content table td:nth-child(3){
-            width: 30%;
+            width: 25%;
         } 
         .article-content table th:nth-child(4), .article-content table td:nth-child(4){
-            width: 50%;
+            width: 45%;
         }
         .article-content table th:nth-child(5), .article-content table td:nth-child(5){
             width: 20%;
