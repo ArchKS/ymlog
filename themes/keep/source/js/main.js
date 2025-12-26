@@ -785,14 +785,14 @@ window.addEventListener('DOMContentLoaded', () => {
             display: flex;
             justify-content: space-between;
         }
-.article-content table th:nth-child(2), .article-content table td:nth-child(2){
-            width: 10%;
+        .article-content table th:nth-child(2), .article-content table td:nth-child(2){
+            width: 15%;
         } 
         .article-content table th:nth-child(3), .article-content table td:nth-child(3){
-            width: 25%;
+            width: 24%;
         } 
         .article-content table th:nth-child(4), .article-content table td:nth-child(4){
-            width: 45%;
+            width: 41%;
         }
         .article-content table th:nth-child(5), .article-content table td:nth-child(5){
             width: 20%;
