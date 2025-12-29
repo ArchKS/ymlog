@@ -4,7 +4,7 @@ typora-root-url: ..
 permalink: 2025-invest-summary/
 date: 2025-12-19 12:53:18
 create: 2025-12-19 12:53:18
-update: 2025-12-29 07:41:48
+update: 2025-12-29 08:06:14
 categories:
     - 投资总结
 ---
@@ -30,4 +30,4 @@ categories:
 <!-- 从2016～2025这10年，纳斯达克TR为375.94%，CAGR为16。88%。 -->
 <!-- https://danjuanfunds.com/dj-valuation-table-detail/NDX -->
 
-<iframe src="/2024-invest-summary?menu=0&header=0#display2025" width="100%" height="600px">
+<iframe src="/2024-invest-summary?menu=0&header=0#display2025" width="80%" height="600px" style="margin: 20px 10%;">

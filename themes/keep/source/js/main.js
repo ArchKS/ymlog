@@ -29,11 +29,13 @@ function handleUrlParams() {
     const headerDrawer = document.querySelector('.header-drawer');
     const postTools = document.querySelector('.post-tools');
     const mainContent = document.querySelector('.main-content');
+    const exposedTools = document.querySelector('.exposed-tools-list');
 
     if (pcMenu) pcMenu.style.display = 'none';
     if (mobileMenu) mobileMenu.style.display = 'none';
     if (headerDrawer) headerDrawer.style.display = 'none';
     if(postTools) postTools.style.display = 'none';
+    if(exposedTools) exposedTools.style.display = 'none';
     if(mainContent) mainContent.style.width = '100%';
   }
 }
