@@ -27,10 +27,14 @@ function handleUrlParams() {
     const pcMenu = document.querySelector('.header-wrapper .right .pc');
     const mobileMenu = document.querySelector('.header-wrapper .right .mobile');
     const headerDrawer = document.querySelector('.header-drawer');
+    const postTools = document.querySelector('.post-tools');
+    const mainContent = document.querySelector('.main-content');
 
     if (pcMenu) pcMenu.style.display = 'none';
     if (mobileMenu) mobileMenu.style.display = 'none';
     if (headerDrawer) headerDrawer.style.display = 'none';
+    if(postTools) postTools.style.display = 'none';
+    if(mainContent) mainContent.style.width = '100%';
   }
 }
 
