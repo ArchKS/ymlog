@@ -167,7 +167,6 @@ keep-tablet()
   border-collapse: collapse;
   width: 100%;
   overflow: auto;
-  display: block;
   max-width: 100%;
 keep-tablet()
 }
@@ -193,4 +192,7 @@ keep-tablet()
 .main-content img {
   border: 1px solid #ebebeb;
   margin: 0 !important;
+}
+.show_star_img .hide_img_star {
+  display: none;
 }

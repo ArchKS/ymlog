@@ -4,7 +4,7 @@ typora-root-url: ..
 permalink: 2024-invest-summary/
 date: 2024-12-31 17:10:24
 create: 2024-12-31 17:10:24
-update: 2025-01-01 17:10:24
+update: 2025-12-29 07:41:48
 categories:
     - 投资总结
 ---
@@ -266,6 +266,7 @@ categories:
 
 以后：能用港股通买的尽量用港股通买，不再追求最大化港股账户的收益率。
 
+<div id="display2025" style="opacity:0;margin:50px;"></div>
 
 ## 对 2025 的展望
 

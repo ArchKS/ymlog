@@ -6,6 +6,30 @@ function isReadpage() {
   return isRead;
 }
 
+// 检测 URL 参数并控制菜单和 header 显示
+function handleUrlParams() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const hideMenu = urlParams.get('menu') === '0';
+  const hideHeader = urlParams.get('header') === '0';
+
+  if (hideHeader) {
+    // 隐藏整个 header
+    const header = document.querySelector('.header-wrapper');
+    if (header) {
+      header.style.display = 'none';
+    }
+  } else if (hideMenu) {
+    // 只隐藏菜单，保留 logo 和标题
+    const pcMenu = document.querySelector('.header-wrapper .right .pc');
+    const mobileMenu = document.querySelector('.header-wrapper .right .mobile');
+    const headerDrawer = document.querySelector('.header-drawer');
+
+    if (pcMenu) pcMenu.style.display = 'none';
+    if (mobileMenu) mobileMenu.style.display = 'none';
+    if (headerDrawer) headerDrawer.style.display = 'none';
+  }
+}
+
 
 // 给不同的分类设置颜色
 function setColorsInCategory() {
@@ -87,7 +111,6 @@ function setColorsInCategory() {
 }
 // 设置每年阅读量
 function setYearReadCount() {
-  console.log('set reader page year read count');
   // 获取所有的h1元素
   const h1Elements = document.querySelectorAll('h2');
   const titleElements = document.querySelectorAll('.nav-item.nav-level-2 .nav-text');
@@ -106,7 +129,6 @@ function setYearReadCount() {
           return ret;
         });
         h1.innerHTML = fmtH1;
-        // console.log(`h1:${h1.innerHTML} \nfmtH1:${fmtH1}`);
       } catch (e) {
         console.log(e);
       }
@@ -771,9 +793,9 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   function generatorCss() {
+    // , .article-content table th:nth-child(2), .article-content table td:nth-child(2)
     const cls = `
-        .article-content table th:nth-child(1), .article-content table td:nth-child(1), 
-        .article-content table th:nth-child(2), .article-content table td:nth-child(2) {
+        .article-content table th:nth-child(1), .article-content table td:nth-child(1) {
             display: none;
         }
         .article-content table th{
@@ -787,12 +809,14 @@ window.addEventListener('DOMContentLoaded', () => {
             display: flex;
             justify-content: space-between;
         }
-
+        .article-content table th:nth-child(2), .article-content table td:nth-child(2){
+            width: 15%;
+        } 
         .article-content table th:nth-child(3), .article-content table td:nth-child(3){
-            width: 30%;
+            width: 24%;
         } 
         .article-content table th:nth-child(4), .article-content table td:nth-child(4){
-            width: 50%;
+            width: 41%;
         }
         .article-content table th:nth-child(5), .article-content table td:nth-child(5){
             width: 20%;
@@ -926,6 +950,9 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
 
+  // 处理 URL 参数（menu=0 和 header=0）
+  handleUrlParams();
+
   initLeftSideToggle();
   KEEP.printThemeInfo();
   addReadStyle();
@@ -986,7 +1013,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // el.setAttribute('tlen', text.length);
     // 可选：隐藏原始文本
     if (window.location.href.indexOf("star") > -1) {
-      // document.body.classList.add('show_star');
+      document.body.classList.add('show_star_img');
     }else{
       el.textContent = starStr.slice(0, text.length);
     }

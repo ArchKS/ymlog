@@ -559,7 +559,6 @@ button {
   border-collapse: collapse;
   width: 100%;
   overflow: auto;
-  display: block;
   max-width: 100%;
 }
 .markdown-body > table td,
@@ -584,6 +583,7 @@ button {
   .markdown-body > table td,
   .markdown-body > table th {
     white-space: nowrap;
+    border: none !important;
   }
 }
 .main-content .high-image {
@@ -595,6 +595,9 @@ button {
 .main-content img {
   border: 1px solid #ebebeb;
   margin: 0 !important;
+}
+.show_star_img .hide_img_star {
+  display: none;
 }
 :root {
   --background-color: #fff;
@@ -2329,8 +2332,7 @@ pre .javascript .function {
 .article-content-container.invest-summary-page .article-content table:first-of-type {
   transform-origin: left top;
   transition: transform 0.3s ease;
-  width: max-content;
-  max-width: none;
+  width: 100%;
 }
 @media (max-width: 780px) {
   .article-content-container.invest-summary-page .article-content table:first-of-type {

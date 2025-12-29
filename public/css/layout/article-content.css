@@ -70,8 +70,7 @@ keep-mobile()
 .article-content-container.invest-summary-page .article-content table:first-of-type {
   transform-origin: left top;
   transition: transform 0.3s ease;
-  width: max-content;
-  max-width: none;
+  width: 100%;
 keep-tablet()
 }
 .article-content-container .post-tags-box {

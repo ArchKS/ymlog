@@ -32,7 +32,6 @@ function highlightTableRows() {
       let rowText = row.innerText || row.textContent;
       rowText = rowText.toUpperCase();
 
-      console.log(rowText);
       // 检查行内容是否包含 TR
       if (rowText.includes('TR')) {
         row.style.backgroundColor = isDarkMode ? colors.TR.dark : colors.TR.light;

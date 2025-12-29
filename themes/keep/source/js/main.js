@@ -1,9 +1,37 @@
 function isReadpage() {
   let isRead = window.location.pathname.replace(/\/| /g, '') == 'Read';
-  if(isRead){
+  if (isRead) {
     document.querySelector('html').classList.add('read-page');
   }
   return isRead;
+}
+
+// 检测 URL 参数并控制菜单和 header 显示
+function handleUrlParams() {
+  console.log('URL',window.location.href);
+  const urlParams = new URLSearchParams(window.location.search);
+  const hideMenu = urlParams.get('menu') === '0';
+  const hideHeader = urlParams.get('header') === '0';
+
+  console.log({ hideMenu, hideHeader });
+
+  if (hideHeader) {
+    // 隐藏整个 header
+    const header = document.querySelector('.header-wrapper');
+    if (header) {
+      header.style.display = 'none';
+    }
+  } 
+  if (hideMenu) {
+    // 只隐藏菜单，保留 logo 和标题
+    const pcMenu = document.querySelector('.header-wrapper .right .pc');
+    const mobileMenu = document.querySelector('.header-wrapper .right .mobile');
+    const headerDrawer = document.querySelector('.header-drawer');
+
+    if (pcMenu) pcMenu.style.display = 'none';
+    if (mobileMenu) mobileMenu.style.display = 'none';
+    if (headerDrawer) headerDrawer.style.display = 'none';
+  }
 }
 
 
@@ -926,12 +954,17 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
 
+  // 处理 URL 参数（menu=0 和 header=0）
+
+  handleUrlParams();
   initLeftSideToggle();
   KEEP.printThemeInfo();
   addReadStyle();
   showStampInReadPage();
   initTOC();
 });
+
+
 
 // 展示印章
 // /img/stamp.png
@@ -987,7 +1020,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // 可选：隐藏原始文本
     if (window.location.href.indexOf("star") > -1) {
       document.body.classList.add('show_star_img');
-    }else{
+    } else {
       el.textContent = starStr.slice(0, text.length);
     }
   });

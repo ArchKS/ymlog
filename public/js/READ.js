@@ -108,9 +108,6 @@ function setColorsInCategory() {
         objArr.sort((a, b) => b.number - a.number);
 
         let Tops = objArr.slice(0, markCount);
-
-        console.log('Tops: ', Tops);
-
         let specTableCateObj = {};
         Tops.forEach(item => {
             let key = item.category;
