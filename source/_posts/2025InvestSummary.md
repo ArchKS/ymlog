@@ -4,7 +4,7 @@ typora-root-url: ..
 permalink: 2025-invest-summary/
 date: 2025-12-19 12:53:18
 create: 2025-12-19 12:53:18
-update: 2025-12-31 08:14:14
+update: 2025-12-31 08:20:13
 categories:
     - 投资总结
 ---
@@ -70,6 +70,17 @@ nsdq -33.1,43.66,28.64,21.27
 
 目前持仓中矿（80%）+传奇生物（17%）+ 再鼎医药（2%）+ QQQ PUT（1.5%）
 
+当下的资产负债表：
+<div style="position:relative;padding:16px 0;">
+   <img src="/img/20251231zcbzb.png">
+   <div class="hide_img_star" d='https://htmlcolors.com/user/htmlcolors' style="position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    left: 0%;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC');
+    border-radius: 5px;"></div>
+</div>
 
 
 ## 二、对2024判断的修正
