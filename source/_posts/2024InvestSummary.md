@@ -4,7 +4,7 @@ typora-root-url: ..
 permalink: 2024-invest-summary/
 date: 2024-12-31 17:10:24
 create: 2024-12-31 17:10:24
-update: 2025-12-29 07:41:48
+update: 2025-12-31 08:14:14
 categories:
     - 投资总结
 ---
@@ -46,9 +46,9 @@ categories:
    <div class="hide_img_star" d='https://htmlcolors.com/user/htmlcolors' style="position: absolute;
     width: 14.5%;
     height: 6%;
-    background: linear-gradient(to left,rgb(52, 102, 174) 0%, rgb(83, 144, 241) 100%);;
     top: 15%;
     left: 2.5%;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC');
     border-radius: 5px;"></div>
 </div>
 
