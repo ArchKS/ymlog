@@ -4,7 +4,7 @@ typora-root-url: ..
 permalink: 2025-invest-summary/
 date: 2025-12-19 12:53:18
 create: 2025-12-19 12:53:18
-update: 2026-01-04 13:11:38
+update: 2026-01-04 17:37:11
 categories:
     - 投资总结
 ---
@@ -35,6 +35,7 @@ categories:
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC');"></div>
 </div>
 </div>
+
 
 
 过往收益率：
@@ -86,6 +87,24 @@ nsdq -33.1,43.66,28.64,21.27
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC');
     border-radius: 5px;"></div>
 </div>
+
+<br>
+
+手续费：
+
+<br>
+
+| 券商 | 印花税 | 总费用 |
+| --- | --- | --- | 
+| 东财-a | 534.4 |  1126.28|
+| 东财-hk | 1772.3 |  2471.36 |
+|富途-hk | | 4691| 
+|富途 -us| |  16440 |
+|累计| | | 23728|
+
+其中东财3600，富途21131
+
+<br>
 
 
 ## 二、对2024判断的修正
