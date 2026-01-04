@@ -11,6 +11,11 @@ categories:
 
 ## 一、收益分析
 
+2025整体收益<span class="hide_star">152w</span>（包括期货+雪球账号），收益率+164.8%，收益率不可持续
+
+目前持仓中矿（80%）+传奇生物（17%）+ 再鼎医药（2%）+ QQQ PUT（1.5%）
+
+<div style="display:flex;justify-content:flex-start;">
 <div style="position:relative">
    <img src="/img/2025AstockRet.jpg">
    <div class="hide_img_star" d='https://htmlcolors.com/user/htmlcolors' style="position: absolute;
@@ -18,21 +23,21 @@ categories:
     height: 6%;
     top: 25%;
     left: 6%;
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC');
-    border-radius: 5px;"></div>
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC');"></div>
 </div>
-<div style="position:relative;padding:16px 0;">
+<div style="position:relative;">
    <img src="/img/2025UshkRet.jpg">
    <div class="hide_img_star" d='https://htmlcolors.com/user/htmlcolors' style="position: absolute;
     width: 32%;
     height: 6%;
-    top: 35%;
-    left: 1.5%;
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC');
-    border-radius: 5px;"></div>
+    top: 33%;
+    left: 2.5%;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC');"></div>
+</div>
 </div>
 
 
+过往收益率：
 
 | 年份 | 收益率| 沪深300|创业板指| 标普500| 纳斯达克 |
 |:---:|:------:|:-------:|:-------:|:-------:|:-------:|
@@ -68,9 +73,7 @@ nsdq -33.1,43.66,28.64,21.27
 | 传奇生物 | <span class="hide_star">-8.4</span>     | -18%  | -5.5%    |
 |          | <span class="hide_star">152w</span>     |   +164.8%    | 100%     |
 
-2025整体收益<span class="hide_star">152w</span>（包括期货+雪球账号），收益率+164.8%，收益率不可持续
 
-目前持仓中矿（80%）+传奇生物（17%）+ 再鼎医药（2%）+ QQQ PUT（1.5%）
 
 当下的资产负债表：
 <div style="position:relative;padding:16px 0;">
