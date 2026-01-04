@@ -4,7 +4,7 @@ typora-root-url: ..
 permalink: 2025-invest-summary/
 date: 2025-12-19 12:53:18
 create: 2025-12-19 12:53:18
-update: 2026-01-04 13:05:14
+update: 2026-01-04 13:11:38
 categories:
     - 投资总结
 ---
@@ -65,7 +65,7 @@ nsdq -33.1,43.66,28.64,21.27
 | 中矿资源 | <span class="hide_star">120</span> | +147% | +78%     |
 | 赣锋锂业 | <span class="hide_star">15.7</span>     | +180% | +11%     |
 | ALB      | <span class="hide_star">20.8</span>     | +130% | +13%     |
-| 苹果      | <span class="hide_star">3.5</span>     | / | +2.2%     |
+| Apple Put      | <span class="hide_star">3.5</span>     | / | +2.2%     |
 | 药明生物      | <span class="hide_star">2.7</span> | +27% | +1.8%     |
 | ...      |          |       |          |
 | QQQ PUT  | <span class="hide_star">-1.78</span> | -30%  | -1%      |
