@@ -4,7 +4,7 @@ typora-root-url: ..
 permalink: 2025-invest-summary/
 date: 2025-12-19 12:53:18
 create: 2025-12-19 12:53:18
-update: 2025-12-31 08:20:13
+update: 2026-01-04 13:05:14
 categories:
     - 投资总结
 ---
@@ -53,13 +53,15 @@ nsdq -33.1,43.66,28.64,21.27
 
 
 
-收益贡献前三位和后三：
+收益贡献前5位和后3（亏损低于1w不展示了）：
 
 | 标的     | 盈利(万) | 涨幅  | 贡献占比 |
 | -------- | :--------: | :-----: | :--------: |
 | 中矿资源 | <span class="hide_star">120</span> | +147% | +78%     |
 | 赣锋锂业 | <span class="hide_star">15.7</span>     | +180% | +11%     |
 | ALB      | <span class="hide_star">20.8</span>     | +130% | +13%     |
+| 苹果      | <span class="hide_star">3.5</span>     | / | +2.2%     |
+| 药明生物      | <span class="hide_star">2.7</span> | +27% | +1.8%     |
 | ...      |          |       |          |
 | QQQ PUT  | <span class="hide_star">-1.78</span> | -30%  | -1%      |
 | 拼多多   | <span class="hide_star">-2.3</span>     | -10%  | -1.5%    |
