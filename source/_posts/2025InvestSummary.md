@@ -4,7 +4,7 @@ typora-root-url: ..
 permalink: 2025-invest-summary/
 date: 2025-12-19 12:53:18
 create: 2025-12-19 12:53:18
-update: 2026-01-04 17:37:11
+update: 2026-01-13 01:24:34
 categories:
     - 投资总结
 ---
@@ -64,8 +64,8 @@ nsdq -33.1,43.66,28.64,21.27
 | 标的     | 盈利(万) | 涨幅  | 贡献占比 |
 | -------- | :--------: | :-----: | :--------: |
 | 中矿资源 | <span class="hide_star">120</span> | +147% | +78%     |
-| 赣锋锂业 | <span class="hide_star">15.7</span>     | +180% | +11%     |
 | ALB      | <span class="hide_star">20.8</span>     | +130% | +13%     |
+| 赣锋锂业 | <span class="hide_star">15.7</span>     | +180% | +11%     |
 | Apple Put      | <span class="hide_star">3.5</span>     | / | +2.2%     |
 | 药明生物      | <span class="hide_star">2.7</span> | +27% | +1.8%     |
 | ...      |          |       |          |
@@ -74,7 +74,8 @@ nsdq -33.1,43.66,28.64,21.27
 | 传奇生物 | <span class="hide_star">-8.4</span>     | -18%  | -5.5%    |
 |          | <span class="hide_star">152w</span>     |   +164.8%    | 100%     |
 
-
+胜率：A股-47%，港股-66.7%，美股23.8%
+赔率总（前3/后3）：12.5:1，A股-500:1，港股-64:1，美股-2:1
 
 当下的资产负债表：
 <div style="position:relative;padding:16px 0;">
