@@ -2,6 +2,7 @@
 title: 书单
 sticky: 999
 typora-root-url: ..
+typora-copy-images-to: ../img
 permalink: Read/
 date: 2017-09-27 12:24:54
 create: 2017-09-27 12:24:54
@@ -369,7 +370,6 @@ categories:
 > 今年最喜欢的作家：余秋雨
 >
 > 今年最喜欢的书：《一只特立独行的猪》
-
 
 
 

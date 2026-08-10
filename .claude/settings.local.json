@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(hexo clean:*)",
-      "Bash(hexo generate:*)"
-    ]
-  }
-}
