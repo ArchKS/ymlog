@@ -62,11 +62,11 @@ else
     echo "---Image Checkout----"
 fi
 
-echo "---Optimize Images----"
-if ! python3 exec/optimize_images.py --apply; then
-    echo -e "\e[41m\e[97m图片优化失败，已停止部署\e[0m"
-    exit 1
-fi
+# echo "---Optimize Images----"
+# if ! python3 exec/optimize_images.py --apply; then
+#     echo -e "\e[41m\e[97m图片优化失败，已停止部署\e[0m"
+#     exit 1
+# fi
 
 # 检查 source/_posts/ 目录下所有修改的 .md 文件，并更新它们的 update 时间
 current_time=$(date +'%Y-%m-%d %H:%M:%S')
