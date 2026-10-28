@@ -1,6 +1,7 @@
 ---
 title: 2023投资总结
 typora-root-url: ..
+typora-copy-images-to: ../img
 permalink: 2023-invest-summary/
 date: 2023-12-30 14:47:00
 create: 2023-12-30 14:47:00
@@ -91,11 +92,11 @@ categories:
 
 今年的一些笔记
 
-![image-20240113121511704](/img/image-20240113121511704.png)
+![image-20240113121511704](/img/image-20240113121511704.webp)
 
-![NoDate_2023.12.10 13.06.40 Is](/img/NoDate_2023.12.10%2013.06.40%20Is.png)
+![NoDate_2023.12.10 13.06.40 Is](/img/NoDate_2023.12.10%2013.06.40%20Is.webp)
 
-![NoDate_2023.12.10 13.06.40 gy](/img/NoDate_2023.12.10%2013.06.40%20gy.png)
+![NoDate_2023.12.10 13.06.40 gy](/img/NoDate_2023.12.10%2013.06.40%20gy.webp)
 
 
 
@@ -183,7 +184,7 @@ categories:
 
 > 2023年早期，关注过高速公路股票，当时普遍在8%的股息率。想买，顾虑在于市场长期给到这么低的股息率肯定有它的原因，说不定未来就一直是这样，还不如等市场下跌的时候买中药白酒；第二是高速公路收费年限过了，不知道会变成什么样，但没深入研究年限到哪一天，后来23年高速公路等高股息涨幅很大，错过了不少，让我对什么是合理的估值有了新的认识。
 
-<img src="/img/IMG_20240117_144108.jpg" style="zoom:50%;" />
+<img src="/img/IMG_20240117_144108.webp" style="zoom:50%;" />
 
 -   2022年年末开始炒中特估，拉中字头的股票，如中国联通、中国电信、中国移动、中国海油、中国建筑等，基本都是一些央企国企。
 -   2023年1-2月份开始，ChatGPT爆火，开始炒AI概念，挖掘各种AI产业链，明星股票如鸿博股份
@@ -207,12 +208,12 @@ categories:
 -   国际局势方面，俄乌战争仍在持续，巴以冲突10月份爆发
 
     
- <img src="/img/image-20240103193451319.png"/>
+ <img src="/img/image-20240103193451319.webp"/>
 <div class="high-image" style="min-height:500px;">
- <img src="/img/Global_Market_Index.png"/>
+ <img src="/img/Global_Market_Index.webp"/>
 </div>
 <div class="high-image" style="min-height:500px;">
- <img src="/img/CN_Industry_ETF.png"/>
+ <img src="/img/CN_Industry_ETF.webp"/>
 </div>
 
 

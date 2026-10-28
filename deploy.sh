@@ -25,8 +25,28 @@ found_exception=false
 # git config --global https.proxy http://localhost:7890
 
 
+# 将 Typora 生成的相对图片路径统一为站点根路径。
+normalize_image_paths() {
+    local file="$1"
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        sed -i '' \
+            -e 's#](\.\./img/#](/img/#g' \
+            -e 's#src="\.\./img/#src="/img/#g' \
+            -e "s#src='\.\./img/#src='/img/#g" \
+            "$file"
+    else
+        sed -i \
+            -e 's#](\.\./img/#](/img/#g' \
+            -e 's#src="\.\./img/#src="/img/#g' \
+            -e "s#src='\.\./img/#src='/img/#g" \
+            "$file"
+    fi
+}
+
 # 遍历 source/_posts 目录下的所有 .md 文件
 for file in source/_posts/*.md; do
+    normalize_image_paths "$file"
+
     # 使用 grep 检查文件内容是否包含特定字符串，并获取行号
     if grep -n "/_posts/img" "$file"; then
         # 打印出现异常的文件名和行号
@@ -42,43 +62,45 @@ else
     echo "---Image Checkout----"
 fi
 
-# hexo clean
-
-cp -r source/_posts/img source/
+# echo "---Optimize Images----"
+# if ! python3 exec/optimize_images.py --apply; then
+#     echo -e "\e[41m\e[97m图片优化失败，已停止部署\e[0m"
+#     exit 1
+# fi
 
 # 检查 source/_posts/ 目录下所有修改的 .md 文件，并更新它们的 update 时间
 current_time=$(date +'%Y-%m-%d %H:%M:%S')
-modified_files=$(git status --porcelain | grep "^ M\|^M " | grep "source/_posts/.*\.md$" | awk '{print $2}')
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    # macOS
-    SED_CMD="sed -i ''"
-else
-    # Linux/Windows
-    SED_CMD="sed -i"
-fi
+# modified_files=$(git status --porcelain | grep "^ M\|^M " | grep "source/_posts/.*\.md$" | awk '{print $2}')
+# if [[ "$OSTYPE" == "darwin"* ]]; then
+#     # macOS
+#     SED_CMD="sed -i ''"
+# else
+#     # Linux/Windows
+#     SED_CMD="sed -i"
+# fi
 
-if [ -n "$modified_files" ]; then
-    echo "检测到以下 Markdown 文件被修改："
-    echo "$modified_files"
-    echo ""
+# if [ -n "$modified_files" ]; then
+#     echo "检测到以下 Markdown 文件被修改："
+#     echo "$modified_files"
+#     echo ""
 
-    while IFS= read -r file; do
-        if [ -f "$file" ]; then
-            # 检查文件是否包含 update 字段
-            if grep -q "^update:" "$file"; then
-                # Windows Git Bash 环境使用 sed -i (不需要空字符串参数)
-                # sed -i "s/^update: .*/update: $current_time/" "$file"
-                eval "$SED_CMD \"s/^update: .*/update: $current_time/\" \"$file\""
-                echo "✓ 已更新 $file 的 update 时间为: $current_time"
-            else
-                echo "⚠ $file 中未找到 update 字段，跳过"
-            fi
-        fi
-    done <<< "$modified_files"
-    echo ""
-else
-    echo "未检测到 source/_posts/ 目录下有修改的 Markdown 文件"
-fi
+#     while IFS= read -r file; do
+#         if [ -f "$file" ]; then
+#             # 检查文件是否包含 update 字段
+#             if grep -q "^update:" "$file"; then
+#                 # Windows Git Bash 环境使用 sed -i (不需要空字符串参数)
+#                 # sed -i "s/^update: .*/update: $current_time/" "$file"
+#                 eval "$SED_CMD \"s/^update: .*/update: $current_time/\" \"$file\""
+#                 echo "✓ 已更新 $file 的 update 时间为: $current_time"
+#             else
+#                 echo "⚠ $file 中未找到 update 字段，跳过"
+#             fi
+#         fi
+#     done <<< "$modified_files"
+#     echo ""
+# else
+#     echo "未检测到 source/_posts/ 目录下有修改的 Markdown 文件"
+# fi
 
 git add .
 current_date=$(date +'%Y-%m-%d %H:%M')
@@ -97,5 +119,3 @@ git config --global --unset https.proxy;
 
 
 echo -e "\n [ Deploy Finish ] \n"
-
-

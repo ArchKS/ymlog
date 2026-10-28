@@ -1,6 +1,7 @@
 ---
 title: 我的投资哲学
 typora-root-url: ..
+typora-copy-images-to: ../img
 date: 2024-05-07 22:00:22
 create: 2024-05-07 22:00:22
 update: 2024-05-07 22:00:22
@@ -121,4 +122,3 @@ END.
 
 
 **不考虑人性的理性，不是真正的理性。**
-

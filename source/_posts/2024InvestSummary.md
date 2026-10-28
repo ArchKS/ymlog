@@ -1,6 +1,7 @@
 ---
 title: 2024投资总结
 typora-root-url: ..
+typora-copy-images-to: ../img
 permalink: 2024-invest-summary/
 date: 2024-12-31 17:10:24
 create: 2024-12-31 17:10:24
@@ -42,7 +43,7 @@ categories:
 年收益：<span class="hide_star">14.2</span>w，持仓年化+30%，实际年化24%。 
 
 <div style="position:relative">
-   <img src="/img/2024_year_return.jpg">
+   <img src="/img/2024_year_return.webp">
    <div class="hide_img_star" d='https://htmlcolors.com/user/htmlcolors' style="position: absolute;
     width: 14.5%;
     height: 6%;
@@ -58,11 +59,11 @@ categories:
 整体操作很烂，下面具体分析一下为什么这么烂。先看整体记录：
 
 <div class="high-image">
-   <img src="/img/2024_my_jgd.png"/>
+   <img src="/img/2024_my_jgd.webp"/>
 </div>
 <div style='display:flex;'>
-   <img style="max-width: 50%;" src="/img/2024_pigpice.png"/>
-   <img style="max-width: 50%;" src="/img/2024_mygf.png"/>
+   <img style="max-width: 50%;" src="/img/2024_pigpice.webp"/>
+   <img style="max-width: 50%;" src="/img/2024_mygf.webp"/>
 </div>
 
 **主要买卖区间的复盘：**
@@ -159,7 +160,7 @@ categories:
 ## 应对的几只爆雷的股票
 
 <div class="high-image">
-   <img src="/img/stocks_which_bloomb.jpg"/>
+   <img src="/img/stocks_which_bloomb.webp"/>
 </div>
 
 1. 药明生物（目前仍持仓，+60%）
@@ -250,7 +251,7 @@ categories:
 罗列了药明三个账户主要操的截图：
 
 <div class="high-image">
-   <img src="/img/2024_ymsw.jpg"/>
+   <img src="/img/2024_ymsw.webp"/>
 </div>
 
 

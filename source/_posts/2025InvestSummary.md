@@ -1,6 +1,7 @@
 ---
 title: 2025投资总结
 typora-root-url: ..
+typora-copy-images-to: ../img
 permalink: 2025-invest-summary/
 date: 2025-12-19 12:53:18
 create: 2025-12-19 12:53:18
@@ -17,7 +18,7 @@ categories:
 
 <div style="display:flex;justify-content:flex-start;">
 <div style="position:relative">
-   <img src="/img/2025AstockRet.jpg">
+   <img src="/img/2025AstockRet.webp">
    <div class="hide_img_star" d='https://htmlcolors.com/user/htmlcolors' style="position: absolute;
     width: 34%;
     height: 6%;
@@ -26,7 +27,7 @@ categories:
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC');"></div>
 </div>
 <div style="position:relative;">
-   <img src="/img/2025UshkRet.jpg">
+   <img src="/img/2025UshkRet.webp">
    <div class="hide_img_star" d='https://htmlcolors.com/user/htmlcolors' style="position: absolute;
     width: 32%;
     height: 6%;
@@ -79,7 +80,7 @@ nsdq -33.1,43.66,28.64,21.27
 
 当下的资产负债表：
 <div style="position:relative;padding:16px 0;">
-   <img src="/img/20251231zcbzb.png">
+   <img src="/img/20251231zcbzb.webp">
    <div class="hide_img_star" d='https://htmlcolors.com/user/htmlcolors' style="position: absolute;
     width: 100%;
     height: 100%;
@@ -110,7 +111,7 @@ nsdq -33.1,43.66,28.64,21.27
 
 ## 二、对2024判断的修正
 
-![2024zk2025](/img/2024zk2025.png)
+![2024zk2025](/img/2024zk2025.webp)
 
 对**医药**的判断，在国内卖药确实没什么利润，但创新药企可以把药卖到全世界，中国过去20年培养了世界上最多的工程师群体，有人才优势。**药明生物**本身想长拿的，但川普关税战的时候，实在看不清CXO会不会被行政干预，从经济成本的角度是不会的，从政治的角度看，看不清。于是最后也没拿住，赚了80%清了。
 
@@ -122,7 +123,7 @@ nsdq -33.1,43.66,28.64,21.27
 
 > 贸易战前做空苹果截图存档
 
-![appleput2025](/img/appleput2025.png)
+![appleput2025](/img/appleput2025.webp)
 
 ## 三、2025决策回顾
 
@@ -146,7 +147,7 @@ nsdq -33.1,43.66,28.64,21.27
 
 > 增加中矿持有心态的变化，以及相关事件交易时的细节
 
-![2025recv1](/img/2025recv1.png)
+![2025recv1](/img/2025recv1.webp)
 
 
 
@@ -298,7 +299,7 @@ nsdq -33.1,43.66,28.64,21.27
 
 > 到达100w时，当时账户的快照
 
-![100wlcb](/img/100wlcb.png)
+![100wlcb](/img/100wlcb.webp)
 
 
 
