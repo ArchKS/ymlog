@@ -1,3 +1,13 @@
+<% const _booklistColumns = (theme.read_booklist && theme.read_booklist.columns) || null; %>
+<% const _booklistWidths = (theme.read_booklist && theme.read_booklist.widths) || null; %>
+<% const _booklistAligns = (theme.read_booklist && theme.read_booklist.aligns) || null; %>
+<script>
+window.BOOKLIST_COLUMNS = <%- JSON.stringify(_booklistColumns) %>;
+window.BOOKLIST_WIDTHS = <%- JSON.stringify(_booklistWidths) %>;
+window.BOOKLIST_ALIGNS = <%- JSON.stringify(_booklistAligns) %>;
+window.BOOKLIST_FILTER_MIN = <%- JSON.stringify((theme.read_booklist && theme.read_booklist.filter_min_count) || 1) %>;
+window.STAMP_SRC = <%- JSON.stringify((theme.style && theme.style.stamp) || '/img/stamp.png') %>;
+</script>
 <%- __js([
     // 'js/utils.js',
     // 'js/header-shrink.js',

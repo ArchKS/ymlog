@@ -555,12 +555,15 @@ window.addEventListener('DOMContentLoaded', () => {
     KEEP.utils.modeToggle = {
 
       modeToggleButton_dom: document.querySelector('.tool-dark-light-toggle'),
-      iconDom: document.querySelector('.tool-dark-light-toggle i'),
+
+      // 太阳/月亮 SVG 图标（亮色模式显示月亮，暗色模式显示太阳）
+      moonSVG: '<svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.6 10.2A6.1 6.1 0 1 1 5.8 2.4a5 5 0 0 0 7.8 7.8z"/></svg>',
+      sunSVG: '<svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.1"/><path d="M8 1.4v1.7M8 12.9v1.7M1.4 8h1.7M12.9 8h1.7M3.3 3.3l1.2 1.2M11.5 11.5l1.2 1.2M3.3 12.7l1.2-1.2M11.5 4.5l1.2-1.2"/></svg>',
 
       enableLightMode() {
         document.body.classList.remove('dark-mode');
         document.body.classList.add('light-mode');
-        this.iconDom.className = 'fas fa-moon';
+        if (this.modeToggleButton_dom) this.modeToggleButton_dom.innerHTML = this.moonSVG;
         KEEP.styleStatus.isDark = false;
         KEEP.setStyleStatus();
       },
@@ -568,7 +571,7 @@ window.addEventListener('DOMContentLoaded', () => {
       enableDarkMode() {
         document.body.classList.add('dark-mode');
         document.body.classList.remove('light-mode');
-        this.iconDom.className = 'fas fa-sun';
+        if (this.modeToggleButton_dom) this.modeToggleButton_dom.innerHTML = this.sunSVG;
         KEEP.styleStatus.isDark = true;
         KEEP.setStyleStatus();
       },
@@ -588,6 +591,7 @@ window.addEventListener('DOMContentLoaded', () => {
       },
 
       initModeToggleButton() {
+        if (!this.modeToggleButton_dom) return;
         this.modeToggleButton_dom.addEventListener('click', () => {
           const isDark = document.body.classList.contains('dark-mode');
           isDark ? this.enableLightMode() : this.enableDarkMode();
@@ -819,19 +823,7 @@ window.addEventListener('DOMContentLoaded', () => {
             display: flex;
             justify-content: space-between;
         }
-        .article-content table th:nth-child(2), .article-content table td:nth-child(2){
-            width: 15%;
-        } 
-        .article-content table th:nth-child(3), .article-content table td:nth-child(3){
-            width: 24%;
-        } 
-        .article-content table th:nth-child(4), .article-content table td:nth-child(4){
-            width: 41%;
-        }
-        .article-content table th:nth-child(5), .article-content table td:nth-child(5){
-            width: 20%;
-        }
-
+       
         .article-content table th:nth-child(3), .article-content table td:nth-child(3), 
         .article-content table th:nth-child(3), .article-content table td:nth-child(4),
         .article-content table th:nth-child(3), .article-content table td:nth-child(5) {
@@ -850,6 +842,22 @@ window.addEventListener('DOMContentLoaded', () => {
             display: block;
         }
     `;
+
+    /* 
+     .article-content table th:nth-child(2), .article-content table td:nth-child(2){
+            width: 15%;
+        } 
+        .article-content table th:nth-child(3), .article-content table td:nth-child(3){
+            width: 24%;
+        } 
+        .article-content table th:nth-child(4), .article-content table td:nth-child(4){
+            width: 41%;
+        }
+        .article-content table th:nth-child(5), .article-content table td:nth-child(5){
+            width: 20%;
+        }
+
+     */
     addNewStyle(cls);
   }
 
@@ -972,8 +980,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
-// 展示印章
-// /img/stamp.png
+// 展示印章（图源可在主题配置 style.stamp 中配置，支持 base64 data URI）
 function showStampInReadPage() {
   if (isReadpage()) {
     const styles = {
@@ -981,12 +988,13 @@ function showStampInReadPage() {
       right: '3px',
       bottom: '3px',
       zIndex: 100,
-      width: '32px'
+      width: '32px',
+      border: 'none'  // 去掉主题 .main-content img 的默认浅灰边框
     }
     let block = document.querySelector('.article-content.markdown-body blockquote');
     block.style.position = 'relative';
     var img = document.createElement('img');
-    img.src = '/img/stamp.png';
+    img.src = window.STAMP_SRC || '/img/stamp.png';
     Object.keys(styles).forEach(key => { img.style[key] = styles[key] })
     block.appendChild(img);
   }

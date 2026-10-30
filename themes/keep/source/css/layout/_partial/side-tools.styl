@@ -2,6 +2,42 @@ $tools-item-width = 32px;
 $tools-item-font-size = 1.1rem;
 $tools-item-border-radius = 1px;
 
+// 明暗切换按钮（独立 fixed 定位，右上角悬浮，不受 header 显隐影响）
+.mode-toggle-fixed {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: $z-index-9;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--default-text-color);
+  background: var(--background-color);
+  box-shadow: 1px 1px 4px var(--shadow-color);
+  opacity: 0.85;
+  transition-t("opacity, transform", "0.85, 0", "0.2, 0.2", "linear, linear");
+
+  &:hover {
+    opacity: 1;
+    transform: rotate(30deg);
+  }
+
+  svg {
+    display: block;
+  }
+
+  +keep-tablet() {
+    top: 14px;
+    right: 14px;
+    width: 30px;
+    height: 30px;
+  }
+}
+
 
 .side-tools-container {
   position: relative;

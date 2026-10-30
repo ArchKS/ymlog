@@ -102,7 +102,9 @@ $page-aside-width = $temp-width ? convert($temp-width) : 260px;
         position: relative;
         box-sizing: border-box;
         width: $main-content-width;
-        max-width: $content-max-width;
+        if $temp-content-max-width {
+          max-width: convert($temp-content-max-width);
+        }
         height: 100%;
 
         +keep-tablet() {
@@ -174,8 +176,21 @@ $page-aside-width = $temp-width ? convert($temp-width) : 260px;
   }
 }
 
+$read-content-width-cfg = hexo-config('style.read_content_width');
+$read-content-max-cfg = hexo-config('style.read_content_max_width');
+
 .read-page .page-container{
   padding-left: 0 !important;
+}
+
+// Read 页面正文宽度单独覆盖（配置了才生效，优先级高于全局及平板/手机断点）
+.read-page .page-container .page-main-content .page-main-content-middle .main-content {
+  if $read-content-width-cfg {
+    width: convert($read-content-width-cfg);
+  }
+  if $read-content-max-cfg {
+    max-width: convert($read-content-max-cfg);
+  }
 }
 .read-page .page-aside{
   height: fit-content;
