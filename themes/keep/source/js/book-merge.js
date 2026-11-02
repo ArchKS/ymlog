@@ -77,6 +77,8 @@
         /* 年份收起/展开 */
         .bm-year-toggle { cursor: pointer; user-select: none; }
         .bm-year-arrow { display: inline-block; margin-right: 6px; font-size: 0.8em; opacity: 0.55; transition: transform 0.2s; }
+        /* 「书单」标题禁止选中（双击/双触全收全展时不选中文字） */
+        .article-title { user-select: none; -webkit-user-select: none; cursor: pointer; }
         .bm-summary-row td { font-weight: bold; text-align: center; opacity: 0.85; border-top: 2px solid #999; font-size: 13px; display: table-cell !important; width: auto !important; }
         /* 单元格文字超出显示省略号（统计行除外，保持可换行） */
         .article-content table td { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -381,6 +383,19 @@
             boundCollapseElems.add(title);
             title.style.cursor = 'pointer';
             title.addEventListener('dblclick', toggleAllYears);
+
+            // 移动端：双击手势不可靠（常与缩放手势冲突），手动检测 double-tap
+            let lastTap = 0;
+            title.addEventListener('touchend', function(e) {
+                const now = Date.now();
+                if (now - lastTap < 350) {
+                    e.preventDefault(); // 阻止双击缩放与误触
+                    toggleAllYears();
+                    lastTap = 0;
+                } else {
+                    lastTap = now;
+                }
+            });
         }
     }
 
@@ -990,11 +1005,8 @@
         }
 
         const attr = sortMode === 'category' ? 'category' : 'stars';
-        // 分类模式不展示「全部」徽章（再次点击选中项即取消筛选）；评级模式保留
-        const allChip = sortMode === 'rating'
-            ? '<span class="bm-filter-chip bm-filter-all active" data-value="__all__">全部 ' + sortedBooks.length + '</span>'
-            : '';
-        return '<div class="bm-filter-bar" data-attr="' + attr + '">' + allChip + chips + '</div>';
+        // 不展示「全部」徽章（再次点击选中项即取消筛选，回到全部）
+        return '<div class="bm-filter-bar" data-attr="' + attr + '">' + chips + '</div>';
     }
 
     // 应用筛选：value 为 __all__ 显示全部
@@ -1006,9 +1018,41 @@
 
         const table = document.querySelector('.merged-table');
         if (!table) return;
-        table.querySelectorAll('tbody tr').forEach(function(tr) {
-            tr.style.display = (value === '__all__' || tr.getAttribute(attr) === String(value)) ? '' : 'none';
+        const tbody = table.querySelector('tbody');
+        const allRows = Array.from(tbody.querySelectorAll('tr'));
+        allRows.forEach(function(tr) {
+            // 用 class 控制显隐（移动端 display 规则带 !important，内联样式打不过）
+            tr.classList.toggle('bm-hidden', !(value === '__all__' || tr.getAttribute(attr) === String(value)));
         });
+
+        // 评级模式筛选后：可见行按分类聚组（组按组内数量降序，组内保持原顺序）；取消则恢复评级排序原顺序
+        if (attr === 'data-stars') {
+            if (value !== '__all__') {
+                const visible = allRows.filter(function(tr) { return tr.getAttribute(attr) === String(value); });
+                const catCount = {};
+                visible.forEach(function(tr) {
+                    const c = tr.getAttribute('data-category');
+                    catCount[c] = (catCount[c] || 0) + 1;
+                });
+                visible.sort(function(a, b) {
+                    const ca = a.getAttribute('data-category'), cb = b.getAttribute('data-category');
+                    if (ca !== cb) return (catCount[cb] - catCount[ca]) || ca.localeCompare(cb, 'zh');
+                    return 0; // 组内保持原相对顺序
+                });
+                visible.forEach(function(tr, i) {
+                    tbody.appendChild(tr); // 聚组后的可见行移到前面
+                    const seqCell = tr.querySelector('.bm-col-seq');
+                    if (seqCell) seqCell.textContent = i + 1; // 筛选后重新连续编号
+                });
+            } else {
+                allRows.sort(function(a, b) { return Number(a.dataset.idx) - Number(b.dataset.idx); });
+                allRows.forEach(function(tr) {
+                    tbody.appendChild(tr);
+                    const seqCell = tr.querySelector('.bm-col-seq');
+                    if (seqCell) seqCell.textContent = Number(tr.dataset.idx) + 1; // 恢复总榜排名
+                });
+            }
+        }
         lastFilter = { mode: currentSortMode, value: value };
         syncUrl(); // 筛选状态同步到 URL
     }
@@ -1179,7 +1223,7 @@
         }
     }
 
-    // 获取行数据（按列配置动态生成）
+    // 获取行数据（按列配置动态生成；data-idx 记录当前排序下的原始位置，用于筛选取消后恢复顺序）
     function getRowData(book, sortMode, index, isMobile, mergedColumns) {
         const rowClass = getRowClass(book, sortMode, index);
         let tds = '';
@@ -1188,7 +1232,7 @@
                 ? renderIndexCell(sortMode, book, index)
                 : renderFieldCell(c.key, book, sortMode, isMobile);
         });
-        return `<tr class="${rowClass}" data-year="${book.year}" data-stars="${book.starCount}" data-category="${book.category}">${tds}</tr>`;
+        return `<tr class="${rowClass}" data-idx="${index}" data-year="${book.year}" data-stars="${book.starCount}" data-category="${book.category}">${tds}</tr>`;
     }
     
     // 判断颜色是否为浅色（亮度高），用于决定徽章文字用深色还是白色
@@ -1347,6 +1391,10 @@
                 transition: background 0.3s ease;
             }
 
+            .merged-table tr.bm-hidden {
+                display: none !important;
+            }
+            
             .merged-row[data-stars="5"] .rating-cell {
                 color: gold !important;
                 font-weight: bold;

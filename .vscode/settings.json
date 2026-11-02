@@ -1,0 +1,7 @@
+{
+  // Hexo Auto Updated：保存时自动更新 front matter 的 update 字段
+  // 本项目 front matter 用的是 update（非扩展默认的 updated），所以改匹配模式
+  "hexoAutoUpdated.modifiedTimeStart": "^update *: ",
+  "hexoAutoUpdated.modifiedTimeEnd": "$",
+  "hexoAutoUpdated.momentFormat": "YYYY-MM-DD HH:mm:ss"
+}
