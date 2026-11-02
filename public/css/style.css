@@ -1274,7 +1274,7 @@ pre .javascript .function {
 .page-container .page-main-content .page-main-content-middle .main-content {
   position: relative;
   box-sizing: border-box;
-  width: 80%;
+  width: 50%;
   height: 100%;
 }
 @media (max-width: 780px) {
@@ -1313,6 +1313,10 @@ pre .javascript .function {
     left: 0 !important;
     display: none !important;
   }
+  .page-container .page-aside.aside-open {
+    display: block !important;
+    top: 70px;
+  }
 }
 .page-container .post-tools {
   position: fixed;
@@ -1348,10 +1352,10 @@ pre .javascript .function {
   width: 84%;
 }
 .read-page .page-aside {
-  height: fit-content;
-  width: 140px;
-  left: 30px !important;
-  top: 9%;
+  display: none !important; /* 目录已搬进右上角按钮组（book-merge-container 的「目录」按钮） */
+}
+.read-page .page-aside.aside-open {
+  display: none !important; /* 防止移动端 aside-open 规则把 Read 页的目录又显示出来 */
 }
 .read-page .article-title {
   text-align: center !important;
@@ -1448,7 +1452,7 @@ pre .javascript .function {
 .header-wrapper .header-content {
   position: relative;
   height: 100%;
-  width: 80%;
+  width: 50%;
   max-width: 1000px;
   display: flex;
   flex-direction: row;
@@ -1529,6 +1533,34 @@ pre .javascript .function {
 @media (max-width: 500px) {
   .header-wrapper .header-content .left .logo-title {
     font-size: 1.12rem;
+  }
+}
+.header-wrapper .header-content .right {
+  display: flex;
+  align-items: center;
+}
+.header-wrapper .header-content .right .header-icon-btn {
+  cursor: pointer;
+  color: var(--default-text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  opacity: 0.75;
+  transition-property: color, background, box-shadow, border-color, opacity;
+  transition-delay: 0s, 0s, 0s, 0s, 0.75s;
+  transition-duration: 0.2s, 0.2s, 0.2s, 0.2s, 0.2s;
+  transition-timing-function: ease, ease, ease, ease, linear;
+}
+.header-wrapper .header-content .right .header-icon-btn:hover {
+  opacity: 1;
+}
+.header-wrapper .header-content .right .header-icon-btn svg {
+  display: block;
+}
+@media (max-width: 780px) {
+  .header-wrapper .header-content .right .header-icon-btn {
+    margin-right: 14px;
   }
 }
 .header-wrapper .header-content .right .pc .menu-list {
@@ -1699,6 +1731,12 @@ pre .javascript .function {
   visibility: visible;
   opacity: 1;
 }
+@media (max-width: 780px) {
+  .aside-toc-show .header-wrapper .window-mask {
+    visibility: visible;
+    opacity: 1;
+  }
+}
 .header-drawer-show {
   overflow: hidden;
 }
@@ -1795,6 +1833,88 @@ pre .javascript .function {
     width: 30px;
     height: 30px;
   }
+}
+html:not(.read-page) .mode-toggle-fixed {
+  display: none !important;
+}
+.eye-toggle-fixed {
+  right: 62px;
+}
+@media (max-width: 780px) {
+  .eye-toggle-fixed {
+    right: 52px;
+  }
+}
+#unlock-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1010;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#unlock-modal .unlock-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.45);
+}
+#unlock-modal .unlock-dialog {
+  position: relative;
+  width: 260px;
+  padding: 22px 20px 16px;
+  border-radius: 12px;
+  background: var(--background-color);
+  color: var(--default-text-color);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  text-align: center;
+  font-size: 14px;
+}
+#unlock-modal .unlock-dialog input {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 12px 0 4px;
+  padding: 8px 10px;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 4px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--second-background-color);
+  color: var(--first-text-color);
+  outline: none;
+}
+#unlock-modal .unlock-dialog input:focus {
+  border-color: var(--primary-color);
+}
+#unlock-modal .unlock-dialog .unlock-error {
+  height: 18px;
+  font-size: 12px;
+  color: #e64545;
+}
+#unlock-modal .unlock-dialog .unlock-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+#unlock-modal .unlock-dialog .unlock-actions button {
+  flex: 1;
+  padding: 7px 0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  background: var(--second-background-color);
+  color: var(--default-text-color);
+}
+#unlock-modal .unlock-dialog .unlock-actions button.unlock-ok {
+  background: var(--primary-color);
+  color: #fff;
 }
 .side-tools-container {
   position: relative;

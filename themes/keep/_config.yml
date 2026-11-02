@@ -31,7 +31,7 @@ style:
   left_side_width: 260px
 
   # Content area width (PC 百分比) & max width
-  content_width: 80%
+  content_width: 50%
   # content_max_width 不配置则无上限
   # content_max_width: 920px
 
@@ -241,11 +241,39 @@ footer:
 #       , 速度, 日均时长
 # ---------------------------------------------------------------------------------------
 read_booklist:
+  # 隐藏内容（hide_star）解锁密码；前端密码仅防君子，内容本就在页面源码中
+  unlock_password: "0606"
   columns:
     web: [序号, 分类, 作者, 书名, 评级]
     h5: [分类, 作者, 书名, 评级]
   # 筛选徽章：数量小于该值的分类/评级不展示（默认 1 即全部展示）
   filter_min_count: 2
+  # URL 定位的分类短码（用于 ?type=category#xx 直达）；未配置的分类回退用 URL 编码的中文名
+  category_codes:
+    文学: wx
+    投资: tz
+    心理学: xlx
+    历史: ls
+    传记: zj
+    哲学: zx
+    政治: zz
+    社会: sh
+    社会学: shx
+    矿业: ky
+    行业分析: hyfx
+    灵: l
+    经济: jj
+    其他: qt
+    医学: yx
+    健身: js
+    神学: sx
+    小说: xs
+    艺术: ys
+    计算机: jsj
+    中医: zy
+    杂文: zw
+    科学: kx
+    支付: zf
   # 列宽比例（可选，不配置则自动布局）：按列名设置，只对「实际显示的列」生效，
   # 未配置的列按 1 计；隐藏/未显示的列自动跳过，其比例不参与分配
   widths:

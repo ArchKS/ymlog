@@ -40,7 +40,8 @@
         category: '<svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2.2" y="2.2" width="4.6" height="4.6" rx="1"/><rect x="9.2" y="2.2" width="4.6" height="4.6" rx="1"/><rect x="2.2" y="9.2" width="4.6" height="4.6" rx="1"/><rect x="9.2" y="9.2" width="4.6" height="4.6" rx="1"/></svg>',
         speed: '<svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M8.9 1.6L3.4 8.9h3.1l-.8 5.5 5.7-7.3H8.7z"/></svg>',
         daily: '<svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="8" cy="8" r="6.4"/><path d="M8 4.7V8l2.3 1.5"/></svg>',
-        restore: '<svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M2.8 4.6h10.4M2.8 8h10.4M2.8 11.4h10.4"/></svg>'
+        restore: '<svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M2.8 4.6h10.4M2.8 8h10.4M2.8 11.4h10.4"/></svg>',
+        toc: '<svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="3" cy="4" r="1" fill="currentColor" stroke="none"/><path d="M6.5 4h6.5"/><circle cx="3" cy="8" r="1" fill="currentColor" stroke="none"/><path d="M6.5 8h6.5"/><circle cx="3" cy="12" r="1" fill="currentColor" stroke="none"/><path d="M6.5 12h6.5"/></svg>'
     };
 
     // 各列的单位/格式说明（ⓘ 图标悬停/点击展示）
@@ -66,6 +67,16 @@
         body.dark-mode .bm-unit-tip { background: #e8e8ec !important; color: #2a2a30 !important; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
         body.dark-mode .bm-unit-tip::after { border-top-color: #e8e8ec; }
         .bm-unit-icon:hover .bm-unit-tip, .bm-unit-icon.show .bm-unit-tip { display: block; }
+        /* 目录面板 */
+        #book-toc-panel { position: fixed; z-index: 1002; min-width: 120px; max-height: 60vh; overflow-y: auto; padding: 6px; border-radius: 10px; background: var(--background-color, #fff); color: var(--default-text-color, #333); box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+        #book-toc-panel .bm-toc-item { padding: 6px 12px; border-radius: 6px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 14px; font-size: 13px; white-space: nowrap; }
+        #book-toc-panel .bm-toc-item:hover { background: rgba(102,126,234,0.15); }
+        #book-toc-panel .bm-toc-count { opacity: 0.5; font-size: 12px; }
+        @media (min-width: 769px) { #book-toc-panel { top: 10%; right: 135px; } }
+        @media (max-width: 768px) { #book-toc-panel { top: 12px; left: 14px; right: 14px; max-height: 45vh; } }
+        /* 年份收起/展开 */
+        .bm-year-toggle { cursor: pointer; user-select: none; }
+        .bm-year-arrow { display: inline-block; margin-right: 6px; font-size: 0.8em; opacity: 0.55; transition: transform 0.2s; }
         .bm-summary-row td { font-weight: bold; text-align: center; opacity: 0.85; border-top: 2px solid #999; font-size: 13px; display: table-cell !important; width: auto !important; }
         /* 单元格文字超出显示省略号（统计行除外，保持可换行） */
         .article-content table td { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -317,12 +328,84 @@
         });
     }
 
+    // ============ 年份收起/展开 ============
+    const boundCollapseElems = new WeakSet(); // 记录已绑定的元素（innerHTML 恢复后元素重建可重新绑定）
+
+    // 获取年份 H2 到下一个 H2 之间的所有元素
+    function getYearElems(h2) {
+        const els = [];
+        let sib = h2.nextElementSibling;
+        while (sib && sib.tagName !== 'H2') {
+            els.push(sib);
+            sib = sib.nextElementSibling;
+        }
+        return els;
+    }
+
+    // 切换单个年份的收起/展开（force 指定目标状态）
+    function toggleYear(h2, force) {
+        const collapsed = force !== undefined ? force : h2.dataset.collapsed !== '1';
+        h2.dataset.collapsed = collapsed ? '1' : '0';
+        const arrow = h2.querySelector('.bm-year-arrow');
+        if (arrow) arrow.textContent = collapsed ? '▸' : '▾';
+        getYearElems(h2).forEach(function(el) {
+            el.style.display = collapsed ? 'none' : '';
+        });
+    }
+
+    // 一键全部收起/展开：以第一个年份的当前状态为准（展开→全收，收起→全展）
+    function toggleAllYears() {
+        const first = document.querySelector('.article-content h2');
+        if (!first) return;
+        const collapse = first.dataset.collapsed !== '1';
+        document.querySelectorAll('.article-content h2').forEach(function(h2) {
+            toggleYear(h2, collapse);
+        });
+    }
+
+    // 绑定年份 H2 点击收起 + 「书单」标题双击全收/全展
+    function bindYearCollapse() {
+        document.querySelectorAll('.article-content h2').forEach(function(h2) {
+            if (boundCollapseElems.has(h2)) return;
+            boundCollapseElems.add(h2);
+            h2.classList.add('bm-year-toggle');
+            const arrow = document.createElement('span');
+            arrow.className = 'bm-year-arrow';
+            arrow.textContent = '▾';
+            h2.insertBefore(arrow, h2.firstChild);
+            h2.addEventListener('click', function() { toggleYear(h2); });
+        });
+
+        const title = document.querySelector('.article-title');
+        if (title && !boundCollapseElems.has(title)) {
+            boundCollapseElems.add(title);
+            title.style.cursor = 'pointer';
+            title.addEventListener('dblclick', toggleAllYears);
+        }
+    }
+
+    // 五星行高亮（移植自旧版 READ.js）：金色星星 + 金棕斜切渐变行背景
+    function highlightFiveStarRows() {
+        document.querySelectorAll('.article-content table:not(.merged-table) tbody tr').forEach(function(row) {
+            if (row.classList.contains('bm-summary-row')) return;
+            const ratingCell = row.querySelector('td:nth-child(5)'); // 评级列
+            if (!ratingCell) return;
+            const starCount = (ratingCell.textContent.match(/★/g) || []).length;
+            if (starCount >= 5) {
+                row.style.background = 'linear-gradient(109.6deg, rgb(214,180,148) 71.8%, rgb(10,5,0) 71.8%)';
+                ratingCell.style.color = 'gold';
+            }
+        });
+    }
+
     // 统一的列显示入口：隐藏未配置列 + 注入计算列 + 表头单位图标 + 序号自动编号
     function applyColumnDisplay() {
         numberOriginalTables();
+        bindYearCollapse();
         applyColumnVisibility();
         injectComputedColumns();
         decorateOriginalHeaders();
+        highlightFiveStarRows();
     }
 
     // 序号列自动编号：每张表内从 1 开始，只填充空单元格（已有值保留）
@@ -403,9 +486,58 @@
         tbody.appendChild(buildSummaryRow(data.map(function(d) { return d.metrics; }), colCount));
     }
 
+    // ============ 目录面板：年份导航，从页面 H2 + 表格行数生成 ============
+
+    // 构建/刷新目录面板内容
+    function buildTocPanel() {
+        let panel = document.getElementById('book-toc-panel');
+        if (!panel) {
+            panel = document.createElement('div');
+            panel.id = 'book-toc-panel';
+            panel.style.display = 'none';
+            document.body.appendChild(panel);
+        }
+        const items = [];
+        document.querySelectorAll('.article-content h2').forEach(function(h2) {
+            const m = h2.textContent.replace(/[‹›\s]/g, '').match(/\d{4}/);
+            if (!m) return;
+            let count = 0;
+            let sib = h2.nextElementSibling;
+            while (sib && sib.tagName !== 'H2') {
+                if (sib.tagName === 'TABLE') count += sib.querySelectorAll('tbody tr').length;
+                sib = sib.nextElementSibling;
+            }
+            items.push({ year: m[0], count: count, el: h2 });
+        });
+        panel.innerHTML = items.map(function(it) {
+            return '<div class="bm-toc-item" data-year="' + it.year + '"><span>' + it.year + '</span><span class="bm-toc-count">' + it.count + ' 本</span></div>';
+        }).join('');
+
+        panel.querySelectorAll('.bm-toc-item').forEach(function(item) {
+            item.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const year = item.dataset.year;
+                const target = items.find(function(it) { return it.year === year; });
+                if (target) target.el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                panel.style.display = 'none';
+            });
+        });
+        return panel;
+    }
+
+    // 切换目录面板显隐
+    function toggleTocPanel() {
+        const panel = buildTocPanel();
+        panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function closeTocPanel() {
+        const panel = document.getElementById('book-toc-panel');
+        if (panel) panel.style.display = 'none';
+    }
+
     // 应用按年排序模式
-    function applyYearSort(mode) {
-        const articleContent = document.querySelector('.article-content');
+    function applyYearSort(mode) {        const articleContent = document.querySelector('.article-content');
         if (!articleContent) return;
 
         if (!originalState) {
@@ -424,6 +556,7 @@
         currentSortMode = mode;
         isMerged = true;
         applyFabState(); // 状态更新后同步 FAB 图标
+        syncUrl(); // 排序模式同步到 URL
         console.log('已切换到按年' + (mode === 'speed' ? '速度' : '日均时长') + '排序视图');
     }
 
@@ -529,16 +662,20 @@
         const restoreButton = createButton('restore', '原始', buttonSize);
         restoreButton.style.display = 'none'; // 初始隐藏
 
+        // 目录按钮（合并视图下隐藏，原始/按年排序视图可用）
+        const tocButton = createButton('toc', '目录', buttonSize);
+
         container.appendChild(ratingButton);
         container.appendChild(categoryButton);
         container.appendChild(speedButton);
         container.appendChild(dailyButton);
+        container.appendChild(tocButton);
         container.appendChild(restoreButton);
 
         // 移动端：选项按钮收进悬浮球（FAB），默认收起不遮挡内容
         let fab = null;
         if (isMobile) {
-            [ratingButton, categoryButton, speedButton, dailyButton].forEach(function(b) { b.style.display = 'none'; });
+            [ratingButton, categoryButton, speedButton, dailyButton, tocButton].forEach(function(b) { b.style.display = 'none'; });
             fab = document.createElement('button');
             fab.id = 'book-merge-fab';
             fab.innerHTML = FAB_ICON;
@@ -596,13 +733,16 @@
     function applyFabState() {
         const fab = document.getElementById('book-merge-fab');
         if (!fab) return; // 桌面端无 FAB
-        ['rating', 'category', 'speed', 'daily', 'restore'].forEach(function(id) {
+        ['rating', 'category', 'speed', 'daily', 'toc', 'restore'].forEach(function(id) {
             const btn = document.getElementById('book-merge-' + id);
             if (!btn) return;
             if (!fabExpanded) {
                 btn.style.display = 'none';
             } else if (id === 'restore') {
                 btn.style.display = isMerged ? 'inline-flex' : 'none';
+            } else if (id === 'toc') {
+                // 目录按钮：合并视图（rating/category）下隐藏
+                btn.style.display = (isMerged && (currentSortMode === 'rating' || currentSortMode === 'category')) ? 'none' : 'inline-flex';
             } else {
                 btn.style.display = 'inline-flex';
             }
@@ -676,6 +816,16 @@
     
     // 处理按钮点击
     function handleButtonClick(type) {
+        if (type === 'toc') {
+            // 打开目录时收起 FAB 展开态，避免按钮组与面板互相遮挡
+            if (fabExpanded) {
+                fabExpanded = false;
+                applyFabState();
+            }
+            toggleTocPanel();
+            return;
+        }
+        closeTocPanel(); // 切换排序/恢复时收起目录面板
         if (type === 'restore') {
             restoreOriginalView();
         } else {
@@ -763,6 +913,54 @@
         return books;
     }
     
+    // ============ URL 定位：?type=category#wx 直达分类模式+筛选，操作同步回写 URL ============
+
+    // 分类名 <-> 短码 互转（未配置的分类用 URL 编码的中文名）
+    function categoryToCode(cat) {
+        const codes = window.BOOKLIST_CATEGORY_CODES || {};
+        return codes[cat] || encodeURIComponent(cat);
+    }
+    function codeToCategory(code) {
+        const codes = window.BOOKLIST_CATEGORY_CODES || {};
+        for (const k in codes) {
+            if (codes[k] === code) return k;
+        }
+        try { return decodeURIComponent(code); } catch (e) { return code; }
+    }
+
+    // 把当前视图状态同步到 URL（replaceState 不产生历史记录）
+    function syncUrl() {
+        let qs = '';
+        let hash = '';
+        if (isMerged) {
+            qs = '?type=' + currentSortMode;
+            if (lastFilter && lastFilter.value !== '__all__') {
+                if (currentSortMode === 'category') {
+                    hash = '#' + categoryToCode(lastFilter.value);
+                } else if (currentSortMode === 'rating') {
+                    hash = '#' + lastFilter.value;
+                }
+            }
+        }
+        history.replaceState(null, '', location.pathname + qs + hash);
+    }
+
+    // 页面加载时读取 URL 状态：自动切换排序模式 + 应用筛选
+    function applyUrlState() {
+        const params = new URLSearchParams(location.search);
+        const type = params.get('type');
+        const valid = ['rating', 'category', 'speed', 'daily'];
+        if (valid.indexOf(type) === -1) return;
+
+        const rawHash = location.hash ? location.hash.slice(1) : '';
+        if (rawHash && (type === 'category' || type === 'rating')) {
+            lastFilter = {
+                mode: type,
+                value: type === 'category' ? codeToCategory(rawHash) : rawHash
+            };
+        }
+        handleButtonClick(type);
+    }
     // 构建筛选徽章栏：分类模式按分类计数（分类色），评级模式按星级计数；点击徽章筛选表格
     // 数量小于 filter_min_count（配置文件可改）的分类/评级不展示徽章（书籍仍在表格中）
     function buildFilterBar(sortedBooks, sortMode) {
@@ -812,6 +1010,7 @@
             tr.style.display = (value === '__all__' || tr.getAttribute(attr) === String(value)) ? '' : 'none';
         });
         lastFilter = { mode: currentSortMode, value: value };
+        syncUrl(); // 筛选状态同步到 URL
     }
 
     // 重建合并视图后恢复上次的筛选状态
@@ -1262,13 +1461,14 @@
         const mergedHTML = createMergedTable(books, sortMode);
         articleContent.innerHTML = mergedHTML;
         addMergedTableStyles();
-        reapplyFilter(); // 恢复上次筛选状态（若模式一致）
-        
-        // 更新按钮状态
-        updateButtonStates(sortMode, true);
+
+        // 先更新状态，再更新按钮/筛选/URL（reapplyFilter 依赖 currentSortMode）
         currentSortMode = sortMode;
         isMerged = true;
+        updateButtonStates(sortMode, true);
         applyFabState(); // 状态更新后同步 FAB 图标
+        reapplyFilter(); // 恢复上次筛选状态（若模式一致）
+        syncUrl(); // 排序模式同步到 URL
 
         console.log(`已切换到${sortMode}排序视图`);
     }
@@ -1296,6 +1496,7 @@
         // 恢复原始内容
         forcedColumns = []; // 清除排序强制列，回到配置驱动
         lastFilter = null; // 清除筛选状态
+        syncUrl(); // 清除 URL 中的 type/hash
         articleContent.innerHTML = originalState.content;
         applyColumnDisplay(); // 重新应用列隐藏与计算列注入
         updateButtonStates(null, false);
@@ -1311,10 +1512,16 @@
         const categoryBtn = document.getElementById('book-merge-category');
         const speedBtn = document.getElementById('book-merge-speed');
         const dailyBtn = document.getElementById('book-merge-daily');
+        const tocBtn = document.getElementById('book-merge-toc');
         const restoreBtn = document.getElementById('book-merge-restore');
 
-        if (!ratingBtn || !categoryBtn || !speedBtn || !dailyBtn || !restoreBtn) return;
+        if (!ratingBtn || !categoryBtn || !speedBtn || !dailyBtn || !tocBtn || !restoreBtn) return;
         const sortBtns = [ratingBtn, categoryBtn, speedBtn, dailyBtn];
+
+        // 目录按钮：合并视图（rating/category）下没有年份结构，隐藏；原始/按年排序视图显示
+        const isMergedView = merged && (activeMode === 'rating' || activeMode === 'category');
+        tocBtn.style.display = isMergedView ? 'none' : 'inline-flex';
+        if (isMergedView) closeTocPanel();
 
         if (merged) {
             // 排序视图：显示所有按钮，但高亮当前激活的按钮
@@ -1374,11 +1581,13 @@
                 setTimeout(createToggleButtons, 100);
                 setTimeout(applyColumnDisplay, 100);
                 addScrollOpacityListener();
+                setTimeout(applyUrlState, 300); // URL 定位：?type=category#wx
             });
         } else {
             setTimeout(createToggleButtons, 100);
             setTimeout(applyColumnDisplay, 100);
             addScrollOpacityListener();
+            setTimeout(applyUrlState, 300); // URL 定位：?type=category#wx
         }
 
         // 单位提示：移动端点击图标切换显示，点击其他位置收起（桌面端由 CSS :hover 处理）
@@ -1403,6 +1612,14 @@
                 ? '__all__'
                 : chip.dataset.value;
             applyFilter(bar, value);
+        });
+
+        // 点击目录面板和目录按钮以外的位置时收起面板
+        document.addEventListener('click', function(e) {
+            const panel = document.getElementById('book-toc-panel');
+            if (!panel || panel.style.display === 'none') return;
+            if (e.target.closest && (e.target.closest('#book-toc-panel') || e.target.closest('#book-merge-toc'))) return;
+            closeTocPanel();
         });
 
         // 窗口缩放跨越 768px 断点时：重算列可见性；若处于合并视图则用缓存数据重建表格；按钮容器按端型重建

@@ -144,6 +144,11 @@ $page-aside-width = $temp-width ? convert($temp-width) : 260px;
     +keep-tablet() {
       left: 0 !important;
       display: none !important;
+
+      &.aside-open {
+        display: block !important;
+        top: $header-height; // 露出 header，目录按钮可再次点击关闭
+      }
     }
 
   }
@@ -193,10 +198,11 @@ $read-content-max-cfg = hexo-config('style.read_content_max_width');
   }
 }
 .read-page .page-aside{
-  height: fit-content;
-  width: 140px;
-  left: 30px !important;
-  top: 9%;
+  display: none !important; /* 目录已搬进右上角按钮组（book-merge-container 的「目录」按钮） */
+
+  &.aside-open {
+    display: none !important; /* 防止移动端 aside-open 规则把 Read 页的目录又显示出来 */
+  }
 }
 
 .read-page .article-title{

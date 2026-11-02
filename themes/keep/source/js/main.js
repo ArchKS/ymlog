@@ -554,16 +554,20 @@ window.addEventListener('DOMContentLoaded', () => {
 
     KEEP.utils.modeToggle = {
 
-      modeToggleButton_dom: document.querySelector('.tool-dark-light-toggle'),
+      modeToggleButtons: document.querySelectorAll('.tool-dark-light-toggle'),
 
       // 太阳/月亮 SVG 图标（亮色模式显示月亮，暗色模式显示太阳）
       moonSVG: '<svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13.6 10.2A6.1 6.1 0 1 1 5.8 2.4a5 5 0 0 0 7.8 7.8z"/></svg>',
       sunSVG: '<svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3.1"/><path d="M8 1.4v1.7M8 12.9v1.7M1.4 8h1.7M12.9 8h1.7M3.3 3.3l1.2 1.2M11.5 11.5l1.2 1.2M3.3 12.7l1.2-1.2M11.5 4.5l1.2-1.2"/></svg>',
 
+      setIcons(svg) {
+        this.modeToggleButtons.forEach(function(btn) { btn.innerHTML = svg; });
+      },
+
       enableLightMode() {
         document.body.classList.remove('dark-mode');
         document.body.classList.add('light-mode');
-        if (this.modeToggleButton_dom) this.modeToggleButton_dom.innerHTML = this.moonSVG;
+        this.setIcons(this.moonSVG);
         KEEP.styleStatus.isDark = false;
         KEEP.setStyleStatus();
       },
@@ -571,7 +575,7 @@ window.addEventListener('DOMContentLoaded', () => {
       enableDarkMode() {
         document.body.classList.add('dark-mode');
         document.body.classList.remove('light-mode');
-        if (this.modeToggleButton_dom) this.modeToggleButton_dom.innerHTML = this.sunSVG;
+        this.setIcons(this.sunSVG);
         KEEP.styleStatus.isDark = true;
         KEEP.setStyleStatus();
       },
@@ -591,10 +595,12 @@ window.addEventListener('DOMContentLoaded', () => {
       },
 
       initModeToggleButton() {
-        if (!this.modeToggleButton_dom) return;
-        this.modeToggleButton_dom.addEventListener('click', () => {
-          const isDark = document.body.classList.contains('dark-mode');
-          isDark ? this.enableLightMode() : this.enableDarkMode();
+        if (!this.modeToggleButtons.length) return;
+        this.modeToggleButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const isDark = document.body.classList.contains('dark-mode');
+            isDark ? this.enableLightMode() : this.enableDarkMode();
+          });
         });
       },
 
@@ -731,7 +737,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // =====left side toggle
   function initLeftSideToggle() {
     KEEP.utils.leftSideToggle = {
-      toggleBar: document.querySelector('.page-aside-toggle'),
+      toggleBars: document.querySelectorAll('.page-aside-toggle'),
       pageTopDom: document.querySelector('.page-main-content-top'),
       containerDom: document.querySelector('.page-container'),
       leftAsideDom: document.querySelector('.page-aside'),
@@ -740,38 +746,53 @@ window.addEventListener('DOMContentLoaded', () => {
       isOpenPageAside: false,
 
       initToggleBarButton() {
-        this.toggleBar && this.toggleBar.addEventListener('click', () => {
-          this.isOpenPageAside = !this.isOpenPageAside;
-          KEEP.styleStatus.isOpenPageAside = this.isOpenPageAside;
-          KEEP.setStyleStatus();
-          this.changePageLayoutWhenOpenToggle(this.isOpenPageAside);
+        this.toggleBars.forEach(bar => {
+          bar.addEventListener('click', () => {
+            this.isOpenPageAside = !this.isOpenPageAside;
+            KEEP.styleStatus.isOpenPageAside = this.isOpenPageAside;
+            KEEP.setStyleStatus();
+            this.changePageLayoutWhenOpenToggle(this.isOpenPageAside);
+          });
         });
 
+        // 移动端：点遮罩关闭目录
+        const mask = document.querySelector('.window-mask');
+        if (mask) {
+          mask.addEventListener('click', () => {
+            if (this.isOpenPageAside) {
+              this.isOpenPageAside = false;
+              KEEP.styleStatus.isOpenPageAside = false;
+              KEEP.setStyleStatus();
+              this.changePageLayoutWhenOpenToggle(false);
+            }
+          });
+        }
+
         // 添加滚动监听，实现半透明效果
-        if (this.toggleBar) {
+        if (this.toggleBars.length) {
           let scrollTimeout;
           window.addEventListener('scroll', () => {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
             if (scrollTop > 50) {
               // 滚动超过50px时，添加半透明背景
-              this.toggleBar.style.opacity = '0.7';
+              this.toggleBars.forEach(b => { b.style.opacity = '0.7'; });
             } else {
               // 在顶部时，恢复完全不透明
-              this.toggleBar.style.opacity = '1';
+              this.toggleBars.forEach(b => { b.style.opacity = '1'; });
             }
 
             // 停止滚动后恢复不透明度
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(() => {
-              this.toggleBar.style.opacity = '1';
+              this.toggleBars.forEach(b => { b.style.opacity = '1'; });
             }, 1000); // 停止滚动1秒后恢复
           });
         }
       },
 
       changePageLayoutWhenOpenToggle(isOpen) {
-        // 更新按钮文字
+        // 更新按钮文字（post-tools 里的文字按钮，header 图标按钮无文字）
         if (this.toggleBarText) {
           this.toggleBarText.textContent = isOpen ? '📑 收起' : '📑 目录';
         }
@@ -779,10 +800,12 @@ window.addEventListener('DOMContentLoaded', () => {
         this.containerDom.style.paddingLeft = isOpen ? pageAsideWidth : '0';
         this.pageTopDom.style.paddingLeft = isOpen ? pageAsideWidth : '0';
         this.leftAsideDom.style.left = isOpen ? '0' : `-${pageAsideWidth}`;
+        this.leftAsideDom.classList.toggle('aside-open', isOpen); // 移动端（默认隐藏）打开时显示
+        document.body.classList.toggle('aside-toc-show', isOpen); // 移动端遮罩
       },
 
       pageAsideHandleOfTOC(isOpen) {
-        this.toggleBar.style.display = 'flex';
+        this.toggleBars.forEach(b => { b.style.display = 'flex'; });
         this.isOpenPageAside = isOpen;
         this.changePageLayoutWhenOpenToggle(isOpen);
       }
@@ -959,7 +982,10 @@ window.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      KEEP.utils.showPageAsideWhenHasTOC();
+      // Read 页目录已搬进按钮组，不恢复左侧 TOC 的展开状态
+      if (!isReadpage()) {
+        KEEP.utils.showPageAsideWhenHasTOC();
+      }
       KEEP.utils.registerSidebarTOC();
 
     } else {
@@ -1025,17 +1051,107 @@ function showStampInReadPage() {
 
 const starStr = '********************************************************************************************'
 
+// ============ 加密内容解锁（眼睛按钮 + 密码）============
+const STAR_UNLOCK_KEY = 'bm_unlocked';
+const EYE_OPEN_SVG = '<svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1.5 8s2.3-4.4 6.5-4.4S14.5 8 14.5 8 12.2 12.4 8 12.4 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg>';
+const EYE_CLOSED_SVG = '<svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M1.5 8s2.3-4.4 6.5-4.4 6.5 4.4 6.5 4.4-2.3 4.4-6.5 4.4S1.5 8 1.5 8z"/><path d="M3 13.5L13 2.5"/></svg>';
 
-document.addEventListener('DOMContentLoaded', function () {
-  const elements = document.querySelectorAll('.hide_star');
-  elements.forEach(el => {
-    const text = el.textContent.trim();
-    // el.setAttribute('tlen', text.length);
-    // 可选：隐藏原始文本
-    if (window.location.href.indexOf("star") > -1) {
-      document.body.classList.add('show_star_img');
+function isStarUnlocked() {
+  return localStorage.getItem(STAR_UNLOCK_KEY) === '1' || window.location.href.indexOf('star') > -1;
+}
+
+// 解锁：显示 hide_star 原文
+function unlockStars() {
+  document.body.classList.add('show_star_img');
+  document.querySelectorAll('.hide_star').forEach(function(el) {
+    if (el.dataset.originalText) el.textContent = el.dataset.originalText;
+  });
+}
+
+// 锁定：hide_star 替换为 ****
+function lockStars() {
+  document.body.classList.remove('show_star_img');
+  document.querySelectorAll('.hide_star').forEach(function(el) {
+    if (!el.dataset.originalText) el.dataset.originalText = el.textContent.trim();
+    el.textContent = starStr.slice(0, el.dataset.originalText.length);
+  });
+}
+
+// 更新眼睛图标状态（fixed 悬浮 + header 内两处同步）
+function updateEyeIcon() {
+  const svg = isStarUnlocked() ? EYE_OPEN_SVG : EYE_CLOSED_SVG;
+  document.querySelectorAll('.eye-toggle-fixed, .eye-toggle-header').forEach(function(btn) {
+    btn.innerHTML = svg;
+  });
+}
+
+// 密码弹窗
+function showUnlockModal(onSuccess) {
+  if (document.getElementById('unlock-modal')) return;
+  const pwd = window.BOOKLIST_UNLOCK_PWD || '0606';
+  const modal = document.createElement('div');
+  modal.id = 'unlock-modal';
+  modal.innerHTML =
+    '<div class="unlock-mask"></div>' +
+    '<div class="unlock-dialog">' +
+    '  <div>输入密码查看隐藏内容</div>' +
+    '  <input type="password" inputmode="numeric" autocomplete="off" placeholder="****" />' +
+    '  <div class="unlock-error"></div>' +
+    '  <div class="unlock-actions"><button class="unlock-cancel">取消</button><button class="unlock-ok">确定</button></div>' +
+    '</div>';
+  document.body.appendChild(modal);
+
+  const input = modal.querySelector('input');
+  const errEl = modal.querySelector('.unlock-error');
+  setTimeout(function() { input.focus(); }, 50);
+
+  function close() { modal.remove(); }
+  function submit() {
+    if (input.value === pwd) {
+      localStorage.setItem(STAR_UNLOCK_KEY, '1');
+      unlockStars();
+      updateEyeIcon();
+      close();
     } else {
-      el.textContent = starStr.slice(0, text.length);
+      errEl.textContent = '密码错误';
+      input.value = '';
+      input.focus();
     }
+  }
+  modal.querySelector('.unlock-ok').addEventListener('click', submit);
+  modal.querySelector('.unlock-cancel').addEventListener('click', close);
+  modal.querySelector('.unlock-mask').addEventListener('click', close);
+  input.addEventListener('keydown', function(e) { if (e.key === 'Enter') submit(); });
+}
+
+// 初始化隐藏内容状态 + 眼睛按钮
+document.addEventListener('DOMContentLoaded', function () {
+  // 先保存所有 hide_star 的原文
+  document.querySelectorAll('.hide_star').forEach(function(el) {
+    if (!el.dataset.originalText) el.dataset.originalText = el.textContent.trim();
+  });
+
+  if (isStarUnlocked()) {
+    unlockStars();
+  } else {
+    lockStars();
+  }
+  updateEyeIcon();
+
+  // 眼睛按钮：未解锁弹密码框；已解锁点击则重新锁定
+  document.querySelectorAll('.eye-toggle-fixed, .eye-toggle-header').forEach(function(eyeBtn) {
+    eyeBtn.addEventListener('click', function() {
+      if (isStarUnlocked()) {
+        localStorage.removeItem(STAR_UNLOCK_KEY);
+        // 去掉 URL 里的 star 参数（若有），避免刷新后又解锁
+        if (window.location.href.indexOf('star') > -1) {
+          history.replaceState(null, '', location.pathname);
+        }
+        lockStars();
+        updateEyeIcon();
+      } else {
+        showUnlockModal();
+      }
+    });
   });
 });

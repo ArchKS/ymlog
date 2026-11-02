@@ -38,6 +38,101 @@ $tools-item-border-radius = 1px;
   }
 }
 
+// 非 Read 页面：右上角悬浮按钮隐藏（功能已移入 header）
+html:not(.read-page) .mode-toggle-fixed {
+  display: none !important;
+}
+
+// 眼睛按钮（暗黑切换左侧）
+.eye-toggle-fixed {
+  right: 62px;
+
+  +keep-tablet() {
+    right: 52px;
+  }
+}
+
+// 解锁密码弹窗
+#unlock-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1010;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .unlock-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.45);
+  }
+
+  .unlock-dialog {
+    position: relative;
+    width: 260px;
+    padding: 22px 20px 16px;
+    border-radius: 12px;
+    background: var(--background-color);
+    color: var(--default-text-color);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    font-size: 14px;
+
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      margin: 12px 0 4px;
+      padding: 8px 10px;
+      font-size: 16px;
+      text-align: center;
+      letter-spacing: 4px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background: var(--second-background-color);
+      color: var(--first-text-color);
+      outline: none;
+
+      &:focus {
+        border-color: var(--primary-color);
+      }
+    }
+
+    .unlock-error {
+      height: 18px;
+      font-size: 12px;
+      color: #e64545;
+    }
+
+    .unlock-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+
+      button {
+        flex: 1;
+        padding: 7px 0;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 13px;
+        background: var(--second-background-color);
+        color: var(--default-text-color);
+
+        &.unlock-ok {
+          background: var(--primary-color);
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
 
 .side-tools-container {
   position: relative;

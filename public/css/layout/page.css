@@ -90,10 +90,10 @@ keep-mobile()
   width: 84%;
 }
 .read-page .page-aside {
-  height: fit-content;
-  width: 140px;
-  left: 30px !important;
-  top: 9%;
+  display: none !important; /* 目录已搬进右上角按钮组（book-merge-container 的「目录」按钮） */
+}
+.read-page .page-aside.aside-open {
+  display: none !important; /* 防止移动端 aside-open 规则把 Read 页的目录又显示出来 */
 }
 .read-page .article-title {
   text-align: center !important;

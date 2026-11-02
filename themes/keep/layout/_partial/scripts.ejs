@@ -6,6 +6,8 @@ window.BOOKLIST_COLUMNS = <%- JSON.stringify(_booklistColumns) %>;
 window.BOOKLIST_WIDTHS = <%- JSON.stringify(_booklistWidths) %>;
 window.BOOKLIST_ALIGNS = <%- JSON.stringify(_booklistAligns) %>;
 window.BOOKLIST_FILTER_MIN = <%- JSON.stringify((theme.read_booklist && theme.read_booklist.filter_min_count) || 1) %>;
+window.BOOKLIST_CATEGORY_CODES = <%- JSON.stringify((theme.read_booklist && theme.read_booklist.category_codes) || {}) %>;
+window.BOOKLIST_UNLOCK_PWD = <%- JSON.stringify((theme.read_booklist && theme.read_booklist.unlock_password) || '0606') %>;
 window.STAMP_SRC = <%- JSON.stringify((theme.style && theme.style.stamp) || '/img/stamp.png') %>;
 </script>
 <%- __js([

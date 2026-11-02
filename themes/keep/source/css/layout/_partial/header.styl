@@ -110,6 +110,31 @@ $logo-image-box-width = 46px;
 
 
     .right {
+      display: flex;
+      align-items: center;
+
+      .header-icon-btn {
+        cursor: pointer;
+        color: var(--default-text-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 20px;
+        opacity: 0.75;
+        transition-t("opacity", "0.75", "0.2", "linear");
+
+        &:hover {
+          opacity: 1;
+        }
+
+        svg {
+          display: block;
+        }
+
+        +keep-tablet() {
+          margin-right: 14px;
+        }
+      }
 
       .pc {
 
@@ -312,6 +337,14 @@ $logo-image-box-width = 46px;
     .header-drawer-show & {
       visibility: visible;
       opacity: 1;
+    }
+
+    // 目录侧栏打开时的遮罩（仅移动端；桌面端为常驻侧栏不需要遮罩）
+    .aside-toc-show & {
+      +keep-tablet() {
+        visibility: visible;
+        opacity: 1;
+      }
     }
   }
 
